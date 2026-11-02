@@ -11,6 +11,6 @@
 // „service_role“-Schlüssel ein!
 
 window.ZZ_CONFIG = {
-  url: 'https://DEIN-PROJEKT.supabase.co',
-  key: 'DEIN-PUBLISHABLE-KEY'
+  url: 'https://wmgztvktjkdmjfvdqlez.supabase.co',
+  key: 'sb_publishable_55adQK0VbPRwMNhKCW-4Sg_vg31lgFz'
 };
