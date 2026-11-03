@@ -462,6 +462,10 @@ tr.me td{background:color-mix(in oklab,var(--tomato) 9%,var(--surface))}
 @keyframes pulse{50%{transform:scale(1.05)}}
 .feed{font-size:13px;font-weight:700;color:var(--ink-2);min-height:1.35em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .feed.pick{color:var(--tomato)}
+.feed.note{color:var(--ink);background:var(--surface-2);border-radius:8px;padding:2px 8px;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;animation:tin .2s ease}
+.feed.note.big{background:var(--gold);color:var(--on-gold)}
+.ingame .fx-small{top:16%;font-size:clamp(20px,6vw,34px);text-shadow:2px 2px 0 var(--ink)}
+.ingame .fx-small small{font-size:13px}
 .live-stage{position:relative;min-height:200px}
 .fxw{transition:transform .35s ease,filter .35s ease;transform-origin:50% 25%}
 .fxw.mirror{transform:scaleX(-1)}
@@ -482,7 +486,66 @@ tr.me td{background:color-mix(in oklab,var(--tomato) 9%,var(--surface))}
 
 /* Live-Quiz & Schätzen */
 .stage{position:relative}
-.live-wrap,.hud,.game,.page,.qz,.sz,.lj,.zs,.hl,.mk,.fb,.rc{grid-template-columns:minmax(0,1fr)}
+.live-wrap,.hud,.game,.page,.qz,.sz,.lj,.zs,.hl,.mk,.fb,.rc,.ar,.lr,.lr-body,.nd{grid-template-columns:minmax(0,1fr)}
+/* Runden-Spiele (alle gleichzeitig, danach Aufdeckung) */
+.lr{display:grid;gap:12px;position:relative}
+.lr-body{display:grid;gap:12px}
+.who-tag{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who-tag.me{color:var(--tomato)}
+.fb-target{display:grid}
+.fb-big{height:min(22vh,150px);border-radius:18px;border:2px solid var(--line);display:grid;place-items:end start;padding:10px 12px;font-weight:800;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.fb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.fb-tile{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:6px;display:grid;gap:4px;min-width:0}
+.fb-tile.me{border-color:var(--cobalt)}
+.fb-sw{height:64px;border-radius:10px}
+.fb-who{min-width:0;display:flex}
+.fb-de{font-size:12px;color:var(--ink-2)}
+.fb-sls{display:grid;gap:12px}
+.sl.salad label span:first-child{color:transparent;background:var(--ink);border-radius:4px}
+.hl-cards{transition:transform .4s ease}
+.hl-cards.upside{transform:rotate(180deg)}
+.hl-res{position:relative;flex-wrap:wrap;row-gap:6px;cursor:default;opacity:.55}
+.hl-res.ok{opacity:1;outline:3px solid var(--good);outline-offset:2px}
+.hl-res.no{opacity:1;outline:3px solid var(--bad);outline-offset:2px}
+.hl-btns .btn.picked{outline:3px solid var(--cobalt);outline-offset:2px}
+.mk-hints{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:mh}
+.mk-hints li{counter-increment:mh;background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:9px 12px 9px 40px;position:relative;font-weight:600;font-size:15px}
+.mk-hints li::before{content:counter(mh);position:absolute;left:10px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--violet);color:var(--on-accent);font-size:12px;font-weight:800;display:grid;place-items:center}
+.mk-hints li.new{animation:tin .3s ease}
+.mk-hints.all li{font-size:13px;padding-block:6px}
+.picker small{position:absolute;right:-3px;bottom:-3px;font-size:10px;font-weight:800;background:var(--ink);color:var(--bg);border-radius:6px;padding:0 3px;line-height:1.4}
+.picker{position:relative}
+.nd{display:grid;gap:10px}
+.nd .lj-globe{justify-self:center}
+.nd-q{display:grid;gap:2px;text-align:center;font-size:19px}
+.nd-q b{font-family:var(--f-display);font-weight:400;font-size:clamp(20px,5.4vw,28px);line-height:1.15}
+.nd-kind{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.zt-pl{display:flex;flex-wrap:wrap;gap:6px}
+.zt-p{display:flex;align-items:center;gap:6px;background:var(--surface);border:2px solid var(--line);border-radius:99px;padding:3px 10px 3px 4px;font-size:13px;min-width:0}
+.zt-p .em{font-size:18px}
+.zt-p small{color:var(--ink-2);white-space:nowrap}
+.zt-p.cur{border-color:var(--violet);box-shadow:0 0 0 3px color-mix(in oklab,var(--violet) 25%,transparent)}
+.zt-p.me b{color:var(--tomato)}
+.zt-p.out{opacity:.45;filter:grayscale(1)}
+.zs-cur.mine{background:var(--tomato);animation:tick .35s}
+.zs-cur.wait{background:var(--ink-2)}
+.zs-cur.okc{background:var(--good)}
+.zs-yr{font-family:var(--f-display);font-weight:400}
+.zt .g-msg .rank{text-align:left}
+.wgrid{display:grid;gap:2px;margin-top:4px;width:max-content}
+.wg-row{display:flex;gap:2px}
+.wgrid i{width:9px;height:9px;border-radius:2px;background:var(--surface-2)}
+.wgrid .wg-g{background:var(--good)}
+.wgrid .wg-y{background:var(--gold)}
+/* Live-Arena */
+.ar{display:grid;gap:10px}
+.ar-wrap{display:grid;justify-items:center}
+.ar-cv{touch-action:none;border-radius:18px;box-shadow:0 6px 0 rgba(8,12,30,.35);max-width:100%;user-select:none;-webkit-user-select:none}
+.ar-cv.fl{border-radius:14px}
+.ar-ctrl{display:flex;gap:10px;justify-content:center}
+.ar-ctrl .btn{flex:1;max-width:220px;padding:16px 10px;font-size:17px;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.ar-dash:disabled{opacity:.5}
+.ar-hint{text-align:center}
 .lj{justify-items:stretch}
 .ans-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:34px}
 .ans-chip{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:var(--surface-2);opacity:.35;filter:grayscale(1);transition:opacity .2s,transform .2s}
@@ -541,7 +604,7 @@ tr.me td{background:color-mix(in oklab,var(--tomato) 9%,var(--surface))}
 .lj-km{font-size:13px}
 </style>
 <script src="config.js"></script>
-<script src="fragen.js?v=3"></script>
+<script src="fragen.js?v=4"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0"></script>
 </head>
 <body>
@@ -628,6 +691,11 @@ const ICONS = {
   gefuehl: '<circle cx="12" cy="14" r="7.5"/><path d="M12 14v-4M10 2.5h4M18.3 6.7l1.6-1.6"/>',
   rechnen: '<path d="M5 7h5M7.5 4.5v5M14 7h5M5 16.5h5M14.5 14.5l4 4M18.5 14.5l-4 4"/>',
   farbe: '<path d="M12 3c3.5 4.2 6 7.4 6 10.5a6 6 0 0 1-12 0C6 10.4 8.5 7.2 12 3z"/>',
+  flappy: '<path d="M3.5 13.5c2.5-5 8.5-6.5 12.5-3.5l3.5-1.5-1 3.5c0 4-3.6 7-8.5 7-3.2 0-5.6-2-6.5-5.5z"/><circle cx="15" cy="11" r="1" fill="currentColor"/><path d="M8 13c1.5 1 3 1 4.5 0"/>',
+  sumo: '<circle cx="8.5" cy="13" r="5.5"/><circle cx="17" cy="11" r="4.5"/><path d="M12 4.5l1.2-2M15 5.6l2.2-1.4M3 21h18"/>',
+  tron: '<path d="M3 20.5V9.5h6.5v6H15V4h6"/><rect x="19.5" y="2.5" width="3" height="3" fill="currentColor"/>',
+  marke: '<path d="M20.5 12.5 12 21l-9-9V3h9z"/><circle cx="7.5" cy="7.5" r="1.6"/><path d="M11 11.5l4 4"/>',
+  nadel: '<path d="M12 21.5s-6.8-6-6.8-11a6.8 6.8 0 0 1 13.6 0c0 5-6.8 11-6.8 11z"/><circle cx="12" cy="10.3" r="2.4"/>',
   laender: '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.6 4 5.8 4 9.5s-1.4 6.9-4 9.5c-2.6-2.6-4-5.8-4-9.5s1.4-6.9 4-9.5z"/>',
   merk: '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M6.5 10l1.5-1v6M11 9.5h2.4c.9 0 1.1 1.2.3 1.7L11 14.8h3M17 9h2l-1.2 2.2c1.5 0 1.6 2.8-.2 2.8H17"/>',
   grid: '<rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/>',
@@ -937,8 +1005,19 @@ const GAMES = [
   { id: 'merk', name: 'Zahlenmerker', cat: 'denken', short: 'Wie viele Ziffern passen in deinen Kopf?',
     rules: 'Eine Zahl blitzt kurz auf, danach tippst du sie ein. Jede Runde kommt eine Ziffer dazu. Ein Fehler beendet das Spiel. Jede geschaffte Ziffer bringt 80 Punkte.', play: playMerk },
   { id: 'laender', name: 'Länderjagd', cat: 'wissen', short: 'Finde das Land auf dem Globus. Heiß oder kalt?',
-    rules: 'Ein Land wird gesucht. Tipp irgendein Land ein und du siehst, wie weit es vom gesuchten entfernt ist, gemessen von Grenze zu Grenze. Auf dem Globus wird jeder Tipp eingefärbt: je röter, desto heißer. Weniger Tipps bringen mehr Punkte.', play: playLaender }
+    rules: 'Ein Land wird gesucht. Tipp irgendein Land ein und du siehst, wie weit es vom gesuchten entfernt ist, gemessen von Grenze zu Grenze. Auf dem Globus wird jeder Tipp eingefärbt: je röter, desto heißer. Weniger Tipps bringen mehr Punkte.', play: playLaender },
+  { id: 'marke', name: 'Markenraten', cat: 'wissen', short: 'Welche Marke steckt hinter den Hinweisen?',
+    rules: 'Sechs Marken. Nach und nach erscheinen bis zu vier Hinweise: Branche und Land, seit wann es sie gibt, ein Fakt und wie das Logo aussieht. Wer schon nach dem ersten Hinweis richtig tippt, bekommt die meisten Punkte. Falsch gibt null. Am Rechner gehen auch die Tasten 1 bis 4.', play: playMarke },
+  { id: 'nadel', name: 'Nadelstich', cat: 'schaetzen', short: 'Setz die Nadel dahin, wo es steht oder passiert ist.',
+    rules: 'Sechs Bauwerke, Orte oder Ereignisse. Dreh den Globus, zoom heran (auch mit zwei Fingern), tipp auf die Stelle und setz die Nadel. Je näher du dran bist, desto mehr Punkte. Live seht ihr danach alle Nadeln auf einem Globus.', play: playNadel },
+  { id: 'flappy', name: 'Flatterflug', cat: 'geschick', short: 'Flieg durch die Röhren, so weit du kommst.',
+    rules: 'Tippen lässt deinen Vogel flattern. Flieg durch die Lücken zwischen den Röhren, es wird immer schneller. Jede geschaffte Röhre bringt 40 Punkte. In der Live-Party fliegen alle gleichzeitig durch denselben Parcours, und wer am längsten durchhält, gewinnt die Runde.', play: playFlappy },
+  { id: 'sumo', name: 'Rempelring', cat: 'geschick', short: 'Schubs alle von der Plattform. Wer zuletzt steht, gewinnt.', noAsync: true,
+    rules: 'Alle rollen auf einer runden Plattform, die nach zehn Sekunden schrumpft. Steuer mit dem Finger oder den Pfeiltasten und ramm die anderen mit „Stoß“ über den Rand. Wer zuletzt noch steht, gewinnt die Runde. Drei Runden, Punkte für jeden Platz. Allein trainierst du gegen drei Bots.', play: playSumo },
+  { id: 'tron', name: 'Lichtrad', cat: 'geschick', short: 'Zieh deine Leuchtspur und schneid den anderen den Weg ab.', noAsync: true,
+    rules: 'Jeder fährt ein Lichtrad, das eine Spur hinter sich herzieht. Wer gegen eine Spur oder die Wand fährt, ist raus. Schneid den anderen den Weg ab, bis nur noch du fährst. Drei Runden, Punkte für jeden Platz. Allein trainierst du gegen drei Bots.', play: playTron }
 ];
+const DAILY_GAMES = GAMES.filter(g => !g.noAsync);
 const GAME = Object.fromEntries(GAMES.map(g => [g.id, g]));
 const CATS = {
   denken: { label: 'Denken', c: 'var(--cobalt)', oc: 'var(--on-accent)' },
@@ -961,8 +1040,8 @@ function playWort(ctx) {
     kb.append(row);
   }
   root.append(h('div', { class: 'wj' }, msg, grid, kb));
-  let cur = '', r = 0, over = false, bestRow = 0; const kstate = {}; const rank = { x: 1, y: 2, g: 3 };
-  ctx.partial = () => ({ p: bestRow, d: `${r}/6 · ungelöst` });
+  let cur = '', r = 0, over = false, bestRow = 0; const kstate = {}; const rank = { x: 1, y: 2, g: 3 }; const pat = [];
+  ctx.partial = () => ({ p: bestRow, d: `${r}/6 · ungelöst`, x: pat.join('|') });
   function paint() { for (let c = 0; c < 5; c++) { const t = tiles[r][c]; t.textContent = cur[c] || ''; t.classList.toggle('filled', !!cur[c]); } }
   function press(ch) {
     if (over) return;
@@ -978,7 +1057,7 @@ function playWort(ctx) {
   }
   function submit() {
     if (cur.length < 5) { bump(grid.children[r]); msg.textContent = 'Zu kurz – fünf Buchstaben bitte.'; return; }
-    const g = cur, res = evalGuess(g), row = r;
+    const g = cur, res = evalGuess(g), row = r; pat.push(res.join(''));
     res.forEach((s, i) => { ctx.after(i * 110, () => tiles[row][i].classList.add('flip', 's-' + s)); if (!kstate[g[i]] || rank[s] > rank[kstate[g[i]]]) kstate[g[i]] = s; });
     ctx.after(5 * 110 + 200, () => { for (const [ch, s] of Object.entries(kstate)) { const k = keyEls[ch]; if (!k) continue; k.classList.remove('s-x', 's-y', 's-g'); k.classList.add('s-' + s); } });
     bestRow = Math.max(bestRow, res.reduce((a, s) => a + (s === 'g' ? 30 : s === 'y' ? 10 : 0), 0));
@@ -988,10 +1067,10 @@ function playWort(ctx) {
       over = true; const sec = (performance.now() - t0) / 1000;
       const p = Math.max(50, [1000, 880, 760, 640, 520, 400][r - 1] - Math.min(150, Math.floor(sec / 2)));
       msg.textContent = ['Unfassbar, erster Versuch!', 'Stark!', 'Sauber.', 'Gut gemacht.', 'Knapp!', 'Puh, gerade so.'][r - 1];
-      ctx.after(1500, () => ctx.done({ p, d: `${r}/6 · ${mmss(sec)}` }));
+      ctx.after(1500, () => ctx.done({ p, d: `${r}/6 · ${mmss(sec)}`, x: pat.join('|') }));
     } else if (r === 6) {
       over = true; msg.replaceChildren('Gesucht war ', h('strong', null, word), '.');
-      ctx.after(2000, () => ctx.done({ p: bestRow, d: `✗ · ${word}` }));
+      ctx.after(2000, () => ctx.done({ p: bestRow, d: `✗ · ${word}`, x: pat.join('|') }));
     } else msg.textContent = `Noch ${6 - r} Versuch${6 - r === 1 ? '' : 'e'}.`;
   }
   ctx.listen(window, 'keydown', e => {
@@ -1071,16 +1150,19 @@ function playSchaetz(ctx) {
 }
 
 /* ---------- Live: Quiz & Schätzen im Gleichschritt ---------- */
-const SYNC = { quiz: { ask: 13000, rev: 4500 }, schaetz: { ask: 25000, rev: 8000 } };
+const SYNC = { quiz: { ask: 13000, rev: 4500 }, schaetz: { ask: 25000, rev: 8000 }, farbe: { ask: 17000, rev: 6500 }, hl: { ask: 9000, rev: 4000 }, marke: { ask: 21000, rev: 5500 }, nadel: { ask: 24000, rev: 8000 } };
 function syncPayload(gid, seed) {
-  const R = makeRng(seed);
-  if (gid === 'quiz') return R.shuffle(QUIZ).slice(0, 10).map(q => [q[0], q[1], ...R.shuffle(q.slice(1))]);
-  if (gid === 'schaetz') return R.shuffle(EST).slice(0, 6).map(x => { const o = { q: x.q, a: x.a, u: x.u || '' }; if (x.yr) { o.yr = true; o.abs = x.abs; } return o; });
-  return null;
+  const gen = SYNC_GEN[gid] || (gid === 'zeit' ? (R) => R.shuffle(EVENTS).slice(0, 70) : null);
+  return gen ? gen(makeRng(seed)) : null;
 }
 function cleanQs(gid, arr) {
-  if (!Array.isArray(arr) || !arr.length || arr.length > 12) return null;
-  const s = (x, n) => String(x ?? '').slice(0, n);
+  if (!Array.isArray(arr) || !arr.length || arr.length > (gid === 'zeit' ? 80 : 12)) return null;
+  const s = (x, n) => String(x ?? '').slice(0, n); const all = (out) => out.length === arr.length ? out : null; const num = (x) => Number.isFinite(Number(x));
+  if (gid === 'farbe') return all(arr.filter(isObj).map(c => ({ h: clamp(Math.round(Number(c.h) || 0), 0, 360), s: clamp(Math.round(Number(c.s) || 0), 0, 100), v: clamp(Math.round(Number(c.v) || 0), 0, 100) })));
+  if (gid === 'hl') return all(arr.filter(q => Array.isArray(q) && q.length === 9 && Number(q[6]) > 0 && Number(q[8]) > 0).map(q => [s(q[0], 60), s(q[1], 80), s(q[2], 30), s(q[3], 30), s(q[4], 12), s(q[5], 90), Number(q[6]), s(q[7], 90), Number(q[8])]));
+  if (gid === 'marke') return all(arr.filter(q => Array.isArray(q) && q.length === 10 && [1, 2, 3, 4].includes(Number(q[9]))).map(q => [...q.slice(0, 9).map(x => s(x, 220)), Number(q[9])]));
+  if (gid === 'nadel') return all(arr.filter(q => Array.isArray(q) && q.length === 4 && num(q[2]) && num(q[3]) && Math.abs(q[2]) <= 90 && Math.abs(q[3]) <= 180).map(q => [s(q[0], 120), s(q[1], 20), Number(q[2]), Number(q[3])]));
+  if (gid === 'zeit') return all(arr.filter(q => Array.isArray(q) && q.length === 2 && Number.isInteger(Number(q[1]))).map(q => [s(q[0], 120), Number(q[1])]));
   if (gid === 'quiz') { const out = arr.filter(q => Array.isArray(q) && q.length === 6).map(q => q.map(x => s(x, 240))); return out.length === arr.length ? out : null; }
   if (gid === 'schaetz') { const out = arr.filter(x => isObj(x) && Number(x.a) > 0).map(x => { const o = { q: s(x.q, 240), a: Number(x.a), u: s(x.u, 20) }; if (x.yr) { o.yr = true; o.abs = Number(x.abs) || 30; } return o; }); return out.length === arr.length ? out : null; }
   return null;
@@ -1255,6 +1337,609 @@ function playSchaetzLive(ctx) {
     if (sub.ph === 'rev') renderRev();
   };
   ctx.loop(() => { const fill = bar.firstChild; if (cur.ph === 'ask' && !mine[cur.i]) { const rem = deadline() - Date.now(); fill.style.width = clamp(rem / ASK * 100, 0, 100) + '%'; if (rem <= 0) submit(true); } else if (cur.ph !== 'ask') fill.style.width = '0%'; });
+  if (P.st && P.st.sub) ctx.sync(P.st.sub);
+}
+
+
+/* ---------- Runden-Treiber: alle bekommen dieselbe Runde, danach wird aufgedeckt ----------
+   live: Gastgeber taktet (st.sub), Antworten laufen über 'ans'. solo: eigener Takt, gleiche Optik. */
+function liveRounds(ctx, o) {
+  const { root } = ctx; const live = !!(ctx.live && ctx.qs && P.st); const qs = o.qs; const N = qs.length; const ASK = SYNC[o.gid].ask;
+  const L = { i: -1, ph: '', total: 0, mine: {}, stolen: 0, dbl: false, earned: 0, earnNow: '', pend: [], shownAt: 0, live, qs, N, ASK, ctx };
+  const head = h('div', { class: 'g-head' }), bar = h('div', { class: 'tbar' }, h('i')), body = h('div', { class: 'lr-body' }), who = h('div', { class: 'ans-row' }), foot = h('div', { class: 'qz-foot' });
+  root.append(h('div', { class: 'lr ' + (o.cls || '') }, head, bar, body, who, foot));
+  Object.assign(L, { root, body, foot, head });
+  const localA = {}; let localEnd = 0;
+  L.end = () => (live ? P.subLocalEnd : localEnd) - L.stolen;
+  L.left = () => L.end() - Date.now();
+  L.since = () => Date.now() - L.shownAt;
+  L.active = () => L.ph === 'ask' && !L.mine[L.i];
+  L.frozen = () => Date.now() < P.frozenUntil;
+  L.ans = (i) => live ? ansFor(i) : (localA[i] || {});
+  L.setHead = (extra) => head.replaceChildren(h('span', null, `${o.unit || 'Runde'} ${L.i + 1} von ${N}`), h('span', null, L.dbl ? h('span', { class: 'tag r' }, '×2 aktiv') : null, ' ', extra || '', h('span', { class: 'digits' }, L.total), ' Punkte'));
+  L.answer = (a, pts, s, b, msg) => {
+    if (L.mine[L.i] || L.ph !== 'ask') return false;
+    pts = Math.max(0, Math.round(pts || 0)); if (pts > 0 && L.dbl) { pts *= 2; L.dbl = false; }
+    L.total += pts; s = Math.round(clamp(s || 0, 0, 1) * 1000) / 1000; L.mine[L.i] = { a, pts, s, b };
+    const d = { gi: live ? P.st.gi : 0, r: live ? P.st.round : 0, q: L.i, a, ok: s >= 0.85, pts, tot: L.total, s };
+    if (b != null) d.b = b;
+    if (live) { pbcast('ans', d); storeAns(S.me.id, d); }
+    else { (localA[L.i] = localA[L.i] || {})[S.me.id] = { a, ok: d.ok, pts, tot: L.total, s, b: b == null ? null : b }; localEnd = Math.min(localEnd, Date.now() + 500); }
+    if (msg !== false) foot.replaceChildren(h('p', { class: 'g-msg' }, msg || (live ? 'Eingeloggt. Warte auf die anderen …' : 'Eingeloggt.')));
+    return true;
+  };
+  L.earn = (reason) => { if (L.earned < 3) { L.earned++; L.earnNow = reason; } };
+  L.pickers = (A, k) => Object.keys(A).filter(id => A[id].a === k).map(id => h('span', { class: 'picker', title: pname(id) }, pemoji(id)));
+  L.sorted = (A) => Object.keys(A).filter(id => A[id].a !== -1).map(id => ({ id, ...A[id] })).sort((x, y) => y.pts - x.pts || y.s - x.s);
+  function finishAsk() { if (L.mine[L.i] || L.ph !== 'ask') return; if (o.timeout) o.timeout(L.i, L); if (!L.mine[L.i]) L.answer(-1, 0, 0, null, '⏱ Zeit um!'); }
+  function toAsk() {
+    L.stolen = 0; L.shownAt = Date.now(); L.setHead(); ctx.progress(`${o.unit || 'Runde'} ${L.i + 1}/${N} · ${L.total} P`);
+    foot.replaceChildren(); who.replaceChildren(...(live ? answeredRow(L.i) : [])); body.replaceChildren(); o.ask(L.i, L);
+    const p = L.pend; L.pend = []; p.forEach(k => fx(k));
+  }
+  function toRev() {
+    finishAsk(); L.ph = 'rev'; const A = L.ans(L.i); const me = L.mine[L.i]; who.replaceChildren(); body.replaceChildren();
+    o.rev(L.i, A, L);
+    foot.replaceChildren(live ? standingsEl(liveStandings(L.i, A)) : h('div', { class: 'row', style: 'justify-content:center' }, h('button', { class: 'btn primary', type: 'button', onclick: () => { localEnd = Date.now(); } }, L.i + 1 < N ? 'Weiter' : 'Auswertung')));
+    L.setHead(me && me.pts ? `+${me.pts} · ` : '');
+    ctx.progress(`${o.desc(L)} · ${L.total} P`);
+    if (L.earnNow && ctx.live) ctx.live.earn(L.earnNow); L.earnNow = '';
+  }
+  const result = () => ({ p: Math.min(1000, L.total), d: o.desc(L) });
+  ctx.partial = result;
+  function sync(sub) {
+    if (!sub || L.ph === 'end') return;
+    if (sub.ph === 'end') { finishAsk(); L.ph = 'end'; ctx.after(700, () => ctx.done(result())); return; }
+    if ((sub.i === L.i && sub.ph === L.ph) || sub.i >= N) return;
+    const newQ = sub.i !== L.i; L.i = sub.i;
+    if (newQ) { L.ph = 'ask'; toAsk(); }
+    if (sub.ph === 'rev') toRev(); else L.ph = sub.ph;
+  }
+  function fx(k, self) {
+    if (self) { if (k === 'double') { L.dbl = true; L.setHead(); return true; } return o.self && o.self[k] ? !!o.self[k](L) : false; }
+    const fn = k === 'thief' && !o.noThief ? (() => { L.stolen += 5000; liveFly(root, '−5 s'); }) : (o.atk && o.atk[k]);
+    if (!fn) return false;
+    if (!L.active()) { L.pend.push(k); return true; }
+    return fn(L) !== false;
+  }
+  ctx.effect = fx;
+  ctx.loop(() => {
+    const fill = bar.firstChild;
+    if (L.ph === 'ask' && !L.mine[L.i]) { const rem = L.left(); fill.style.width = clamp(rem / ASK * 100, 0, 100) + '%'; if (rem <= 0) finishAsk(); } else fill.style.width = '0%';
+    if (o.tick) o.tick(L);
+  });
+  if (live) {
+    ctx.sync = sync; ctx.onAns = () => { if (L.ph === 'ask') who.replaceChildren(...answeredRow(L.i)); };
+    if (P.st && P.st.sub) sync(P.st.sub);
+  } else {
+    let si = 0, sph = 'ask'; const REV = o.revMs || 8000;
+    localEnd = Date.now() + ASK; sync({ i: 0, ph: 'ask' });
+    ctx.loop(() => {
+      if (L.ph === 'end' || Date.now() < localEnd) return;
+      if (sph === 'ask') { sph = 'rev'; localEnd = Date.now() + REV; sync({ i: si, ph: 'rev' }); }
+      else if (si + 1 < N) { si++; sph = 'ask'; localEnd = Date.now() + ASK; sync({ i: si, ph: 'ask' }); }
+      else { sph = 'end'; sync({ i: si, ph: 'end' }); }
+    });
+  }
+  return L;
+}
+function whoTag(id) { return h('span', { class: 'who-tag' + (id === S.me.id ? ' me' : '') }, pemoji(id), ' ', pname(id)); }
+
+/* ---------- Farbgedächtnis live: alle mischen dieselbe Farbe, danach liegen alle Farben nebeneinander ---------- */
+const packHsv = (c) => c.h * 1000000 + c.s * 1000 + c.v;
+const unpackHsv = (a) => ({ h: Math.floor(a / 1000000), s: Math.floor(a / 1000) % 1000, v: a % 1000 });
+function colorDE(c1, c2) { const la = rgb2lab(hsv2rgb(c1.h, c1.s, c1.v)), lb = rgb2lab(hsv2rgb(c2.h, c2.s, c2.v)); return Math.hypot(la[0] - lb[0], la[1] - lb[1], la[2] - lb[2]); }
+function playFarbeLive(ctx) {
+  const qs = ctx.qs; const SHOW = 3000; let cur = null, des = [], shut = false, salad = false, picking = false, sw = null, slots = null;
+  const L = liveRounds(ctx, {
+    gid: 'farbe', qs, unit: 'Farbe', cls: 'fb',
+    desc: (L) => des.length ? `Ø ΔE ${fmt(des.reduce((x, y) => x + y, 0) / des.length, 1)}` : `${L.i + 1}/${L.N} Farben`,
+    ask(i, L) {
+      const c = qs[i]; cur = { h: 180, s: 50, v: 50 }; picking = false; const showMs = shut ? 1000 : SHOW; shut = false;
+      sw = h('div', { class: 'fb-swatch', style: `background:${rgbCss(hsv2rgb(c.h, c.s, c.v))}` }, String(Math.ceil(showMs / 1000)));
+      L.body.replaceChildren(sw, h('div', { class: 'g-msg' }, 'Präg sie dir ein …'));
+      L.showUntil = L.shownAt + showMs;
+    },
+    tick(L) {
+      if (L.ph !== 'ask' || L.mine[L.i] || picking || !sw) return;
+      const rem = L.showUntil - Date.now(); if (rem > 0) { sw.textContent = String(Math.ceil(rem / 1000)); return; }
+      picking = true; pickUI(L);
+    },
+    timeout(i, L) { if (picking && cur) submit(L, true); },
+    rev(i, A, L) {
+      const c = qs[i]; const es = L.sorted(A);
+      L.body.replaceChildren(
+        h('div', { class: 'fb-target' }, h('div', { class: 'fb-big', style: `background:${rgbCss(hsv2rgb(c.h, c.s, c.v))}` }, 'Original')),
+        es.length ? h('div', { class: 'fb-grid' }, es.map(e => { const m = unpackHsv(e.a); const de = colorDE(c, m); return h('div', { class: 'fb-tile' + (e.id === S.me.id ? ' me' : '') }, h('div', { class: 'fb-sw', style: `background:${rgbCss(hsv2rgb(m.h, m.s, m.v))}` }), h('div', { class: 'fb-who' }, whoTag(e.id)), h('div', { class: 'fb-de' }, `ΔE ${fmt(de, 1)} · `, h('b', null, '+' + e.pts))); })) : h('p', { class: 'fine' }, 'Niemand hat eine Farbe abgegeben.'));
+    },
+    atk: {
+      shut(L) { if (!picking) { L.showUntil = Math.min(L.showUntil, Date.now() + 300); } else shut = true; },
+      sliders(L) { if (picking && slots) shuffleSliders(); else salad = true; }
+    }
+  });
+  function shuffleSliders() { if (!slots) return; const ord = shuffleMath([0, 1, 2]); slots.forEach((s, k) => { s.style.order = String(ord[k]); s.classList.add('salad'); }); }
+  function pickUI(L) {
+    const pv = h('div', { class: 'fb-swatch' });
+    const mk = (key, label, max) => { const inp = h('input', { type: 'range', min: '0', max: String(max), value: String(cur[key]), 'aria-label': label }); const lab = h('label', null, h('span', null, label), h('span', { class: 'digits' }, cur[key])); inp.addEventListener('input', () => { if (L.frozen()) { inp.value = String(cur[key]); return; } cur[key] = +inp.value; lab.lastChild.textContent = inp.value; upd(); }); return { el: h('div', { class: 'sl' }, lab, inp), inp }; };
+    const H_ = mk('h', 'Farbton', 360), S_ = mk('s', 'Sättigung', 100), V_ = mk('v', 'Helligkeit', 100);
+    function upd() {
+      pv.style.background = rgbCss(hsv2rgb(cur.h, cur.s, cur.v));
+      H_.inp.style.background = `linear-gradient(90deg,${[0, 60, 120, 180, 240, 300, 360].map(x => rgbCss(hsv2rgb(x, Math.max(cur.s, 60), Math.max(cur.v, 70)))).join(',')})`;
+      S_.inp.style.background = `linear-gradient(90deg,${rgbCss(hsv2rgb(cur.h, 0, cur.v))},${rgbCss(hsv2rgb(cur.h, 100, cur.v))})`;
+      V_.inp.style.background = `linear-gradient(90deg,#000,${rgbCss(hsv2rgb(cur.h, cur.s, 100))})`;
+    }
+    upd(); slots = [H_.el, S_.el, V_.el];
+    L.body.replaceChildren(pv, h('div', { class: 'fb-sls' }, slots), h('button', { class: 'btn primary lg wide', type: 'button', onclick: () => submit(L) }, 'So sah sie aus'));
+    if (salad) { salad = false; shuffleSliders(); }
+  }
+  function submit(L, auto) {
+    if (!L.active() || (!auto && L.frozen())) return;
+    const c = qs[L.i]; const de = colorDE(c, cur); const s = Math.max(0, 1 - de / 45); des.push(de);
+    if (de < 8) L.earn('Farbe fast perfekt getroffen');
+    L.answer(packHsv(cur), 200 * s, s, null, auto ? `⏱ Zeit um – deine Mischung zählt (ΔE ${fmt(de, 1)}).` : `ΔE ${fmt(de, 1)}. Warte auf die anderen …`);
+  }
+  return L;
+}
+
+/* ---------- Höher oder tiefer live: alle dasselbe Paar, danach sieht man, wer wohin getippt hat ---------- */
+function playHLLive(ctx) {
+  const qs = ctx.qs; let right = 0, flipped = false, btns = null, cards = null;
+  return liveRounds(ctx, {
+    gid: 'hl', qs, unit: 'Duell', cls: 'hl',
+    desc: () => `${right}/${qs.length} richtig`,
+    ask(i, L) {
+      const q = qs[i];
+      cards = h('div', { class: 'hl-cards' },
+        h('div', { class: 'hl-card' }, h('div', { class: 'eyebrow' }, q[1]), h('div', { class: 'hl-name' }, q[5]), h('div', { class: 'hl-val' }, hlFmt(q[6], q[4]))),
+        h('div', { class: 'hl-vs' }, 'VS'),
+        h('div', { class: 'hl-card' }, h('div', { class: 'eyebrow' }, q[1]), h('div', { class: 'hl-name' }, q[7]), h('div', { class: 'hl-val' }, '?')));
+      btns = h('div', { class: 'hl-btns' }, h('button', { class: 'btn good lg', type: 'button', 'data-k': '1', onclick: () => pick(L, 1) }, '▲ ', q[2]), h('button', { class: 'btn primary lg', type: 'button', 'data-k': '0', onclick: () => pick(L, 0) }, '▼ ', q[3]));
+      L.body.replaceChildren(h('div', { class: 'g-msg' }, `${q[0]}: ${q[2]} oder ${q[3].toLowerCase()} als ${q[5]}?`), cards, btns);
+      if (flipped) { flipped = false; flip(L); }
+    },
+    rev(i, A, L) {
+      const q = qs[i]; const up = q[8] > q[6];
+      const mk = (k, label, cls) => h('div', { class: 'btn lg hl-res ' + cls + ((k === 1) === up ? ' ok' : (L.mine[i] && L.mine[i].a === k ? ' no' : '')) }, label, h('span', { class: 'pickers' }, L.pickers(A, k)));
+      L.body.replaceChildren(
+        h('div', { class: 'hl-cards' },
+          h('div', { class: 'hl-card' }, h('div', { class: 'eyebrow' }, q[1]), h('div', { class: 'hl-name' }, q[5]), h('div', { class: 'hl-val' }, hlFmt(q[6], q[4]))),
+          h('div', { class: 'hl-vs' }, 'VS'),
+          h('div', { class: 'hl-card ok' }, h('div', { class: 'eyebrow' }, q[1]), h('div', { class: 'hl-name' }, q[7]), h('div', { class: 'hl-val' }, hlFmt(q[8], q[4])))),
+        h('div', { class: 'hl-btns' }, mk(1, '▲ ' + q[2], 'good'), mk(0, '▼ ' + q[3], 'primary')));
+    },
+    atk: { flip(L) { flip(L); } }
+  });
+  function flip(L) {
+    if (!btns) { flipped = true; return; } const kids = [...btns.children]; kids.reverse().forEach(b => btns.append(b));
+    if (cards) { cards.classList.add('upside'); L.ctx.after(4500, () => cards && cards.classList.remove('upside')); }
+  }
+  function pick(L, k) {
+    if (!L.active() || L.frozen()) return; const q = qs[L.i]; const ok = (k === 1) === (q[8] > q[6]);
+    const sp = clamp(1 - L.since() / L.ASK, 0, 1); if (ok) { right++; if (right % 4 === 0) L.earn(`${right} richtig getippt`); }
+    [...btns.children].forEach(b => { b.disabled = true; if (+b.dataset.k === k) b.classList.add('picked'); });
+    L.answer(k, ok ? 60 + 40 * sp : 0, ok ? 1 : 0);
+  }
+}
+
+/* ---------- Markenraten: Marke aus Hinweisen erraten (keine Logos, nur Beschreibungen) ---------- */
+const BRANDS = [
+  ['Mercedes-Benz', 'auto', 'Autohersteller', 'Deutschland', '1926 (als Daimler-Benz)', 'ein dreizackiger Stern im Kreis', 'Der Stern steht für Antriebe zu Land, zu Wasser und in der Luft.'],
+  ['BMW', 'auto', 'Autohersteller', 'Deutschland', '1916', 'ein Kreis mit blau-weißen Vierteln und schwarzem Ring', 'Die Firma baute zuerst Flugmotoren.'],
+  ['Audi', 'auto', 'Autohersteller', 'Deutschland', '1909', 'vier ineinander verschlungene Ringe', 'Der Name ist die lateinische Übersetzung des Gründernamens Horch („hör!“).'],
+  ['Volkswagen', 'auto', 'Autohersteller', 'Deutschland', '1937', 'ein V über einem W in einem Kreis', 'Das bekannteste Modell lief über 21 Millionen Mal vom Band.'],
+  ['Porsche', 'auto', 'Sportwagenhersteller', 'Deutschland', '1931', 'ein Wappen mit springendem Pferd und Hirschgeweihen', 'Das berühmteste Modell heißt wie eine dreistellige Notrufnummer in den USA.'],
+  ['Opel', 'auto', 'Autohersteller', 'Deutschland', '1862', 'ein Blitz in einem Kreis', 'Die Firma begann mit Nähmaschinen.'],
+  ['Ferrari', 'auto', 'Sportwagenhersteller', 'Italien', '1947 (erstes Auto)', 'ein schwarzes, aufbäumendes Pferd auf gelbem Grund', 'Die Rennwagen sind traditionell rot lackiert.'],
+  ['Lamborghini', 'auto', 'Sportwagenhersteller', 'Italien', '1963', 'ein goldener Stier auf schwarzem Schild', 'Der Gründer baute vorher Traktoren.'],
+  ['Toyota', 'auto', 'Autohersteller', 'Japan', '1937', 'drei Ellipsen, die zusammen ein T bilden', 'Bekannt für frühe Hybridautos in Serie.'],
+  ['Tesla', 'auto', 'Elektroautohersteller', 'USA', '2003', 'ein stilisiertes T, das an einen Elektromotor erinnert', 'Benannt nach einem Erfinder und Elektro-Pionier.'],
+  ['Peugeot', 'auto', 'Autohersteller', 'Frankreich', '1810', 'ein Löwe', 'Die Familie stellte früher auch Pfeffermühlen her.'],
+  ['Renault', 'auto', 'Autohersteller', 'Frankreich', '1899', 'eine Raute', 'Gegründet von drei Brüdern.'],
+  ['Škoda', 'auto', 'Autohersteller', 'Tschechien', '1895', 'ein geflügelter Pfeil', 'Gehört heute zum Volkswagen-Konzern.'],
+  ['Volvo', 'auto', 'Autohersteller', 'Schweden', '1927', 'ein Kreis mit einem Pfeil schräg nach oben rechts', 'Der Name bedeutet auf Latein „ich rolle“.'],
+  ['Mitsubishi', 'auto', 'Konzern, u. a. Autos', 'Japan', '1870', 'drei rote Rauten', 'Der Name heißt ungefähr „drei Wasserkastanien“.'],
+  ['Subaru', 'auto', 'Autohersteller', 'Japan', '1953', 'sechs Sterne auf blauem Oval', 'Der Name ist das japanische Wort für die Plejaden.'],
+  ['Chevrolet', 'auto', 'Autohersteller', 'USA', '1911', 'ein goldenes Zeichen, das an eine Fliege erinnert', 'Benannt nach einem Schweizer Rennfahrer.'],
+  ['Ford', 'auto', 'Autohersteller', 'USA', '1903', 'ein blaues Oval mit geschwungenem Schriftzug', 'Führte das Fließband in der Autoproduktion ein.'],
+  ['Alfa Romeo', 'auto', 'Autohersteller', 'Italien', '1910', 'ein rotes Kreuz und eine Schlange, die einen Menschen verschlingt', 'Die Schlange stammt aus dem Wappen der Mailänder Visconti.'],
+  ['Rolls-Royce', 'auto', 'Luxusautohersteller', 'Großbritannien', '1906', 'zwei ineinandergreifende R', 'Auf der Motorhaube sitzt die Figur „Spirit of Ecstasy“.'],
+  ['Apple', 'tech', 'Tech-Konzern', 'USA', '1976', 'ein angebissenes Stück Obst', 'Angefangen hat es in einer Garage, u. a. mit Steve Jobs.'],
+  ['Microsoft', 'tech', 'Software-Konzern', 'USA', '1975', 'vier farbige Quadrate', 'Mitgegründet von Bill Gates.'],
+  ['Google', 'tech', 'Internetkonzern', 'USA', '1998', 'ein bunter Schriftzug in Blau, Rot, Gelb und Grün', 'Der Name spielt auf eine Zahl mit 100 Nullen an.'],
+  ['Samsung', 'tech', 'Elektronikkonzern', 'Südkorea', '1938', 'ein blauer Schriftzug in Großbuchstaben', 'Der Name bedeutet „drei Sterne“.'],
+  ['Nokia', 'tech', 'Telekommunikation', 'Finnland', '1865', 'ein blauer Schriftzug, früher auf fast jedem Handy', 'Begann als Papierfabrik.'],
+  ['Sony', 'tech', 'Elektronikkonzern', 'Japan', '1946', 'ein schlichter Schriftzug in Großbuchstaben', 'Erfand den Walkman.'],
+  ['Nintendo', 'tech', 'Spielekonzern', 'Japan', '1889', 'ein roter Schriftzug in einem abgerundeten Rahmen', 'Begann mit Spielkarten.'],
+  ['Amazon', 'tech', 'Online-Händler', 'USA', '1994', 'ein lächelnder Pfeil von a nach z', 'Begann als Online-Buchhandlung.'],
+  ['Facebook', 'tech', 'Soziales Netzwerk', 'USA', '2004', 'ein weißes kleines f auf blauem Grund', 'Startete als Netzwerk für Studierende in Harvard.'],
+  ['Instagram', 'tech', 'Foto-App', 'USA', '2010', 'eine stilisierte Kamera auf buntem Farbverlauf', 'Gehört seit 2012 zum Facebook-Konzern.'],
+  ['WhatsApp', 'tech', 'Messenger', 'USA', '2009', 'eine grüne Sprechblase mit Telefonhörer', 'Gehört seit 2014 zum Facebook-Konzern.'],
+  ['YouTube', 'tech', 'Videoplattform', 'USA', '2005', 'ein rotes, abgerundetes Rechteck mit weißem Play-Dreieck', 'Das erste Video zeigt einen Besuch im Zoo.'],
+  ['Netflix', 'tech', 'Streamingdienst', 'USA', '1997', 'ein rotes N', 'Verschickte früher DVDs per Post.'],
+  ['Spotify', 'tech', 'Musik-Streaming', 'Schweden', '2006', 'ein grüner Kreis mit drei geschwungenen Linien', 'Gegründet in Stockholm.'],
+  ['Discord', 'tech', 'Chat-Plattform', 'USA', '2015', 'ein lila-blaues, controllerförmiges Gesicht', 'Ursprünglich vor allem für Gamer gedacht.'],
+  ['Twitch', 'tech', 'Streamingplattform', 'USA', '2011', 'eine lila Sprechblase mit zwei senkrechten Strichen', 'Gehört zu Amazon.'],
+  ['TikTok', 'tech', 'Video-App', 'China', '2016', 'eine Musiknote mit türkis-pinkem Versatz', 'International groß geworden durch die Fusion mit musical.ly.'],
+  ['Snapchat', 'tech', 'Foto-App', 'USA', '2011', 'ein weißer Geist auf gelbem Grund', 'Bilder verschwinden nach dem Ansehen.'],
+  ['Duolingo', 'tech', 'Sprachlern-App', 'USA', '2011', 'eine grüne Eule', 'Das Maskottchen ist für hartnäckige Erinnerungen berüchtigt.'],
+  ['Firefox', 'tech', 'Webbrowser', 'USA', '2004', 'ein Fuchs, der sich um eine Weltkugel schlingt', 'Wird von einer gemeinnützigen Stiftung entwickelt.'],
+  ['Android', 'tech', 'Betriebssystem', 'USA', '2008', 'ein grüner Roboter', 'Die Versionen hießen lange nach Süßigkeiten.'],
+  ['SAP', 'tech', 'Softwarekonzern', 'Deutschland', '1972', 'ein blauer Schriftzug aus drei Buchstaben', 'Gegründet von ehemaligen IBM-Mitarbeitern in Baden-Württemberg.'],
+  ['Siemens', 'tech', 'Technologiekonzern', 'Deutschland', '1847', 'ein petrolfarbener Schriftzug', 'Der Gründer baute einen Zeigertelegrafen.'],
+  ['Bosch', 'tech', 'Technikkonzern', 'Deutschland', '1886', 'ein Anker in einem Kreis', 'Der Anker im Logo stammt von einem Magnetzünder.'],
+  ['PayPal', 'tech', 'Online-Bezahldienst', 'USA', '1998', 'zwei überlappende P in Blau', 'Elon Musk gehörte zu den frühen Mitgründern.'],
+  ['Mastercard', 'tech', 'Kreditkartenfirma', 'USA', '1966', 'zwei überlappende Kreise in Rot und Gelb', 'Steht auf Millionen Bankkarten.'],
+  ['Telekom', 'tech', 'Telekommunikation', 'Deutschland', '1995', 'ein magentafarbenes T', 'Ging aus der Bundespost hervor.'],
+  ['Coca-Cola', 'food', 'Getränkehersteller', 'USA', '1886', 'ein weißer, geschwungener Schriftzug auf Rot', 'Erfunden von einem Apotheker in Atlanta.'],
+  ['Pepsi', 'food', 'Getränkehersteller', 'USA', '1893', 'eine rot-weiß-blaue Kugel', 'Erfunden von einem Apotheker in North Carolina.'],
+  ['Red Bull', 'food', 'Getränkehersteller', 'Österreich', '1987', 'zwei rote Stiere vor einer gelben Sonne', 'Basiert auf einem Getränk aus Thailand.'],
+  ['Haribo', 'food', 'Süßwarenhersteller', 'Deutschland', '1920', 'ein Goldbär als Maskottchen', 'Der Name setzt sich aus Gründername und Stadt zusammen.'],
+  ['Milka', 'food', 'Schokoladenmarke', 'Schweiz', '1901', 'eine lila Kuh', 'Der Name kommt von Milch und Kakao.'],
+  ['Ritter Sport', 'food', 'Schokoladenmarke', 'Deutschland', '1912', 'quadratische Tafeln in bunten Verpackungen', 'Die Form sollte in jede Sakkotasche passen.'],
+  ['Nutella', 'food', 'Brotaufstrich', 'Italien', '1964', 'ein schwarzer Schriftzug mit rotem Anfangsbuchstaben', 'Hergestellt von Ferrero.'],
+  ['Lindt', 'food', 'Schokoladenhersteller', 'Schweiz', '1845', 'ein goldener Hase mit rotem Bändchen und Glöckchen', 'Hier wurde das Conchieren von Schokolade erfunden.'],
+  ['Toblerone', 'food', 'Schokoladenmarke', 'Schweiz', '1908', 'ein Berg, in dem sich ein Bär versteckt', 'Die Dreiecksform erinnert an Berggipfel.'],
+  ['McDonald’s', 'food', 'Fast-Food-Kette', 'USA', '1940', 'goldene Bögen in M-Form', 'Gegründet von zwei Brüdern.'],
+  ['Burger King', 'food', 'Fast-Food-Kette', 'USA', '1954', 'der Schriftzug zwischen zwei Brötchenhälften', 'Bekannt für den „Whopper“.'],
+  ['Starbucks', 'food', 'Kaffeehauskette', 'USA', '1971', 'eine grüne Meerjungfrau mit zwei Schwanzflossen', 'Benannt nach einer Figur aus „Moby Dick“.'],
+  ['KFC', 'food', 'Fast-Food-Kette', 'USA', '1952', 'ein älterer Herr mit Brille, Spitzbart und Fliege', 'Das Rezept soll elf Kräuter und Gewürze enthalten.'],
+  ['Heineken', 'food', 'Brauerei', 'Niederlande', '1864', 'ein roter Stern', 'Bekannt für grüne Flaschen.'],
+  ['Beck’s', 'food', 'Brauerei', 'Deutschland', '1873', 'ein Schlüssel', 'Der Schlüssel stammt aus dem Bremer Stadtwappen.'],
+  ['Jägermeister', 'food', 'Kräuterlikör', 'Deutschland', '1935', 'ein Hirschkopf mit leuchtendem Kreuz zwischen dem Geweih', 'Der Likör enthält 56 Zutaten.'],
+  ['Nestlé', 'food', 'Lebensmittelkonzern', 'Schweiz', '1866', 'ein Vogelnest mit Vögeln', 'Der Name bedeutet „kleines Nest“.'],
+  ['Dr. Oetker', 'food', 'Lebensmittelhersteller', 'Deutschland', '1891', 'ein heller Frauenkopf im Profil auf rotem Grund', 'Wurde mit Backpulver bekannt.'],
+  ['Pringles', 'food', 'Chipsmarke', 'USA', '1968', 'ein Mann mit großem Schnurrbart', 'Die Chips stecken gestapelt in einer Röhre.'],
+  ['Adidas', 'mode', 'Sportartikelhersteller', 'Deutschland', '1949', 'drei Streifen', 'Benannt nach dem Spitznamen des Gründers.'],
+  ['Puma', 'mode', 'Sportartikelhersteller', 'Deutschland', '1948', 'eine springende Raubkatze', 'Gegründet vom Bruder eines anderen berühmten Sportschuh-Gründers.'],
+  ['Nike', 'mode', 'Sportartikelhersteller', 'USA', '1964 (zuerst unter anderem Namen)', 'ein geschwungener Haken', 'Benannt nach der griechischen Siegesgöttin.'],
+  ['Lacoste', 'mode', 'Modemarke', 'Frankreich', '1933', 'ein grünes Krokodil', 'Gegründet von einem Tennisspieler.'],
+  ['Converse', 'mode', 'Schuhmarke', 'USA', '1908', 'ein Stern', 'Berühmt für den „Chuck Taylor“-Basketballschuh.'],
+  ['Levi’s', 'mode', 'Jeansmarke', 'USA', '1853', 'ein rotes Fähnchen an der Gesäßtasche', 'Gilt als Erfinder der Bluejeans.'],
+  ['Rolex', 'mode', 'Uhrenmarke', 'Schweiz', '1905', 'eine goldene Krone', 'Gegründet in London, heute in Genf zu Hause.'],
+  ['Montblanc', 'mode', 'Schreibgeräte und Luxus', 'Deutschland', '1906', 'ein weißer Stern mit abgerundeten Zacken', 'Der Stern soll einen schneebedeckten Gipfel von oben zeigen.'],
+  ['Ralph Lauren', 'mode', 'Modemarke', 'USA', '1967', 'ein Polospieler auf einem Pferd', 'Benannt nach dem Designer selbst.'],
+  ['The North Face', 'mode', 'Outdoor-Marke', 'USA', '1966', 'drei geschwungene Linien wie eine Felswand', 'Benannt nach der kältesten, schwierigsten Seite eines Berges.'],
+  ['IKEA', 'sonst', 'Möbelhaus', 'Schweden', '1943', 'blauer Schriftzug auf gelbem Oval in blauem Rechteck', 'Die Buchstaben stehen für Gründer, Hof und Dorf.'],
+  ['LEGO', 'sonst', 'Spielzeughersteller', 'Dänemark', '1932', 'weißer Schriftzug auf rotem Quadrat mit gelbem Rand', 'Der Name kommt von „leg godt“ – spiel gut.'],
+  ['Playmobil', 'sonst', 'Spielzeughersteller', 'Deutschland', '1974', 'lächelnde Figuren mit Greifhänden', 'Die Figuren sind 7,5 Zentimeter groß.'],
+  ['Ravensburger', 'sonst', 'Spiele und Puzzles', 'Deutschland', '1883', 'ein blaues Dreieck in der Ecke', 'Bekannt für Puzzles und das Spiel „Memory“.'],
+  ['Lufthansa', 'sonst', 'Fluggesellschaft', 'Deutschland', '1926 (Neugründung 1953)', 'ein Kranich im Kreis', 'Die Hausfarben sind Gelb und Dunkelblau.'],
+  ['Deutsche Bahn', 'sonst', 'Bahnunternehmen', 'Deutschland', '1994', 'zwei rote Buchstaben in einem roten Rahmen', 'Entstand aus Bundesbahn und Reichsbahn.'],
+  ['DHL', 'sonst', 'Paket- und Logistikdienst', 'USA', '1969', 'ein roter, schräger Schriftzug auf Gelb', 'Die drei Buchstaben stehen für die Nachnamen der Gründer.'],
+  ['Shell', 'sonst', 'Ölkonzern', 'Großbritannien', '1907', 'eine gelb-rote Muschel', 'Der Name geht auf einen Handel mit Muscheln zurück.'],
+  ['Nivea', 'sonst', 'Körperpflegemarke', 'Deutschland', '1911', 'ein weißer Schriftzug auf einer dunkelblauen Dose', 'Der Name kommt vom lateinischen Wort für „schneeweiß“.'],
+  ['Tempo', 'sonst', 'Taschentuchmarke', 'Deutschland', '1929', 'ein blauer Schriftzug', 'Der Markenname wurde zum Wort für Papiertaschentücher.'],
+  ['Lidl', 'sonst', 'Discounter', 'Deutschland', '1973', 'ein gelber Kreis mit rotem Rand auf blauem Grund', 'Gehört zur Schwarz-Gruppe aus Neckarsulm.'],
+  ['Airbnb', 'sonst', 'Plattform für Unterkünfte', 'USA', '2008', 'ein geschwungenes Zeichen aus Herz, Standortnadel und A', 'Begann mit Luftmatratzen in einer Wohnung.'],
+  ['Allianz', 'sonst', 'Versicherungskonzern', 'Deutschland', '1890', 'ein stilisierter Adler im Kreis', 'Einer der größten Versicherer der Welt.'],
+  ['Sparkasse', 'sonst', 'Bankengruppe', 'Deutschland', '1778', 'ein rotes S mit einem Punkt darüber', 'Die erste ihrer Art entstand in Hamburg.'],
+  ['Michelin', 'sonst', 'Reifenhersteller', 'Frankreich', '1889', 'ein Männchen aus weißen Reifen', 'Vergibt auch Sterne an Restaurants.'],
+  ['Zalando', 'sonst', 'Online-Modehändler', 'Deutschland', '2008', 'ein orangefarbenes Segel', 'Bekannt für Werbespots mit Schreien vor Glück.']
+];
+const MARKE_PTS = [170, 125, 90, 55]; const MARKE_STEP = 5000;
+function marketHints(b) { return [`${b[2]} aus ${b[3]}`, `Gibt es seit ${b[4]}`, b[6], `Logo oder Erkennungszeichen: ${b[5]}`]; }
+function playMarke(ctx) {
+  const qs = ctx.qs || SYNC_GEN.marke(ctx.R); let right = 0, opts = null, hintsEl = null, shownHints = 0, slowUntil = 0, slowShift = 0;
+  const L = liveRounds(ctx, {
+    gid: 'marke', qs, unit: 'Marke', cls: 'mk2', revMs: 6500,
+    desc: () => `${right}/${qs.length} erkannt`,
+    ask(i, L) {
+      const q = qs[i]; shownHints = 0; slowShift = 0;
+      hintsEl = h('ol', { class: 'mk-hints' });
+      opts = h('div', { class: 'qz-opts' }, q.slice(1, 5).map((o, k) => h('button', { class: 'btn qz-opt', type: 'button', 'data-k': k, onclick: () => pick(L, k) }, h('span', { class: 'digits', style: 'opacity:.5' }, k + 1), h('span', { class: 'opt-t' }, o))));
+      L.body.replaceChildren(h('div', { class: 'qz-q' }, 'Welche Marke ist das?'), hintsEl, opts);
+      showHints(L);
+    },
+    tick(L) { if (L.ph === 'ask') showHints(L); },
+    rev(i, A, L) {
+      const q = qs[i]; const me = L.mine[i];
+      L.body.replaceChildren(h('div', { class: 'qz-q' }, h('span', null, 'Es war: ', h('b', null, q[q[9]]))), h('ol', { class: 'mk-hints all' }, q.slice(5, 9).map(t => h('li', null, t))),
+        h('div', { class: 'qz-opts' }, q.slice(1, 5).map((o, k) => h('div', { class: 'btn qz-opt' + (k + 1 === q[9] ? ' ok' : (me && me.a === k ? ' no' : '')) }, h('span', { class: 'opt-t' }, o),
+          h('span', { class: 'pickers' }, Object.keys(A).filter(id => A[id].a === k).map(id => h('span', { class: 'picker', title: `${pname(id)} nach ${A[id].b || '?'} Hinweis${A[id].b > 1 ? 'en' : ''}` }, pemoji(id), h('small', null, A[id].b || ''))))))));
+    },
+    atk: {
+      mix(L) { const btns = [...opts.children]; let n = 0; const iv = L.ctx.every(550, () => { const ord = shuffleMath(btns.map((_, i) => i)); btns.forEach((b, i) => { b.style.order = String(ord[i]); }); if (++n >= 9 || L.ph !== 'ask') { L.ctx.clear(iv); btns.forEach(b => { b.style.order = ''; }); } }); },
+      censor(L) { shuffleMath([...opts.children].filter(b => !b.classList.contains('gone'))).slice(0, 2).forEach(b => b.classList.add('censored')); },
+      whisper(L) { const q = qs[L.i]; const b = shuffleMath([...opts.children].filter(b => +b.dataset.k + 1 !== q[9] && !b.classList.contains('gone')))[0]; if (b) b.append(h('span', { class: 'psst' }, '👀 Psst … die hier!')); },
+      snail(L) { slowShift += 4000; liveFly(L.root, '🐌 Hinweise später'); }
+    },
+    self: { fifty(L) { if (!L.active()) return false; const q = qs[L.i]; shuffleMath([...opts.children].filter(b => +b.dataset.k + 1 !== q[9] && !b.disabled)).slice(0, 2).forEach(b => { b.disabled = true; b.classList.add('gone'); }); return true; } }
+  });
+  function showHints(L) {
+    if (!hintsEl) return; const q = qs[L.i];
+    const want = L.mine[L.i] ? Math.max(shownHints, 1) : clamp(1 + Math.floor(Math.max(0, L.since() - slowShift) / MARKE_STEP), 1, 4);
+    while (shownHints < want) { hintsEl.append(h('li', { class: 'new' }, q[5 + shownHints])); shownHints++; }
+  }
+  function pick(L, k) {
+    if (!L.active() || L.frozen()) return; const q = qs[L.i]; const ok = k + 1 === q[9];
+    [...opts.children].forEach(b => { b.disabled = true; if (+b.dataset.k === k) b.classList.add('picked'); });
+    if (ok) { right++; if (shownHints <= 1) L.earn('Marke nach einem Hinweis erkannt'); }
+    L.answer(k, ok ? MARKE_PTS[shownHints - 1] : 0, ok ? 1 : 0, shownHints, ok ? `Eingeloggt nach ${shownHints} Hinweis${shownHints > 1 ? 'en' : ''}.` : null);
+  }
+  ctx.listen(window, 'keydown', e => { if (/^[1-4]$/.test(e.key) && opts) { const vis = [...opts.children].sort((a, b) => (+a.style.order || 0) - (+b.style.order || 0)); const b = vis[+e.key - 1]; if (b && !b.disabled) pick(L, +b.dataset.k); } });
+}
+
+/* ---------- Nadelstich: Ort auf dem Globus markieren, wer am nächsten dran ist, gewinnt ---------- */
+const PLACES = [
+  ['Eiffelturm', 'Bauwerk', 48.858, 2.294], ['Kolosseum', 'Bauwerk', 41.890, 12.492], ['Freiheitsstatue', 'Bauwerk', 40.689, -74.045], ['Sydney Opera House', 'Bauwerk', -33.857, 151.215],
+  ['Taj Mahal', 'Bauwerk', 27.175, 78.042], ['Machu Picchu', 'Bauwerk', -13.163, -72.545], ['Christusstatue Cristo Redentor', 'Bauwerk', -22.952, -43.211], ['Chinesische Mauer bei Badaling', 'Bauwerk', 40.359, 116.020],
+  ['Pyramiden von Gizeh', 'Bauwerk', 29.979, 31.134], ['Felsenstadt Petra', 'Bauwerk', 30.329, 35.444], ['Angkor Wat', 'Bauwerk', 13.412, 103.867], ['Stonehenge', 'Bauwerk', 51.179, -1.826],
+  ['Akropolis', 'Bauwerk', 37.972, 23.726], ['Burj Khalifa', 'Bauwerk', 25.197, 55.274], ['Golden Gate Bridge', 'Bauwerk', 37.820, -122.478], ['Big Ben', 'Bauwerk', 51.501, -0.125],
+  ['Sagrada Família', 'Bauwerk', 41.404, 2.174], ['Schloss Neuschwanstein', 'Bauwerk', 47.558, 10.750], ['Brandenburger Tor', 'Bauwerk', 52.516, 13.378], ['Kölner Dom', 'Bauwerk', 50.941, 6.958],
+  ['Schiefer Turm von Pisa', 'Bauwerk', 43.723, 10.396], ['Mount Rushmore', 'Bauwerk', 43.879, -103.459], ['Maya-Stadt Chichén Itzá', 'Bauwerk', 20.684, -88.568], ['Moai-Statuen der Osterinsel', 'Bauwerk', -27.113, -109.350],
+  ['Alhambra', 'Bauwerk', 37.176, -3.588], ['Hagia Sophia', 'Bauwerk', 41.008, 28.980], ['Roter Platz mit Basilius-Kathedrale', 'Bauwerk', 55.754, 37.620], ['Verbotene Stadt', 'Bauwerk', 39.916, 116.397],
+  ['Tokyo Skytree', 'Bauwerk', 35.710, 139.811], ['Louvre', 'Bauwerk', 48.861, 2.336], ['Tower Bridge', 'Bauwerk', 51.505, -0.075], ['Atomium', 'Bauwerk', 50.895, 4.341],
+  ['Kleine Meerjungfrau', 'Bauwerk', 55.693, 12.599], ['Elbphilharmonie', 'Bauwerk', 53.541, 9.984], ['Wartburg', 'Bauwerk', 50.966, 10.307], ['Dresdner Frauenkirche', 'Bauwerk', 51.052, 13.742],
+  ['Marina Bay Sands', 'Bauwerk', 1.283, 103.861], ['Petronas Towers', 'Bauwerk', 3.158, 101.712], ['Kaaba', 'Bauwerk', 21.423, 39.826], ['Klagemauer', 'Bauwerk', 31.777, 35.234],
+  ['Weißes Haus', 'Bauwerk', 38.898, -77.037], ['Petersdom', 'Bauwerk', 41.902, 12.454], ['Potala-Palast', 'Bauwerk', 29.658, 91.117], ['Terrakotta-Armee', 'Bauwerk', 34.385, 109.273],
+  ['Tempel Abu Simbel', 'Bauwerk', 22.337, 31.626], ['Persepolis', 'Bauwerk', 29.935, 52.891], ['Ruinen von Babylon', 'Bauwerk', 32.536, 44.421], ['Göbekli Tepe', 'Bauwerk', 37.223, 38.922],
+  ['Torre de Belém', 'Bauwerk', 38.692, -9.216], ['Mont-Saint-Michel', 'Bauwerk', 48.636, -1.511], ['Schloss Schönbrunn', 'Bauwerk', 48.185, 16.312], ['Edinburgh Castle', 'Bauwerk', 55.949, -3.200],
+  ['Hallgrímskirkja', 'Bauwerk', 64.142, -21.927], ['Space Needle', 'Bauwerk', 47.620, -122.349], ['CN Tower', 'Bauwerk', 43.643, -79.387], ['Borobudur', 'Bauwerk', -7.608, 110.204],
+  ['Fushimi-Inari-Schrein', 'Bauwerk', 34.967, 135.773], ['Mount Everest', 'Natur', 27.988, 86.925], ['Kilimandscharo', 'Natur', -3.067, 37.356], ['Fuji', 'Natur', 35.361, 138.727],
+  ['Matterhorn', 'Natur', 45.976, 7.658], ['Zugspitze', 'Natur', 47.421, 10.985], ['Niagarafälle', 'Natur', 43.083, -79.074], ['Grand Canyon', 'Natur', 36.106, -112.113],
+  ['Uluru (Ayers Rock)', 'Natur', -25.345, 131.036], ['Victoriafälle', 'Natur', -17.925, 25.857], ['Tafelberg', 'Natur', -33.963, 18.410], ['Iguaçu-Wasserfälle', 'Natur', -25.695, -54.437],
+  ['Halong-Bucht', 'Natur', 20.910, 107.184], ['Salar de Uyuni', 'Natur', -20.134, -67.489], ['Totes Meer', 'Natur', 31.50, 35.50], ['Challengertief im Marianengraben', 'Natur', 11.35, 142.20],
+  ['Nordkap', 'Natur', 71.171, 25.783], ['Kap der Guten Hoffnung', 'Natur', -34.357, 18.474], ['Kap Hoorn', 'Natur', -55.98, -67.27], ['Geysir Old Faithful im Yellowstone', 'Natur', 44.460, -110.828],
+  ['Vesuv', 'Natur', 40.821, 14.426], ['Ätna', 'Natur', 37.751, 14.994], ['Galápagos-Inseln', 'Natur', -0.75, -90.33], ['Serengeti', 'Natur', -2.33, 34.83],
+  ['Great Barrier Reef', 'Natur', -18.29, 147.70], ['Milford Sound', 'Natur', -44.641, 167.897], ['Bora Bora', 'Natur', -16.50, -151.74], ['Loch Ness', 'Natur', 57.322, -4.424],
+  ['Cliffs of Moher', 'Natur', 52.972, -9.426], ['Loreley-Felsen', 'Natur', 50.139, 7.729], ['Plitvicer Seen', 'Natur', 44.880, 15.616], ['Baobab-Allee auf Madagaskar', 'Natur', -20.251, 44.419],
+  ['Nazca-Linien', 'Natur', -14.739, -75.130], ['Südpol', 'Natur', -89.99, 0], ['Nullmeridian in Greenwich', 'Ort', 51.478, -0.002], ['Venedigs Markusplatz', 'Ort', 45.434, 12.339],
+  ['Pompeji', 'Ort', 40.749, 14.485], ['Troja', 'Ort', 39.957, 26.239], ['Hallstatt', 'Ort', 47.562, 13.649], ['Santorini (Oia)', 'Ort', 36.462, 25.376],
+  ['Dubrovniks Altstadt', 'Ort', 42.641, 18.108], ['Monaco', 'Ort', 43.738, 7.424], ['Felsen von Gibraltar', 'Ort', 36.140, -5.354], ['Times Square', 'Ort', 40.758, -73.986],
+  ['Hollywood-Schriftzug', 'Ort', 34.134, -118.322], ['Las Vegas Strip', 'Ort', 36.114, -115.173], ['Gefängnisinsel Alcatraz', 'Ort', 37.827, -122.423], ['Area 51', 'Ort', 37.235, -115.811],
+  ['Timbuktu', 'Ort', 16.774, -3.007], ['Stone Town auf Sansibar', 'Ort', -6.162, 39.188], ['Malé auf den Malediven', 'Ort', 4.175, 73.509], ['Kappadokien', 'Ort', 38.643, 34.830],
+  ['Victoria Peak in Hongkong', 'Ort', 22.271, 114.150], ['Waikiki Beach', 'Ort', 21.276, -157.827], ['LEGOLAND Billund', 'Ort', 55.735, 9.127], ['Theresienwiese (Oktoberfest)', 'Ort', 48.131, 11.549],
+  ['Hobbingen-Filmset in Neuseeland', 'Popkultur', -37.872, 175.683], ['Zebrastreifen der Abbey Road', 'Popkultur', 51.532, -0.178], ['Elvis’ Graceland', 'Popkultur', 35.048, -90.026], ['Cavern Club der Beatles', 'Popkultur', 53.406, -2.988],
+  ['Wacken Open Air', 'Popkultur', 54.024, 9.377], ['Woodstock-Festival 1969', 'Popkultur', 41.701, -74.880], ['Disneyland (das erste)', 'Popkultur', 33.812, -117.919], ['Drehort von „Breaking Bad“ (Albuquerque)', 'Popkultur', 35.084, -106.650],
+  ['Bollywood (Mumbai)', 'Popkultur', 19.076, 72.878], ['Roswell (UFO-Absturz 1947)', 'Popkultur', 33.394, -104.523], ['Apple Park', 'Popkultur', 37.335, -122.009], ['Teilchenbeschleuniger CERN', 'Ort', 46.234, 6.055],
+  ['Allianz Arena', 'Sport', 48.219, 11.625], ['Camp Nou', 'Sport', 41.381, 2.123], ['Maracanã-Stadion', 'Sport', -22.912, -43.230], ['Wembley-Stadion', 'Sport', 51.556, -0.280],
+  ['Wimbledon', 'Sport', 51.434, -0.214], ['Nürburgring', 'Sport', 50.335, 6.947], ['Monza-Rennstrecke', 'Sport', 45.620, 9.281], ['24 Stunden von Le Mans', 'Sport', 47.950, 0.224],
+  ['Antikes Olympia', 'Sport', 37.638, 21.630], ['„Wunder von Bern“ 1954 (Wankdorfstadion)', 'Sport', 46.963, 7.465], ['WM-Finale 2022 (Lusail)', 'Sport', 25.421, 51.490], ['Indianapolis Motor Speedway', 'Sport', 39.795, -86.235],
+  ['Mondlandungs-Startplatz Cape Canaveral', 'Ereignis', 28.573, -80.649], ['Gagarins Start in Baikonur', 'Ereignis', 45.920, 63.342], ['Wrack der Titanic', 'Ereignis', 41.726, -49.948], ['Titanics Ablegehafen Southampton', 'Ereignis', 50.900, -1.404],
+  ['Absturz der Hindenburg in Lakehurst', 'Ereignis', 40.034, -74.353], ['Reaktorunglück Tschernobyl', 'Ereignis', 51.389, 30.099], ['Erster Motorflug in Kitty Hawk', 'Ereignis', 36.014, -75.668], ['Unabhängigkeitserklärung der USA (Philadelphia)', 'Ereignis', 39.949, -75.150],
+  ['Attentat von Sarajevo 1914', 'Ereignis', 43.858, 18.428], ['Napoleons Geburtsort Ajaccio', 'Ereignis', 41.919, 8.738], ['Napoleons Tod im Exil auf St. Helena', 'Ereignis', -15.965, -5.708], ['Kolumbus landet auf Guanahani (Bahamas)', 'Ereignis', 24.05, -74.50],
+  ['Mozarts Geburtsort', 'Ereignis', 47.800, 13.044], ['Beethovens Geburtsort', 'Ereignis', 50.737, 7.098], ['Luthers Thesenanschlag', 'Ereignis', 51.866, 12.643], ['Gutenbergs Druckerwerkstatt', 'Ereignis', 49.999, 8.274],
+  ['Einsteins Geburtsort', 'Ereignis', 48.398, 9.992], ['Völkerschlacht 1813', 'Ereignis', 51.312, 12.413], ['Westfälischer Friede 1648 (Münster)', 'Ereignis', 51.962, 7.626], ['Krönungsort Karls des Großen in Aachen', 'Ereignis', 50.775, 6.084],
+  ['Gang nach Canossa', 'Ereignis', 44.577, 10.455], ['Hambacher Fest', 'Ereignis', 49.327, 8.126], ['Erste Autofahrt von Bertha Benz (Start in Mannheim)', 'Ereignis', 49.487, 8.466], ['Schlacht bei Waterloo', 'Ereignis', 50.680, 4.412],
+  ['Landung der Alliierten am Omaha Beach', 'Ereignis', 49.369, -0.882], ['Schlacht bei Hastings', 'Ereignis', 50.914, 0.487], ['Varusschlacht (Kalkriese)', 'Ereignis', 52.409, 8.130], ['Schlacht von Gettysburg', 'Ereignis', 39.811, -77.226],
+  ['Schlacht bei den Thermopylen', 'Ereignis', 38.796, 22.536], ['Ausbruch des Krakatau 1883', 'Ereignis', -6.102, 105.423], ['Ausbruch des Mount St. Helens 1980', 'Ereignis', 46.191, -122.195], ['Mauerfall an der Bornholmer Straße', 'Ereignis', 52.555, 13.398],
+  ['Erster Atombombentest „Trinity“', 'Ereignis', 33.677, -106.475], ['Verleihung des Friedensnobelpreises', 'Ereignis', 59.912, 10.735], ['Weltwirtschaftsforum Davos', 'Ereignis', 46.802, 9.836], ['Erster Eurovision Song Contest 1956 (Lugano)', 'Ereignis', 46.004, 8.951],
+  ['Schlacht bei Marathon', 'Ereignis', 38.118, 23.978], ['Attentat auf John F. Kennedy (Dallas)', 'Ereignis', 32.779, -96.809], ['Angriff auf Pearl Harbor', 'Ereignis', 21.365, -157.950], ['Darwins Beobachtungen auf den Galápagos', 'Ereignis', -0.95, -90.97]
+];
+function geoKm(lat1, lon1, lat2, lon2) { const r = Math.PI / 180; const a = Math.sin((lat2 - lat1) * r / 2) ** 2 + Math.cos(lat1 * r) * Math.cos(lat2 * r) * Math.sin((lon2 - lon1) * r / 2) ** 2; return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(a))); }
+const KIND_E = { Bauwerk: '🏛️', Natur: '🏔️', Ort: '📍', Popkultur: '🎬', Sport: '🏟️', Ereignis: '📜' };
+function playNadel(ctx) {
+  const qs = ctx.qs || SYNC_GEN.nadel(ctx.R); const N = qs.length; const kms = [];
+  const box = h('div', { class: 'nd' }); ctx.root.append(box);
+  box.append(h('div', { class: 'wait-card' }, h('div', { style: 'font-size:54px' }, '🌍'), h('p', { class: 'muted' }, 'Globus wird geladen …')));
+  let G = null, L = null;
+  loadGeo().then(geo => { if (!ctx.alive) return; box.replaceChildren(); start(geo); }).catch(() => {
+    if (!ctx.alive) return;
+    box.replaceChildren(h('div', { class: 'empty' }, h('p', null, 'Die Weltkarte konnte nicht geladen werden. Prüf deine Internetverbindung.')));
+    ctx.partial = () => ({ p: 0, d: 'Karte nicht geladen' }); if (ctx.live) ctx.after(4000, () => ctx.done({ p: 0, d: 'Karte nicht geladen' }));
+  });
+  function start(geo) {
+    G = makeGlobe(ctx, geo, { onTap: (lat, lon) => setPin(lat, lon) });
+    let pin = null, confirmBtn = null, msg = null;
+    L = liveRounds(Object.assign(ctx, { root: box }), {
+      gid: 'nadel', qs, unit: 'Ort', cls: 'nd-in', revMs: 9000,
+      desc: () => kms.length ? `Ø ${fmt(kms.reduce((a, b) => a + b, 0) / kms.length)} km` : 'keine Nadel',
+      ask(i, L) {
+        const q = qs[i]; pin = null; G.pins = []; G.lines = []; G.target = null; G.dirty = true;
+        msg = h('div', { class: 'g-msg' }, 'Dreh den Globus und tipp auf die Stelle.');
+        confirmBtn = h('button', { class: 'btn primary lg wide', type: 'button', disabled: true, onclick: () => confirm(L) }, '📍 Nadel setzen');
+        L.body.replaceChildren(h('div', { class: 'nd-q' }, h('span', { class: 'nd-kind' }, `${KIND_E[q[1]] || '📍'} ${q[1]}`), h('b', null, q[0])), G.el, msg, confirmBtn);
+        G.size(); G.reset();
+      },
+      timeout(i, L) { if (pin) confirm(L, true); },
+      rev(i, A, L) {
+        const q = qs[i]; const es = Object.keys(A).filter(id => A[id].a !== -1 && A[id].b != null).map(id => ({ id, lat: A[id].a, lon: A[id].b, pts: A[id].pts, km: geoKm(q[2], q[3], A[id].a, A[id].b) })).sort((x, y) => x.km - y.km);
+        G.target = [q[3], q[2]]; G.pins = es.map(e => ({ lon: e.lon, lat: e.lat, label: pemoji(e.id), me: e.id === S.me.id })); G.lines = es.map(e => [[q[3], q[2]], [e.lon, e.lat]]); G.flyTo(q[3], q[2], es.length ? Math.max(...es.map(e => e.km)) : 2000);
+        L.body.replaceChildren(h('div', { class: 'nd-q' }, h('span', { class: 'nd-kind' }, `${KIND_E[q[1]] || '📍'} ${q[1]}`), h('b', null, q[0])), G.el,
+          es.length ? h('ol', { class: 'rank' }, es.map((e, k) => h('li', { class: 'rr' + (e.id === S.me.id ? ' me' : '') }, posEl(k + 1), h('span', { class: 'rr-who' }, `${pemoji(e.id)} ${pname(e.id)} `, h('small', null, e.km < 1 ? '< 1 km' : fmt(e.km) + ' km')), h('span', { class: 'rr-p digits' }, `+${e.pts}`)))) : h('p', { class: 'fine' }, 'Niemand hat eine Nadel gesetzt.'));
+        G.size();
+      },
+      atk: {
+        spin(L) { G.spin(2600); },
+        quake(L) { if (pin) { const d = 300 + Math.random() * 700; const ang = Math.random() * Math.PI * 2; const lat = clamp(pin.lat + d / 111 * Math.sin(ang), -85, 85); const lon = pin.lon + d / (111 * Math.max(0.2, Math.cos(pin.lat * Math.PI / 180))) * Math.cos(ang); setPin(lat, ((lon + 540) % 360) - 180); liveFly(L.root, '📳 Erdbeben!'); } else { G.spin(1500); } }
+      }
+    });
+    function setPin(lat, lon) {
+      if (!L || !L.active() || L.frozen()) return; pin = { lat, lon }; G.pins = [{ lat, lon, label: '📍', me: true }]; G.dirty = true;
+      if (confirmBtn) confirmBtn.disabled = false; if (msg) msg.textContent = 'Passt? Dann Nadel setzen – oder nochmal tippen zum Verschieben.';
+    }
+    function confirm(L, auto) {
+      if (!pin || !L.active() || (!auto && L.frozen())) return; const q = qs[L.i]; const km = geoKm(q[2], q[3], pin.lat, pin.lon); kms.push(km);
+      const s = Math.exp(-km / 1200); if (km < 100) L.earn('Nadel unter 100 km');
+      if (confirmBtn) confirmBtn.disabled = true;
+      L.answer(Math.round(pin.lat * 1000) / 1000, 1000 / N * s, s, Math.round(pin.lon * 1000) / 1000, auto ? '⏱ Zeit um – deine Nadel zählt.' : 'Nadel steckt. Warte auf die anderen …');
+    }
+  }
+}
+/* Globus mit Tippen, Ziehen, Zoomen (auch mit zwei Fingern) */
+function makeGlobe(ctx, geo, opt) {
+  const d3 = window.d3; const cv = h('canvas', { class: 'lj-cv nd-cv', 'aria-label': 'Globus' });
+  const zb = (t, f, lab) => h('button', { class: 'btn sm', type: 'button', 'aria-label': lab, onclick: () => setZoom(G.zoom * f) }, t);
+  const el = h('div', { class: 'lj-globe' }, cv, h('div', { class: 'lj-zoom' }, zb('+', 1.5, 'Hineinzoomen'), zb('−', 1 / 1.5, 'Herauszoomen')));
+  const g = cv.getContext('2d'); const proj = d3.geoOrthographic().clipAngle(90).precision(0.5); const path = d3.geoPath(proj, g);
+  const sphere = { type: 'Sphere' }; const grat = d3.geoGraticule10();
+  const G = { el, rot: [-10, -30], zoom: 1, S: 300, dpr: 1, dirty: true, pins: [], lines: [], target: null, anim: null, spinUntil: 0 };
+  function setZoom(z) { G.zoom = clamp(z, 0.9, 40); G.dirty = true; }
+  G.size = () => { const w = el.parentNode ? el.parentNode.clientWidth : 320; G.S = Math.max(220, Math.min(w || 320, Math.round(window.innerHeight * (ctx.live ? 0.46 : 0.52)), 520)); G.dpr = window.devicePixelRatio || 1; cv.style.width = cv.style.height = G.S + 'px'; cv.width = cv.height = Math.round(G.S * G.dpr); G.dirty = true; };
+  G.reset = () => { G.zoom = 1; G.anim = null; G.dirty = true; };
+  G.spin = (ms) => { G.spinUntil = Date.now() + ms; };
+  G.flyTo = (lon, lat, spreadKm) => { const from = G.rot.slice(); const to = [-lon, clamp(-lat, -85, 85)]; const d = ((to[0] - from[0]) % 360 + 540) % 360 - 180; to[0] = from[0] + d; const z = clamp(6000 / Math.max(300, spreadKm * 1.6), 1, 8); G.anim = { from, to, z0: G.zoom, z1: z, t0: performance.now(), ms: 1100 }; };
+  function draw() {
+    const S = G.S; g.setTransform(G.dpr, 0, 0, G.dpr, 0, 0); g.clearRect(0, 0, S, S);
+    proj.translate([S / 2, S / 2]).scale((S / 2 - 3) * G.zoom).rotate(G.rot);
+    g.beginPath(); path(sphere); g.fillStyle = '#1D3B6F'; g.fill();
+    g.beginPath(); path(grat); g.strokeStyle = 'rgba(255,255,255,.09)'; g.lineWidth = 1; g.stroke();
+    g.beginPath(); for (const x of geo.all) path(x.f); g.fillStyle = '#E9E3D0'; g.fill(); g.strokeStyle = 'rgba(25,32,55,.35)'; g.lineWidth = 0.6; g.stroke();
+    for (const ln of G.lines) { g.beginPath(); path({ type: 'LineString', coordinates: ln }); g.strokeStyle = 'rgba(227,65,42,.85)'; g.lineWidth = 2; g.setLineDash([5, 4]); g.stroke(); g.setLineDash([]); }
+    const vis = (lon, lat) => d3.geoDistance([lon, lat], [-G.rot[0], -G.rot[1]]) < Math.PI / 2 - 0.01;
+    for (const p of G.pins) { if (!vis(p.lon, p.lat)) continue; const [x, y] = proj([p.lon, p.lat]); g.beginPath(); g.arc(x, y, p.me ? 6 : 5, 0, 7); g.fillStyle = p.me ? '#2A45DA' : '#141A33'; g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 2; g.stroke(); g.font = '18px system-ui,sans-serif'; g.textAlign = 'center'; g.fillText(p.label, x, y - 10); }
+    if (G.target && vis(G.target[0], G.target[1])) { const [x, y] = proj(G.target); g.font = '26px system-ui,sans-serif'; g.textAlign = 'center'; g.fillText('🎯', x, y + 9); }
+    g.beginPath(); path(sphere); g.strokeStyle = 'rgba(0,0,0,.4)'; g.lineWidth = 1.5; g.stroke();
+  }
+  const pts = new Map(); let drag = null, pinch = null, tap = null;
+  ctx.listen(cv, 'pointerdown', e => {
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); try { cv.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); G.anim = null;
+    if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), z: G.zoom }; drag = null; tap = null; }
+    else if (pts.size === 1) { drag = { x: e.clientX, y: e.clientY, r: G.rot.slice() }; tap = { x: e.clientX, y: e.clientY, t: performance.now() }; }
+  });
+  ctx.listen(cv, 'pointermove', e => {
+    if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinch && pts.size >= 2) { const [a, b] = [...pts.values()]; setZoom(pinch.z * Math.hypot(a.x - b.x, a.y - b.y) / Math.max(10, pinch.d)); return; }
+    if (!drag) return; if (tap && Math.hypot(e.clientX - tap.x, e.clientY - tap.y) > 7) tap = null;
+    const k = 0.42 / G.zoom; G.rot = [drag.r[0] + (e.clientX - drag.x) * k, clamp(drag.r[1] - (e.clientY - drag.y) * k, -88, 88)]; G.dirty = true;
+  });
+  const up = (e) => {
+    pts.delete(e.pointerId);
+    if (tap && performance.now() - tap.t < 500 && opt.onTap) { const r = cv.getBoundingClientRect(); const ll = proj.invert([tap.x - r.left, tap.y - r.top]); if (ll && Number.isFinite(ll[0]) && d3.geoDistance(ll, [-G.rot[0], -G.rot[1]]) < Math.PI / 2) opt.onTap(ll[1], ll[0]); }
+    tap = null; if (pts.size < 2) pinch = null; if (!pts.size) drag = null; else if (pts.size === 1) { const p = [...pts.values()][0]; drag = { x: p.x, y: p.y, r: G.rot.slice() }; }
+  };
+  ctx.listen(cv, 'pointerup', up); ctx.listen(cv, 'pointercancel', up);
+  ctx.listen(cv, 'wheel', e => { e.preventDefault(); setZoom(G.zoom * (e.deltaY < 0 ? 1.18 : 1 / 1.18)); }, { passive: false });
+  ctx.listen(window, 'resize', () => G.size());
+  ctx.loop(() => {
+    const now = performance.now();
+    if (G.anim) { const a = G.anim; const k = Math.min(1, (now - a.t0) / a.ms); const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; G.rot = [a.from[0] + (a.to[0] - a.from[0]) * e, a.from[1] + (a.to[1] - a.from[1]) * e]; G.zoom = a.z0 + (a.z1 - a.z0) * e; G.dirty = true; if (k >= 1) G.anim = null; }
+    if (Date.now() < G.spinUntil) { G.rot = [G.rot[0] + 15, clamp(G.rot[1] + Math.sin(now / 90) * 4, -80, 80)]; G.dirty = true; }
+    if (G.dirty) { G.dirty = false; draw(); }
+  });
+  return G;
+}
+
+/* ---------- Inhalte der Runden-Spiele, für alle gleich aus demselben Startwert ---------- */
+const SYNC_GEN = {
+  quiz: (R) => R.shuffle(QUIZ).slice(0, 10).map(q => [q[0], q[1], ...R.shuffle(q.slice(1))]),
+  schaetz: (R) => R.shuffle(EST).slice(0, 6).map(x => { const o = { q: x.q, a: x.a, u: x.u || '' }; if (x.yr) { o.yr = true; o.abs = x.abs; } return o; }),
+  farbe: (R) => [0, 1, 2, 3, 4].map(() => ({ h: Math.round(R.f() * 360), s: Math.round(35 + R.f() * 65), v: Math.round(40 + R.f() * 60) })),
+  hl: (R) => {
+    const out = []; const used = new Set(); const ratio = (a, b) => Math.max(a, b) / Math.min(a, b);
+    for (let tries = 0; out.length < 10 && tries < 400; tries++) {
+      const cat = R.pick(HL); const A = R.pick(cat.items); if (used.has(cat.k + A[0])) continue;
+      const c = cat.items.filter(it => it !== A && !used.has(cat.k + it[0]) && ratio(it[1], A[1]) >= 1.3); if (!c.length) continue;
+      const B = R.pick(c); used.add(cat.k + A[0]); used.add(cat.k + B[0]);
+      out.push([cat.k, cat.what, cat.up, cat.down, cat.f || '', A[0], A[1], B[0], B[1]]);
+    }
+    return out;
+  },
+  marke: (R) => R.shuffle(BRANDS).slice(0, 6).map(b => {
+    const same = R.shuffle(BRANDS.filter(x => x !== b && x[1] === b[1])); const other = R.shuffle(BRANDS.filter(x => x !== b && x[1] !== b[1]));
+    const opts = R.shuffle([b, ...same.concat(other).slice(0, 3)]).map(x => x[0]);
+    return [b[0], ...opts, ...marketHints(b), opts.indexOf(b[0]) + 1];
+  }),
+  nadel: (R) => R.shuffle(PLACES).slice(0, 6).map(p => [p[0], p[1], p[2], p[3]])
+};
+
+
+/* ---------- Zeitstrahl live: ein gemeinsamer Zeitstrahl, reihum, zwei Fehler und raus ---------- */
+const TURN = { zeit: { pre: 3000, turn: 20000, okMs: 1900, noMs: 3000, strikes: 2 } };
+function zeitScores(sb) {
+  const alive = sb.pl.filter(id => !sb.out.includes(id));
+  const order = alive.slice().sort((a, b) => (sb.ok[b] || 0) - (sb.ok[a] || 0)).concat(sb.out.slice().reverse());
+  const bonus = [400, 250, 150, 80, 40, 20]; const zt = {};
+  order.forEach((id, k) => { zt[id] = Math.min(1000, (sb.ok[id] || 0) * 80 + (sb.pl.length > 1 ? (bonus[k] ?? 10) : 0)); });
+  return zt;
+}
+function zeitNext(sb, from) { const n = sb.pl.length; const k0 = sb.pl.indexOf(from); for (let s = 1; s <= n; s++) { const id = sb.pl[(k0 + s) % n]; if (!sb.out.includes(id) && P.members[id]) return id; } return null; }
+function zeitMove(from, d) {
+  const st = P.st; if (!P.isHost || !st || st.phase !== 'play' || typeof from !== 'string' || !isObj(d)) return; const sb = st.sub;
+  if (!sb || !sb.z || sb.ph !== 'ask' || from !== sb.cur || Number(d.i) !== sb.i) return;
+  P.zMove = { i: sb.i, k: Number.isInteger(Number(d.k)) ? Number(d.k) : -1 };
+}
+function zeitHost(now, st) {
+  const sb = st.sub; const cfg = TURN.zeit; const deck = st.qs || [];
+  if (sb.ph === 'pre') { if (now < P.subEnd) return false; sb.ph = 'ask'; P.subEnd = now + cfg.turn; return true; }
+  if (sb.ph === 'ask') {
+    const mv = P.zMove && P.zMove.i === sb.i ? P.zMove : null; const gone = !P.members[sb.cur];
+    if (!mv && !gone && now < P.subEnd + 600) return false;
+    P.zMove = null; const y = deck[sb.card][1]; const k = mv ? mv.k : -1;
+    const ok = k >= 0 && k <= sb.tl.length && (k === 0 || deck[sb.tl[k - 1]][1] <= y) && (k === sb.tl.length || y <= deck[sb.tl[k]][1]);
+    if (ok) { sb.tl.splice(k, 0, sb.card); sb.ok[sb.cur] = (sb.ok[sb.cur] || 0) + 1; }
+    else { sb.sk[sb.cur] = (sb.sk[sb.cur] || 0) + 1; if ((sb.sk[sb.cur] >= cfg.strikes || gone) && !sb.out.includes(sb.cur)) sb.out.push(sb.cur); }
+    sb.last = { id: sb.cur, k, ok: ok ? 1 : 0, card: sb.card };
+    sb.ph = 'rev'; P.subEnd = now + (ok ? cfg.okMs : cfg.noMs); return true;
+  }
+  if (sb.ph === 'rev') {
+    if (now < P.subEnd) return false;
+    const alive = sb.pl.filter(id => !sb.out.includes(id) && P.members[id]);
+    if (alive.length <= (sb.pl.length > 1 ? 1 : 0) || sb.nx >= deck.length || P.hostEnd - now < 6000) { sb.ph = 'end'; sb.zt = zeitScores(sb); P.subEnd = now; return true; }
+    sb.card = sb.nx++; sb.cur = zeitNext(sb, sb.cur) || alive[0]; sb.i++; sb.ph = 'ask'; P.subEnd = now + cfg.turn; return true;
+  }
+  return false;
+}
+function cleanZeitSub(d, sub, nDeck) {
+  const ids = (x) => Array.isArray(x) ? x.filter(v => typeof v === 'string' && v.length < 80).slice(0, 12) : [];
+  const idx = (v) => { const n = Number(v); return Number.isInteger(n) && n >= 0 && n < nDeck ? n : 0; };
+  const cnt = (o, max) => { const r = {}; if (isObj(o)) for (const [k, v] of Object.entries(o)) if (k.length < 80) r[k] = clamp(Math.round(Number(v) || 0), 0, max); return r; };
+  Object.assign(sub, { z: 1, pl: ids(d.pl), out: ids(d.out), cur: typeof d.cur === 'string' ? d.cur.slice(0, 80) : '', tl: Array.isArray(d.tl) ? d.tl.slice(0, nDeck).map(idx) : [0], card: idx(d.card), nx: idx(d.nx), sk: cnt(d.sk, 9), ok: cnt(d.ok, 99), last: null, zt: d.zt ? cnt(d.zt, 1000) : null });
+  if (isObj(d.last) && typeof d.last.id === 'string') sub.last = { id: d.last.id.slice(0, 80), k: Number.isInteger(Number(d.last.k)) ? Number(d.last.k) : -1, ok: d.last.ok ? 1 : 0, card: idx(d.last.card) };
+  return sub;
+}
+function playZeitLive(ctx) {
+  const { root } = ctx; const deck = ctx.qs; let sb = null, key = '', lastI = -1, stolen = 0, pendThief = 0, blindTurn = -1, pendBlind = false, streak = 0, earned = 0, sentFor = -1, ended = false, buzzed = -1;
+  const head = h('div', { class: 'g-head' }); const bar = h('div', { class: 'tbar' }, h('i')); const players = h('div', { class: 'zt-pl' });
+  const cur = h('div', { class: 'zs-cur' }); const msg = h('div', { class: 'g-msg' }); const list = h('div', { class: 'zs-list' });
+  root.append(h('div', { class: 'zs zt' }, head, bar, players, cur, msg, list));
+  const me = () => S.me.id;
+  const lives = (id) => sb.out.includes(id) ? '💀' : '❤️'.repeat(Math.max(0, TURN.zeit.strikes - (sb.sk[id] || 0)));
+  const myTurn = () => !!sb && sb.ph === 'ask' && sb.cur === me() && sentFor !== sb.i;
+  ctx.partial = () => ({ p: sb ? (sb.zt ? (sb.zt[me()] || 0) : Math.min(1000, (sb.ok[me()] || 0) * 80)) : 0, d: `${sb ? sb.ok[me()] || 0 : 0} richtig eingeordnet` });
+  function render() {
+    const ok = sb.ok, blind = blindTurn === sb.i && sb.cur === me();
+    head.replaceChildren(h('span', null, `Zug ${sb.i + 1}`), h('span', null, h('span', { class: 'digits' }, ok[me()] || 0), ' richtig · ', lives(me())));
+    players.replaceChildren(...sb.pl.map(id => h('span', { class: 'zt-p' + (id === sb.cur && sb.ph !== 'end' ? ' cur' : '') + (sb.out.includes(id) ? ' out' : '') + (id === me() ? ' me' : '') }, h('span', { class: 'em' }, pemoji(id)), h('b', null, pname(id)), h('small', null, `${lives(id)} ${ok[id] || 0}✓`))));
+    if (sb.ph === 'pre') { cur.className = 'zs-cur'; cur.replaceChildren(h('small', null, 'Gleich geht’s los'), `${sb.cur === me() ? 'Du beginnst' : pname(sb.cur) + ' beginnt'}.`); msg.textContent = 'Ihr seid reihum dran. Zwei Fehler und du bist raus. Wer zuletzt übrig ist, gewinnt.'; }
+    else if (sb.ph === 'ask') {
+      const c = deck[sb.card]; const mine = sb.cur === me();
+      cur.className = 'zs-cur' + (mine ? ' mine' : ' wait'); cur.replaceChildren(h('small', null, mine ? 'Du bist dran! Wann war das?' : `${pemoji(sb.cur)} ${pname(sb.cur)} ist dran`), c[0]);
+      msg.textContent = mine ? (blind ? '🙈 Augenbinde! Die Jahreszahlen sind versteckt.' : 'Tipp auf die Lücke, in die das Ereignis gehört.') : (sb.out.includes(me()) ? 'Du bist raus – aber Perks kannst du noch werfen. 😈' : 'Schau zu … oder wirf was. 😈');
+    } else if (sb.ph === 'rev' && sb.last) {
+      const l = sb.last; const c = deck[l.card];
+      cur.className = 'zs-cur ' + (l.ok ? 'okc' : 'no'); cur.replaceChildren(h('small', null, `${pemoji(l.id)} ${pname(l.id)}: ${l.k < 0 ? 'Zeit abgelaufen' : l.ok ? 'Richtig!' : 'Daneben!'}`), c[0], h('span', { class: 'zs-yr' }, ` · ${fy(c[1])}`));
+      msg.textContent = l.ok ? '' : sb.out.includes(l.id) ? `${pname(l.id)} ist raus! 💀` : `${pname(l.id)} hat noch ein Leben.`;
+    } else if (sb.ph === 'end') {
+      const zt = sb.zt || {}; const order = Object.keys(zt).sort((a, b) => zt[b] - zt[a]);
+      cur.className = 'zs-cur'; cur.replaceChildren(h('small', null, 'Zeitstrahl vorbei'), order.length ? `${pemoji(order[0])} ${pname(order[0])} gewinnt!` : 'Fertig!');
+      msg.replaceChildren(h('ol', { class: 'rank' }, order.map((id, k) => h('li', { class: 'rr' + (id === me() ? ' me' : '') }, posEl(k + 1), h('span', { class: 'rr-who' }, `${pemoji(id)} ${pname(id)} `, h('small', null, `${sb.ok[id] || 0} richtig${sb.out.includes(id) ? ' · raus' : ''}`)), h('span', { class: 'rr-p digits' }, zt[id])))));
+    }
+    const can = myTurn(); const flash = sb.ph === 'rev' && sb.last && sb.last.ok ? sb.tl.indexOf(sb.last.card) : -1;
+    list.replaceChildren();
+    for (let k = 0; k <= sb.tl.length; k++) {
+      list.append(h('button', { class: 'zs-slot', type: 'button', disabled: !can, onclick: () => place(k) }, k === 0 ? 'davor' : k === sb.tl.length ? 'danach' : 'hier dazwischen'));
+      if (k < sb.tl.length) { const e = deck[sb.tl[k]]; list.append(h('div', { class: 'zs-card' + (k === flash ? ' ok' : '') }, h('span', { class: 'zs-year digits' }, blind ? '????' : fy(e[1])), h('span', null, e[0]))); }
+    }
+  }
+  function send(k) { const d = { i: sb.i, k }; if (P.isHost) zeitMove(me(), d); else pbcast('zm', d); }
+  function place(k) { if (!myTurn() || Date.now() < P.frozenUntil) return; sentFor = sb.i; send(k); list.querySelectorAll('.zs-slot').forEach(b => { b.disabled = true; }); msg.textContent = 'Eingeloggt …'; }
+  ctx.sync = (s) => {
+    if (!s || !s.z || ended) return; sb = s;
+    const k2 = `${s.i}|${s.ph}|${s.tl.length}|${s.out.length}|${s.cur}`; if (k2 === key) return; key = k2;
+    if (s.i !== lastI) { stolen = 0; lastI = s.i; }
+    if (s.ph === 'ask' && s.cur === me()) {
+      if (pendThief) { stolen += pendThief; pendThief = 0; liveFly(root, '−5 s'); }
+      if (pendBlind) { blindTurn = s.i; pendBlind = false; }
+      if (buzzed !== s.i) { buzzed = s.i; try { navigator.vibrate && navigator.vibrate(60); } catch (e) {} }
+    }
+    if (s.ph === 'rev' && s.last && s.last.id === me()) { if (s.last.ok) { streak++; if (streak % 3 === 0 && earned < 3 && ctx.live) { earned++; ctx.live.earn(`${streak} richtig in Folge`); } } else streak = 0; }
+    render();
+    ctx.progress(`${s.ok[me()] || 0} ✓ · ${lives(me())}`);
+    if (s.ph === 'end') { ended = true; ctx.after(3500, () => ctx.done({ p: (s.zt && s.zt[me()]) || 0, d: `${s.ok[me()] || 0} richtig · ${s.out.includes(me()) ? 'raus' : 'bis zum Schluss'}` })); }
+  };
+  ctx.effect = (k, self) => {
+    if (self || !sb) return false;
+    const onTurn = sb.ph === 'ask' && sb.cur === me();
+    if (k === 'thief') { if (onTurn) { stolen += 5000; liveFly(root, '−5 s'); } else pendThief += 5000; return true; }
+    if (k === 'blind') { if (onTurn) { blindTurn = sb.i; key = ''; ctx.sync(sb); } else pendBlind = true; return true; }
+    return false;
+  };
+  ctx.loop(() => {
+    const fill = bar.firstChild; if (!sb || sb.ph !== 'ask') { fill.style.width = '0%'; return; }
+    const rem = P.subLocalEnd - stolen - Date.now(); fill.style.width = clamp(rem / TURN.zeit.turn * 100, 0, 100) + '%'; fill.style.opacity = sb.cur === me() ? '1' : '.35';
+    if (rem <= 0 && myTurn()) { sentFor = sb.i; send(-1); msg.textContent = '⏱ Zeit um!'; list.querySelectorAll('.zs-slot').forEach(b => { b.disabled = true; }); }
+  });
   if (P.st && P.st.sub) ctx.sync(P.st.sub);
 }
 
@@ -1858,6 +2543,399 @@ function playLaender(ctx) {
   boot();
 }
 
+/* =========================================================
+   Live-Arena: alle gleichzeitig in derselben Welt
+   ========================================================= */
+const ARENA = { sumo: { rounds: 3, cap: 60000, pre: 3000, rev: 4500 }, tron: { rounds: 3, cap: 60000, pre: 3000, rev: 4500 }, flappy: { rounds: 2, cap: 75000, pre: 3000, rev: 4500 } };
+const ARENA_COLORS = ['#FF4D6D', '#3DDCFF', '#FFD23F', '#7CFF6B', '#C77DFF', '#FF9F1C', '#2EC4B6', '#F15BB5'];
+const BOT_NAMES = [['Bot Bruno', '🤖'], ['Bot Berta', '👾'], ['Bot Kalle', '🦾'], ['Bot Lotte', '🛸']];
+function arenaScore(sub, alive) {
+  const N = sub.pl.length; sub.tot = sub.tot || {};
+  sub.out.forEach((id, k) => { sub.tot[id] = (sub.tot[id] || 0) + k; });
+  const bonus = alive.length === 1 ? N : Math.max(0, N - 1);
+  alive.forEach(id => { sub.tot[id] = (sub.tot[id] || 0) + bonus; });
+  sub.win = alive.slice(); sub.max = (sub.max || 0) + N;
+}
+function arenaP(sub, id) { if (!sub || !sub.max) return 0; return clamp(Math.round(1000 * ((sub.tot || {})[id] || 0) / sub.max), 0, 1000); }
+function arenaPlayers() { return Object.keys(P.members).sort((a, b) => (P.members[a].joinedAt - P.members[b].joinedAt) || (a < b ? -1 : 1)).slice(0, 8); }
+function arenaApi(gid) {
+  return {
+    local: false, me: S.me.id, bots: [], cfg: ARENA[gid],
+    name: (id) => pname(id), emoji: (id) => pemoji(id),
+    send(data) { const st = P.st; if (!st) return; pbcast('ag', { ...data, gi: st.gi, r: st.round }); },
+    out() { const st = P.st; if (!st || !st.sub) return; const d = { gi: st.gi, r: st.round, i: st.sub.i }; pbcast('aout', d); arenaOut(S.me.id, d); },
+    endsAt: () => P.subLocalEnd
+  };
+}
+/* Nur der Gastgeber führt die Liste, wer raus ist */
+function arenaOut(from, d) {
+  const st = P.st; if (!P.isHost || !st || st.phase !== 'play' || !st.sub || !isObj(d) || typeof from !== 'string') return;
+  const sub = st.sub; if (sub.ph !== 'ask' || Number(d.r) !== st.round || Number(d.gi) !== st.gi || Number(d.i) !== sub.i) return;
+  if (!(sub.pl || []).includes(from) || sub.out.includes(from)) return;
+  sub.out.push(from); st.v++; sendState(); if (S.ctx && S.ctx.alive && S.ctx.sync) S.ctx.sync(sub); hudSoon();
+}
+/* Training: dieselben Runden, aber lokal gegen Bots */
+function localArena(ctx, gid, nb) {
+  const cfg = ARENA[gid]; const bots = BOT_NAMES.slice(0, nb).map((b, k) => ({ id: 'bot' + k, name: b[0], emoji: b[1] }));
+  const sub = { i: 0, ph: 'pre', pl: [S.me.id, ...bots.map(b => b.id)], out: [], win: [], tot: {}, max: 0, rem: cfg.pre };
+  let end = Date.now() + cfg.pre;
+  const api = {
+    local: true, me: S.me.id, bots, cfg,
+    name: (id) => { const b = bots.find(x => x.id === id); return b ? b.name : (myDoc().nick || 'Du'); },
+    emoji: (id) => { const b = bots.find(x => x.id === id); return b ? b.emoji : myDoc().emoji; },
+    send() {}, out(id = S.me.id) { if (sub.ph === 'ask' && !sub.out.includes(id)) { sub.out.push(id); emit(); } },
+    endsAt: () => end
+  };
+  function emit() { sub.rem = Math.max(0, end - Date.now()); if (ctx.sync) ctx.sync(sub); }
+  ctx.every(100, () => {
+    const now = Date.now(); let ch = false;
+    if (sub.ph === 'pre' && now >= end) { sub.ph = 'ask'; end = now + cfg.cap; ch = true; }
+    else if (sub.ph === 'ask') { const alive = sub.pl.filter(id => !sub.out.includes(id)); if (alive.length <= 1 || sub.out.includes(S.me.id) || now >= end) { arenaScore(sub, alive); sub.ph = 'rev'; end = now + cfg.rev; ch = true; } }
+    else if (sub.ph === 'rev' && now >= end) { if (sub.i + 1 < cfg.rounds) { sub.i++; sub.ph = 'pre'; sub.out = []; sub.win = []; end = now + cfg.pre; } else sub.ph = 'end'; ch = true; }
+    if (ch) emit();
+  });
+  ctx.after(30, emit);
+  return api;
+}
+/* gemeinsamer Ablauf: Runde vorbereiten, Rundensieg belohnen, am Ende abrechnen */
+function arenaLife(ctx, A, hooks) {
+  let sub = null, finished = false;
+  ctx.sync = (s) => {
+    if (!s || finished) return; const n = JSON.parse(JSON.stringify(s)); n.pl = n.pl || []; n.out = n.out || []; n.win = n.win || []; n.tot = n.tot || {};
+    const prev = sub; sub = n;
+    if (!prev || prev.i !== n.i || (n.ph === 'pre' && prev.ph !== 'pre')) hooks.round(n);
+    if (prev && prev.ph === 'ask' && n.ph === 'rev' && n.win.includes(A.me) && ctx.live) ctx.live.earn('Rundensieg');
+    if (hooks.phase) hooks.phase(n, prev);
+    const mine = n.tot[A.me] || 0;
+    ctx.progress(n.ph === 'end' ? `fertig · ${mine} P` : n.out.includes(A.me) ? `raus · ${mine} P` : `Runde ${n.i + 1} · ${mine} P`);
+    if (n.ph === 'end') { finished = true; const p = arenaP(n, A.me); ctx.after(1600, () => ctx.done({ p, d: `${mine} von ${n.max} Punkten` })); }
+  };
+  ctx.partial = () => ({ p: arenaP(sub, A.me), d: sub ? `${sub.tot[A.me] || 0} Punkte` : 'nicht gestartet' });
+  return { get sub() { return sub; } };
+}
+function arenaStand(A, s) { const ids = [...new Set([...(s.pl || []), ...Object.keys(s.tot || {})])]; return ids.map(id => ({ id, t: (s.tot || {})[id] || 0 })).sort((a, b) => b.t - a.t); }
+function drawArenaOverlay(g, W, H, A, s, cfg) {
+  const now = Date.now(); g.textAlign = 'center'; g.textBaseline = 'middle';
+  if (!s) { g.fillStyle = 'rgba(8,12,30,.6)'; g.fillRect(0, 0, W, H); g.fillStyle = '#FFFFFF'; g.font = `bold ${Math.round(W * 0.05)}px system-ui, sans-serif`; g.fillText('Gleich geht’s los …', W / 2, H / 2); return; }
+  if (s.ph === 'pre') {
+    g.fillStyle = 'rgba(8,12,30,.5)'; g.fillRect(0, 0, W, H); g.fillStyle = '#FFFFFF';
+    g.font = `bold ${Math.round(W * 0.055)}px system-ui, sans-serif`; g.fillText(`Runde ${s.i + 1} von ${cfg.rounds}`, W / 2, H * 0.34);
+    g.font = `bold ${Math.round(W * 0.2)}px system-ui, sans-serif`; g.fillText(String(Math.max(1, Math.ceil((A.endsAt() - now) / 1000))), W / 2, H * 0.52);
+  } else if (s.ph === 'rev' || s.ph === 'end') {
+    g.fillStyle = 'rgba(8,12,30,.72)'; g.fillRect(0, 0, W, H); g.fillStyle = '#FFFFFF';
+    const title = s.ph === 'end' ? 'Endstand' : s.win.length === 1 ? `🏆 ${A.name(s.win[0])} gewinnt!` : s.win.length ? 'Gleichstand!' : 'Alle raus!';
+    g.font = `bold ${Math.round(W * 0.058)}px system-ui, sans-serif`; g.fillText(title, W / 2, H * 0.2);
+    g.font = `${Math.round(W * 0.042)}px system-ui, sans-serif`;
+    arenaStand(A, s).slice(0, 8).forEach((x, k) => { g.fillStyle = x.id === A.me ? '#FFD23F' : '#FFFFFF'; g.fillText(`${k + 1}. ${A.emoji(x.id)} ${A.name(x.id).slice(0, 14)}   ${x.t} P`, W / 2, H * 0.32 + k * W * 0.065); });
+  } else if (s.ph === 'ask' && s.out.includes(A.me)) {
+    g.fillStyle = 'rgba(8,12,30,.55)'; g.fillRect(0, 0, W, W * 0.1); g.fillStyle = '#FFFFFF'; g.font = `bold ${Math.round(W * 0.042)}px system-ui, sans-serif`; g.fillText('Du bist raus – schau den anderen zu!', W / 2, W * 0.05);
+  }
+}
+
+/* ---------- Rempelring: schubs alle von der Plattform ---------- */
+function playSumo(ctx) {
+  const A = ctx.arena || localArena(ctx, 'sumo', 3); const cfg = ARENA.sumo; const me = A.me;
+  const r = 0.075, VIEW = 1.16;
+  const wrap = h('div', { class: 'ar-wrap' }); const cv = h('canvas', { class: 'ar-cv', 'aria-label': 'Rempelring-Arena' });
+  const dashBtn = h('button', { class: 'btn primary lg ar-dash', type: 'button' }, '💥 Stoß');
+  wrap.append(cv);
+  ctx.root.append(h('div', { class: 'ar' }, wrap, h('div', { class: 'ar-ctrl' }, dashBtn), h('p', { class: 'fine ar-hint' }, 'Zieh auf dem Feld in die Richtung, in die du rollen willst, und ramm mit „Stoß“ los. Doppeltippen geht auch. Am Rechner: Pfeiltasten oder WASD und Leertaste.')));
+  const g = cv.getContext('2d'); let S = 320, dpr = 1;
+  function size() { S = Math.max(240, Math.min(wrap.clientWidth || 320, window.innerHeight - (ctx.live ? 350 : 260), 560)); dpr = window.devicePixelRatio || 1; cv.style.width = cv.style.height = S + 'px'; cv.width = cv.height = Math.round(S * dpr); }
+  size(); ctx.listen(window, 'resize', size);
+  let bodies = {}, order = [], lastSend = 0, lastBurst = 0, R = 1, joy = null, lastTap = 0;
+  const input = { x: 0, y: 0 }; const keys = {};
+  const now = () => Date.now();
+  const life = arenaLife(ctx, A, { round: (s) => setup(s), phase: (s) => { for (const id of s.out) if (bodies[id] && !bodies[id].fall) bodies[id].fall = now(); if (s.ph === 'pre') R = 1; } });
+  function setup(s) {
+    bodies = {}; order = s.pl.slice(); R = 1;
+    order.forEach((id, k) => { const a = -Math.PI / 2 + 2 * Math.PI * k / order.length; const x = Math.cos(a) * 0.6, y = Math.sin(a) * 0.6;
+      bodies[id] = { id, x, y, vx: 0, vy: 0, px: x, py: y, t: now(), dash: 0, cd: 0, fall: 0, col: ARENA_COLORS[k % 8], slip: 0, sup: false, supDash: false, bot: A.bots.some(b => b.id === id), ai: Math.random(), hit: 0 }; });
+  }
+  const playT = () => (cfg.cap - (A.endsAt() - now())) / 1000;
+  const radius = () => { const t = playT(); return t < 10 ? 1 : Math.max(0.36, 1 - (t - 10) * 0.022); };
+  const isOut = (id) => { const s = life.sub; return !!(s && s.out.includes(id)) || !!(bodies[id] && bodies[id].fall); };
+  const dashing = (b) => now() < b.dash;
+  const mass = (b) => dashing(b) ? (b.supDash ? 4.5 : 2.6) : 1;
+  function doDash(b, dx, dy) {
+    if (now() < b.cd || b.fall) return false; let L = Math.hypot(dx, dy);
+    if (L < 0.2) { dx = b.vx; dy = b.vy; L = Math.hypot(dx, dy); if (L < 0.05) { dx = -b.x; dy = -b.y; L = Math.hypot(dx, dy) || 1; } }
+    const pw = b.sup ? 2.7 : 1.7; b.supDash = b.sup; b.sup = false;
+    b.vx += dx / L * pw; b.vy += dy / L * pw; b.dash = now() + 300; b.cd = now() + 1300; return true;
+  }
+  function collide(a, b, both) {
+    const dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy); if (d >= 2 * r || d < 1e-6) return false;
+    const nx = dx / d, ny = dy / d, ov = 2 * r - d;
+    if (both) { a.x += nx * ov / 2; a.y += ny * ov / 2; b.x -= nx * ov / 2; b.y -= ny * ov / 2; } else { a.x += nx * ov * 0.55; a.y += ny * ov * 0.55; }
+    const ma = mass(a), mb = mass(b); const vrel = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny;
+    if (vrel >= 0) return false;
+    const j = -1.9 * vrel / (1 / ma + 1 / mb);
+    a.vx += j / ma * nx; a.vy += j / ma * ny;
+    if (now() < b.dash) { a.vx += nx * 0.55; a.vy += ny * 0.55; }
+    if (both) { b.vx -= j / mb * nx; b.vy -= j / mb * ny; if (now() < a.dash) { b.vx -= nx * 0.55; b.vy -= ny * 0.55; } }
+    return true;
+  }
+  function stepBody(b, ux, uy, dt) {
+    const slip = now() < b.slip; const acc = slip ? 1.3 : 3.3; const drag = Math.exp(-(slip ? 0.25 : 1.7) * dt);
+    b.vx = (b.vx + ux * acc * dt) * drag; b.vy = (b.vy + uy * acc * dt) * drag;
+    const sp = Math.hypot(b.vx, b.vy); const cap = dashing(b) ? 3.4 : 1.25; if (sp > cap) { b.vx *= cap / sp; b.vy *= cap / sp; }
+    b.x += b.vx * dt; b.y += b.vy * dt;
+  }
+  function botInput(b) {
+    let best = null, bd = 9;
+    for (const id of order) { if (id === b.id || isOut(id)) continue; const o = bodies[id]; if (!o) continue; const d = Math.hypot(o.x - b.x, o.y - b.y); if (d < bd) { bd = d; best = o; } }
+    let ux = 0, uy = 0;
+    if (best) { ux = best.x - b.x; uy = best.y - b.y; const L = Math.hypot(ux, uy) || 1; ux /= L; uy /= L; if (bd < 0.42 && now() > b.cd && Math.random() < 0.04 + b.ai * 0.05) doDash(b, ux, uy); }
+    const dc = Math.hypot(b.x, b.y) || 1e-6; if (dc > R * 0.68) { const k = Math.min(1, (dc - R * 0.68) / (R * 0.3)); ux = ux * (1 - k) - b.x / dc * k * 1.5; uy = uy * (1 - k) - b.y / dc * k * 1.5; }
+    const L = Math.hypot(ux, uy); if (L > 1) { ux /= L; uy /= L; }
+    const sk = 0.7 + b.ai * 0.3; return [ux * sk, uy * sk];
+  }
+  function send(force) {
+    const t = now(); const m = bodies[me]; const s = life.sub; if (!m || !s || A.local) return;
+    const iv = 1000 / clamp(18 / Math.max(1, order.length), 3, 9);
+    if (force ? t - lastBurst < 80 : t - lastSend < iv) return;
+    lastSend = t; if (force) lastBurst = t;
+    A.send({ k: 's', i: s.i, x: Math.round(m.x * 1e4) / 1e4, y: Math.round(m.y * 1e4) / 1e4, vx: Math.round(m.vx * 1e3) / 1e3, vy: Math.round(m.vy * 1e3) / 1e3, d: dashing(m) ? 1 : 0, s: m.supDash && dashing(m) ? 1 : 0 });
+  }
+  ctx.onNet = (from, d) => {
+    const s = life.sub; if (!s || d.k !== 's' || d.i !== s.i || from === me) return; const b = bodies[from]; if (!b || b.bot) return;
+    const f = (v, lim) => clamp(Number.isFinite(+v) ? +v : 0, -lim, lim);
+    b.x = f(d.x, 3); b.y = f(d.y, 3); b.vx = f(d.vx, 5); b.vy = f(d.vy, 5); b.t = now(); b.dash = d.d ? now() + 260 : 0; b.supDash = !!d.s;
+  };
+  function dash() { const m = bodies[me]; const s = life.sub; if (!m || !s || s.ph !== 'ask' || isOut(me) || now() < P.frozenUntil) return; if (doDash(m, input.x, input.y)) send(true); }
+  const local = (e) => { const b = cv.getBoundingClientRect(); return { x: e.clientX - b.left, y: e.clientY - b.top }; };
+  ctx.listen(cv, 'pointerdown', e => { const p = local(e); joy = { id: e.pointerId, sx: p.x, sy: p.y, x: p.x, y: p.y }; try { cv.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); if (now() - lastTap < 280) dash(); lastTap = now(); });
+  ctx.listen(cv, 'pointermove', e => { if (!joy || e.pointerId !== joy.id) return; const p = local(e); joy.x = p.x; joy.y = p.y; const dx = p.x - joy.sx, dy = p.y - joy.sy, L = Math.hypot(dx, dy); const k = L > 6 ? 1 / Math.max(L, 48) : 0; input.x = dx * k; input.y = dy * k; });
+  const endJoy = (e) => { if (joy && e.pointerId === joy.id) { joy = null; input.x = input.y = 0; updKeys(); } };
+  ctx.listen(cv, 'pointerup', endJoy); ctx.listen(cv, 'pointercancel', endJoy);
+  ctx.listen(dashBtn, 'pointerdown', e => { e.preventDefault(); dash(); });
+  function updKeys() { if (joy) return; const x = ((keys.arrowright || keys.d) ? 1 : 0) - ((keys.arrowleft || keys.a) ? 1 : 0); const y = ((keys.arrowdown || keys.s) ? 1 : 0) - ((keys.arrowup || keys.w) ? 1 : 0); const L = Math.hypot(x, y); input.x = L ? x / L : 0; input.y = L ? y / L : 0; }
+  ctx.listen(window, 'keydown', e => { const k = e.key.toLowerCase(); if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(k)) e.preventDefault(); if (k === ' ' && !e.repeat) dash(); keys[k] = true; updKeys(); });
+  ctx.listen(window, 'keyup', e => { keys[e.key.toLowerCase()] = false; updKeys(); });
+  ctx.dbg = () => ({ bodies, R, sub: life.sub });
+  ctx.effect = (k, self) => { const m = bodies[me]; if (!m || isOut(me)) return false; if (self && k === 'superpush') { m.sup = true; return true; } if (!self && k === 'banana') { m.slip = now() + 6000; return true; } return false; };
+  ctx.loop((dt) => {
+    const s = life.sub; const t = now();
+    if (s && s.ph === 'ask') {
+      R = radius(); const m = bodies[me];
+      if (m && !isOut(me)) {
+        const fz = t < P.frozenUntil; stepBody(m, fz ? 0 : input.x, fz ? 0 : input.y, dt);
+        for (const id of order) {
+          if (id === me || isOut(id)) continue; const b = bodies[id]; if (!b) continue;
+          if (b.bot) collide(m, b, true);
+          else { const age = Math.min(0.3, (t - b.t) / 1000); const v = { x: b.x + b.vx * age, y: b.y + b.vy * age, vx: b.vx, vy: b.vy, dash: b.dash, supDash: b.supDash }; if (collide(m, v, false)) send(true); }
+        }
+        if (Math.hypot(m.x, m.y) > R + r * 0.25) { m.fall = t; send(true); A.out(); }
+        send(false);
+      }
+      for (const bt of A.bots) {
+        const b = bodies[bt.id]; if (!b || isOut(bt.id)) continue; const [ux, uy] = botInput(b); stepBody(b, ux, uy, dt);
+        for (const id of order) { if (id <= bt.id || id === me || isOut(id)) continue; const o = bodies[id]; if (o && o.bot) collide(b, o, true); }
+        if (Math.hypot(b.x, b.y) > R + r * 0.25) { b.fall = t; A.out(bt.id); }
+      }
+    }
+    for (const id of order) { const b = bodies[id]; if (!b) continue; if (b.bot || id === me) { b.px = b.x; b.py = b.y; } else { const age = Math.min(0.3, (t - b.t) / 1000); b.px += (b.x + b.vx * age - b.px) * 0.35; b.py += (b.y + b.vy * age - b.py) * 0.35; } }
+    draw();
+  });
+  function draw() {
+    const s = life.sub; const t = now(); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const sc = S / (2 * VIEW), cx = S / 2, cy = S / 2;
+    g.fillStyle = '#0F1430'; g.fillRect(0, 0, S, S);
+    g.fillStyle = 'rgba(255,255,255,.05)'; for (let k = 0; k < 40; k++) { const a = k * 2.399, rr2 = 0.2 + (k * 37 % 100) / 100; g.fillRect(cx + Math.cos(a) * rr2 * S * 0.5, cy + Math.sin(a) * rr2 * S * 0.5, 2, 2); }
+    g.beginPath(); g.arc(cx, cy, sc, 0, 7); g.setLineDash([6, 7]); g.strokeStyle = 'rgba(255,77,109,.28)'; g.lineWidth = 2; g.stroke(); g.setLineDash([]);
+    const rr = R * sc; const grd = g.createRadialGradient(cx, cy - rr * 0.25, rr * 0.1, cx, cy, rr); grd.addColorStop(0, '#F6E7C8'); grd.addColorStop(1, '#D4B27F');
+    g.fillStyle = grd; g.beginPath(); g.arc(cx, cy, rr, 0, 7); g.fill(); g.lineWidth = 6; g.strokeStyle = R < 0.999 ? '#FF4D6D' : '#B0844E'; g.stroke();
+    g.strokeStyle = 'rgba(120,80,40,.3)'; g.lineWidth = 2; g.beginPath(); g.arc(cx, cy, rr * 0.55, 0, 7); g.stroke();
+    for (const id of order) {
+      const b = bodies[id]; if (!b) continue; let k = 1; if (b.fall) { k = Math.max(0, 1 - (t - b.fall) / 700); if (k <= 0) continue; }
+      const x = cx + b.px * sc, y = cy + b.py * sc, rad = r * sc * k;
+      if (dashing(b)) { g.fillStyle = b.col + '55'; g.beginPath(); g.arc(x - b.vx * sc * 0.06, y - b.vy * sc * 0.06, rad * 1.2, 0, 7); g.fill(); }
+      g.fillStyle = b.col; g.beginPath(); g.arc(x, y, rad, 0, 7); g.fill(); g.lineWidth = id === me ? 4 : 2; g.strokeStyle = id === me ? '#FFFFFF' : 'rgba(0,0,0,.45)'; g.stroke();
+      if (t < b.slip) { g.font = `${Math.round(rad)}px system-ui, sans-serif`; g.textAlign = 'center'; g.fillText('🍌', x + rad, y - rad); }
+      g.font = `${Math.round(rad * 1.15)}px system-ui, sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(A.emoji(id), x, y + 1);
+      if (k > 0.6) { g.font = 'bold 11px system-ui, sans-serif'; g.fillStyle = id === me ? '#FFD23F' : '#FFFFFF'; g.fillText(id === me ? 'Du' : A.name(id).slice(0, 12), x, y - rad - 9); }
+    }
+    const m = bodies[me];
+    if (m && s && s.ph === 'ask' && !isOut(me)) { const cdl = clamp((m.cd - t) / 1300, 0, 1); dashBtn.disabled = cdl > 0; dashBtn.style.setProperty('--cd', String(cdl)); }
+    if (joy) { g.strokeStyle = 'rgba(255,255,255,.4)'; g.lineWidth = 2; g.beginPath(); g.arc(joy.sx, joy.sy, 48, 0, 7); g.stroke(); g.fillStyle = 'rgba(255,255,255,.45)'; const dx = joy.x - joy.sx, dy = joy.y - joy.sy, L = Math.hypot(dx, dy) || 1, q = Math.min(L, 48) / L; g.beginPath(); g.arc(joy.sx + dx * q, joy.sy + dy * q, 18, 0, 7); g.fill(); }
+    drawArenaOverlay(g, S, S, A, s, cfg);
+  }
+}
+
+/* ---------- Lichtrad: Leuchtspur ziehen, nicht reinfahren ---------- */
+function playTron(ctx) {
+  const A = ctx.arena || localArena(ctx, 'tron', 3); const cfg = ARENA.tron; const me = A.me;
+  const G = 52, TPS = 10; const DIRS = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+  const wrap = h('div', { class: 'ar-wrap' }); const cv = h('canvas', { class: 'ar-cv', 'aria-label': 'Lichtrad-Arena' }); wrap.append(cv);
+  const btnL = h('button', { class: 'btn lg', type: 'button', 'aria-label': 'Links abbiegen' }, '↰ Links'); const btnR = h('button', { class: 'btn lg', type: 'button', 'aria-label': 'Rechts abbiegen' }, 'Rechts ↱');
+  ctx.root.append(h('div', { class: 'ar' }, wrap, h('div', { class: 'ar-ctrl two' }, btnL, btnR), h('p', { class: 'fine ar-hint' }, 'Tipp links oder rechts aufs Feld zum Abbiegen, oder wisch in eine Richtung. Am Rechner: Pfeiltasten oder WASD. Fahr nicht in eine Spur oder die Wand!')));
+  const g = cv.getContext('2d'); let S = 320, dpr = 1;
+  function size() { S = Math.max(240, Math.min(wrap.clientWidth || 320, window.innerHeight - (ctx.live ? 350 : 260), 560)); dpr = window.devicePixelRatio || 1; cv.style.width = cv.style.height = S + 'px'; cv.width = cv.height = Math.round(S * dpr); }
+  size(); ctx.listen(window, 'resize', size);
+  const grid = new Int16Array(G * G), gk = new Int32Array(G * G), gc = new Uint8Array(G * G);
+  let riders = {}, order = [], t0 = 0, lastHb = 0;
+  const now = () => Date.now();
+  const life = arenaLife(ctx, A, {
+    round: (s) => setup(s),
+    phase: (s, prev) => { if (s.ph === 'ask' && (!prev || prev.ph !== 'ask' || prev.i !== s.i || !t0)) t0 = A.endsAt() - cfg.cap; if (s.ph !== 'ask' && s.ph !== 'rev') t0 = 0; for (const id of s.out) { const rd = riders[id]; if (rd && rd.alive) { rd.alive = false; rd.dead = now(); } } }
+  });
+  function setup(s) {
+    grid.fill(0); gk.fill(0); gc.fill(0); riders = {}; order = s.pl.slice(); t0 = 0;
+    order.forEach((id, k) => {
+      const a = -Math.PI / 2 + 2 * Math.PI * k / order.length; const x = Math.round(G / 2 - 0.5 + Math.cos(a) * G * 0.36), y = Math.round(G / 2 - 0.5 + Math.sin(a) * G * 0.36);
+      const tx = -Math.sin(a), ty = Math.cos(a); const dir = Math.abs(tx) > Math.abs(ty) ? (tx > 0 ? 1 : 3) : (ty > 0 ? 2 : 0);
+      const rd = { id, idx: k, x, y, dir, k: 0, alive: true, cells: [], col: ARENA_COLORS[k % 8], q: [], bot: A.bots.some(b => b.id === id), dead: 0, cleared: false, conf: 0 };
+      riders[id] = rd; occ(rd, x, y, 0, 1);
+    });
+  }
+  function occ(rd, x, y, k, conf) { const ix = y * G + x; grid[ix] = rd.idx + 1; gk[ix] = k; gc[ix] = conf; rd.cells.push([x, y, k]); }
+  const tickNow = () => { const s = life.sub; return s && s.ph === 'ask' && t0 ? Math.floor((now() - t0) * TPS / 1000) : -1; };
+  function blocked(x, y) { if (x < 0 || y < 0 || x >= G || y >= G) return true; const ix = y * G + x; const v = grid[ix]; if (!v) return false; const o = riders[order[v - 1]]; if (o && o.id !== me && !o.bot && !gc[ix] && tickNow() - gk[ix] < 2) return false; return true; }
+  function die(rd) { if (!rd.alive) return; rd.alive = false; rd.dead = now(); if (rd.id === me) A.out(); else if (rd.bot) A.out(rd.id); }
+  function stepOwn(rd) {
+    while (rd.q.length) { const nd = rd.q.shift(); if (nd !== rd.dir && (nd + 2) % 4 !== rd.dir) { rd.dir = nd; if (rd.id === me) A.send({ k: 't', i: life.sub.i, kk: rd.k, x: rd.x, y: rd.y, d: rd.dir }); break; } }
+    const nx = rd.x + DIRS[rd.dir][0], ny = rd.y + DIRS[rd.dir][1]; rd.k++;
+    if (blocked(nx, ny)) { die(rd); return; }
+    rd.x = nx; rd.y = ny; occ(rd, nx, ny, rd.k, 1);
+  }
+  function predict(rd, upto) {
+    while (rd.alive && rd.k < upto) { const nx = rd.x + DIRS[rd.dir][0], ny = rd.y + DIRS[rd.dir][1]; if (nx < 0 || ny < 0 || nx >= G || ny >= G || grid[ny * G + nx]) break; rd.k++; rd.x = nx; rd.y = ny; occ(rd, nx, ny, rd.k, 0); }
+  }
+  ctx.onNet = (from, d) => {
+    const s = life.sub; if (!s || d.k !== 't' || d.i !== s.i || from === me) return; const rd = riders[from]; if (!rd || rd.bot || !rd.alive) return;
+    const kk = Math.max(0, d.kk | 0), x = clamp(d.x | 0, 0, G - 1), y = clamp(d.y | 0, 0, G - 1), dir = d.d & 3; if (kk < rd.conf) return;
+    while (rd.cells.length > 1 && rd.cells[rd.cells.length - 1][2] > kk) { const c = rd.cells.pop(); const ix = c[1] * G + c[0]; if (grid[ix] === rd.idx + 1 && gk[ix] === c[2]) grid[ix] = 0; }
+    for (const c of rd.cells) { const ix = c[1] * G + c[0]; if (grid[ix] === rd.idx + 1) gc[ix] = 1; }
+    rd.x = x; rd.y = y; rd.k = kk; rd.dir = dir; rd.conf = kk;
+    if (!grid[y * G + x]) occ(rd, x, y, kk, 1);
+    const tn = tickNow(); if (tn > 0) predict(rd, tn);
+  };
+  ctx.dbg = () => ({ riders, sub: life.sub, tick: tickNow() });
+  const free = (x, y) => x >= 0 && y >= 0 && x < G && y < G && !grid[y * G + x];
+  function run(x, y, d, max) { let n = 0; while (n < max) { x += DIRS[d][0]; y += DIRS[d][1]; if (!free(x, y)) break; n++; } return n; }
+  function botThink(rd) {
+    if (rd.q.length) return; const st = run(rd.x, rd.y, rd.dir, 10); if (st > 3 && Math.random() > 0.035) return;
+    const l = (rd.dir + 3) % 4, rr = (rd.dir + 1) % 4; const sl = run(rd.x, rd.y, l, 16), sr = run(rd.x, rd.y, rr, 16);
+    if (Math.max(sl, sr) <= st && st > 0) return; rd.q.push(sl === sr ? (Math.random() < 0.5 ? l : rr) : sl > sr ? l : rr);
+  }
+  function turn(nd) { const s = life.sub; const rd = riders[me]; if (!s || s.ph !== 'ask' || !rd || !rd.alive || now() < P.frozenUntil) return; const last = rd.q.length ? rd.q[rd.q.length - 1] : rd.dir; if (nd === last || (nd + 2) % 4 === last) return; if (rd.q.length < 2) rd.q.push(nd); }
+  const rel = (k) => { const rd = riders[me]; if (!rd) return; const last = rd.q.length ? rd.q[rd.q.length - 1] : rd.dir; turn((last + k + 4) % 4); };
+  ctx.listen(btnL, 'pointerdown', e => { e.preventDefault(); rel(-1); }); ctx.listen(btnR, 'pointerdown', e => { e.preventDefault(); rel(1); });
+  let sw = null;
+  ctx.listen(cv, 'pointerdown', e => { sw = { x: e.clientX, y: e.clientY }; e.preventDefault(); });
+  ctx.listen(cv, 'pointerup', e => { if (!sw) return; const dx = e.clientX - sw.x, dy = e.clientY - sw.y; sw = null;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) > 24) turn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 1 : 3) : (dy > 0 ? 2 : 0));
+    else { const b = cv.getBoundingClientRect(); rel(e.clientX - b.left < b.width / 2 ? -1 : 1); } });
+  ctx.listen(window, 'keydown', e => { const m = { arrowup: 0, w: 0, arrowright: 1, d: 1, arrowdown: 2, s: 2, arrowleft: 3, a: 3 }[e.key.toLowerCase()]; if (m !== undefined) { e.preventDefault(); turn(m); } });
+  ctx.loop(() => {
+    const s = life.sub; const t = now();
+    if (s && s.ph === 'ask' && t0) {
+      const tn = tickNow();
+      for (const id of order) {
+        const rd = riders[id]; if (!rd || !rd.alive) continue;
+        if (id === me || rd.bot) { let guard = 0; while (rd.alive && rd.k < tn && guard++ < 40) { if (rd.bot) botThink(rd); stepOwn(rd); } }
+        else predict(rd, tn);
+      }
+      const m = riders[me]; if (m && m.alive && t - lastHb > 1200) { lastHb = t; A.send({ k: 't', i: s.i, kk: m.k, x: m.x, y: m.y, d: m.dir }); }
+    }
+    for (const id of order) { const rd = riders[id]; if (rd && rd.dead && !rd.cleared && t - rd.dead > 1500) { rd.cleared = true; for (const c of rd.cells) { const ix = c[1] * G + c[0]; if (grid[ix] === rd.idx + 1) grid[ix] = 0; } } }
+    draw();
+  });
+  function draw() {
+    const s = life.sub; const t = now(); g.setTransform(dpr, 0, 0, dpr, 0, 0); const cs = S / G;
+    g.fillStyle = '#080B1E'; g.fillRect(0, 0, S, S);
+    g.strokeStyle = 'rgba(80,110,255,.12)'; g.lineWidth = 1; g.beginPath(); for (let k = 0; k <= G; k += 4) { g.moveTo(k * cs, 0); g.lineTo(k * cs, S); g.moveTo(0, k * cs); g.lineTo(S, k * cs); } g.stroke();
+    for (let ix = 0; ix < grid.length; ix++) { const v = grid[ix]; if (!v) continue; const rd = riders[order[v - 1]]; if (!rd) continue; g.globalAlpha = rd.alive ? 0.85 : Math.max(0.15, 1 - (t - rd.dead) / 1500); g.fillStyle = rd.col; g.fillRect((ix % G) * cs, Math.floor(ix / G) * cs, cs + 0.5, cs + 0.5); }
+    g.globalAlpha = 1;
+    for (const id of order) { const rd = riders[id]; if (!rd || (!rd.alive && t - rd.dead > 1500)) continue; const x = (rd.x + 0.5) * cs, y = (rd.y + 0.5) * cs;
+      g.shadowColor = rd.col; g.shadowBlur = 14; g.fillStyle = '#FFFFFF'; g.fillRect(x - cs * 0.7, y - cs * 0.7, cs * 1.4, cs * 1.4); g.shadowBlur = 0;
+      g.font = `${Math.round(cs * 2.4)}px system-ui, sans-serif`; g.textAlign = 'center'; g.textBaseline = 'bottom'; g.fillText(rd.alive ? A.emoji(id) : '💥', x, y - cs);
+      if (id === me && s && s.ph === 'pre') { const [dx, dy] = DIRS[rd.dir]; g.strokeStyle = '#FFFFFF'; g.lineWidth = 3; g.beginPath(); g.moveTo(x, y); g.lineTo(x + dx * cs * 5, y + dy * cs * 5); g.stroke(); } }
+    g.strokeStyle = '#3DDCFF'; g.lineWidth = 2; g.strokeRect(1, 1, S - 2, S - 2);
+    drawArenaOverlay(g, S, S, A, s, cfg);
+  }
+}
+
+/* ---------- Flatterflug: alle fliegen gleichzeitig durch denselben Parcours ---------- */
+function playFlappy(ctx) {
+  const live = !!ctx.arena; const A = ctx.arena; const cfg = ARENA.flappy; const me = live ? A.me : S.me.id;
+  const VW = 0.75, BX = 0.2, BR = 0.027, GRAV = 2.5, FLAP = -0.74, VMAX = 1.5, PW = 0.095;
+  const wrap = h('div', { class: 'ar-wrap' }); const cv = h('canvas', { class: 'ar-cv fl', 'aria-label': 'Flatterflug' }); wrap.append(cv);
+  ctx.root.append(h('div', { class: 'ar' }, wrap, h('p', { class: 'fine ar-hint' }, 'Tippen oder Leertaste zum Flattern. Flieg durch die Lücken!')));
+  const g = cv.getContext('2d'); let W = 300, H = 400, dpr = 1;
+  function size() { H = Math.max(320, Math.min(window.innerHeight - (ctx.live ? 330 : 230), 640)); W = Math.min(wrap.clientWidth || 300, Math.round(H * 0.75)); H = Math.round(W / 0.75); dpr = window.devicePixelRatio || 1; cv.style.width = W + 'px'; cv.style.height = H + 'px'; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+  size(); ctx.listen(window, 'resize', size);
+  const baseSeed = ctx.R.int(1e9);
+  const scrollX = (t) => 0.32 * t + 0.0017 * t * t;
+  function makePipes(seed) { const R = makeRng(seed); const out = []; for (let n = 0; n < 200; n++) out.push({ x: 0.85 + n * 0.5, c: 0.2 + R.f() * 0.6, gap: Math.max(0.2, 0.31 - n * 0.0032) }); return out; }
+  let pipes = makePipes(baseSeed), birds = {}, order = [], t0 = 0, started = !live ? false : true, lastSend = 0, earnedAt = 0, kicks = [], frozenT = null;
+  const now = () => Date.now();
+  const mkBird = (id, k) => ({ id, y: 0.45, vy: 0, alive: true, dead: 0, ev: { tt: 0, y: 0.45, vy: 0 }, col: ARENA_COLORS[k % 8], score: 0 });
+  let life = null;
+  if (live) life = arenaLife(ctx, A, {
+    round: (s) => { order = s.pl.slice(); birds = {}; order.forEach((id, k) => { birds[id] = mkBird(id, k); }); pipes = makePipes(baseSeed + s.i * 7919); t0 = 0; earnedAt = 0; frozenT = null; },
+    phase: (s, prev) => { if (s.ph === 'ask' && (!prev || prev.ph !== 'ask' || prev.i !== s.i || !t0)) t0 = A.endsAt() - cfg.cap; if (prev && prev.ph === 'ask' && s.ph !== 'ask' && t0 && frozenT === null) frozenT = (now() - t0) / 1000; for (const id of s.out) { const b = birds[id]; if (b && b.alive) { b.alive = false; b.dead = now(); } } }
+  });
+  else { birds[me] = mkBird(me, 1); order = [me]; }
+  const tSec = () => (frozenT !== null ? frozenT : t0 ? (now() - t0) / 1000 : 0);
+  const playing = () => live ? !!(life.sub && life.sub.ph === 'ask' && t0) : started;
+  function sim(y, vy, dt) { let n = Math.min(400, Math.ceil(dt * 120)); const h2 = dt / Math.max(1, n); while (n-- > 0) { vy = Math.min(VMAX, vy + GRAV * h2); y += vy * h2; if (y < BR) { y = BR; vy = Math.max(vy, 0); } } return [y, vy]; }
+  function flap() {
+    if (now() < P.frozenUntil) return;
+    if (!live && !started) { started = true; t0 = now(); }
+    const b = birds[me]; if (!b || !b.alive || !playing()) return;
+    b.vy = FLAP; send(true);
+  }
+  function send(force) { if (!live) return; const b = birds[me]; const t = now(); if (!b || !life.sub) return; if (!force && t - lastSend < 1000) return; if (force && t - lastSend < 50) return; lastSend = t; A.send({ k: 'f', i: life.sub.i, tt: t - t0, y: Math.round(b.y * 1e4) / 1e4, vy: Math.round(b.vy * 1e3) / 1e3 }); }
+  ctx.onNet = (from, d) => { const s = life && life.sub; if (!s || d.k !== 'f' || d.i !== s.i || from === me) return; const b = birds[from]; if (!b || !b.alive) return; b.ev = { tt: clamp(+d.tt || 0, 0, 600000), y: clamp(+d.y || 0, 0, 1.2), vy: clamp(+d.vy || 0, -3, 3) }; };
+  function hits(b, t) {
+    const bx = scrollX(t) + BX; if (b.y > 0.97 - BR) return true;
+    for (const p of pipes) { if (p.x > bx + 0.3) break; if (p.x + PW < bx - BR) continue; if (Math.abs(bx - (p.x + PW / 2)) < PW / 2 + BR * 0.85 && (b.y - BR * 0.85 < p.c - p.gap / 2 || b.y + BR * 0.85 > p.c + p.gap / 2)) return true; }
+    return false;
+  }
+  const passed = (t) => { const bx = scrollX(t) + BX; let n = 0; for (const p of pipes) { if (p.x + PW < bx - BR) n++; else break; } return n; };
+  ctx.listen(cv, 'pointerdown', e => { e.preventDefault(); flap(); });
+  ctx.listen(window, 'keydown', e => { if ((e.key === ' ' || e.key === 'ArrowUp') && !e.repeat) { e.preventDefault(); flap(); } });
+  ctx.effect = (k) => { const b = birds[me]; if (k !== 'gust' || !b || !b.alive || !playing()) return false; const s = Math.random() < 0.5 ? -1 : 1; b.vy += s * 0.9; kicks.push([now() + 450, -s * 0.8]); return true; };
+  ctx.partial = live ? ctx.partial : () => ({ p: Math.min(1000, (birds[me] ? birds[me].score : 0) * 40), d: `${birds[me] ? birds[me].score : 0} Röhren` });
+  let over = false; ctx.dbg = () => ({ birds, sub: life && life.sub, t: tSec() });
+  ctx.loop((dt) => {
+    const t = tSec(); const b = birds[me];
+    if (playing() && b && b.alive) {
+      kicks = kicks.filter(([at, v]) => { if (now() >= at) { b.vy += v; return false; } return true; });
+      b.vy = Math.min(VMAX, b.vy + GRAV * dt); b.y += b.vy * dt; if (b.y < BR) { b.y = BR; b.vy = Math.max(0, b.vy); }
+      const sc = passed(t); if (sc !== b.score) { b.score = sc; ctx.progress(live ? `${sc} Röhren` : `${sc} Röhren`); if (live && sc && sc % 10 === 0 && sc !== earnedAt) { earnedAt = sc; ctx.live && ctx.live.earn(`${sc} Röhren geschafft`); } }
+      if (hits(b, t)) { b.alive = false; b.dead = now(); if (live) { send(true); A.out(); } else if (!over) { over = true; ctx.after(1400, () => ctx.done({ p: Math.min(1000, b.score * 40), d: `${b.score} Röhren` })); } }
+      send(false);
+    }
+    if (live && t0 && frozenT === null) for (const id of order) { if (id === me) continue; const o = birds[id]; if (!o || !o.alive) continue; const [y, vy] = sim(o.ev.y, o.ev.vy, Math.max(0, (now() - t0 - o.ev.tt) / 1000)); o.y = y; o.vy = vy; }
+    draw(t);
+  });
+  function draw(t) {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); const sc = W / VW; const cam = playing() || (t0 && live) ? scrollX(t) : 0; const now2 = now();
+    const sky = g.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, '#5EC8F2'); sky.addColorStop(1, '#C5EEFF'); g.fillStyle = sky; g.fillRect(0, 0, W, H);
+    g.fillStyle = 'rgba(255,255,255,.75)'; for (let k = 0; k < 5; k++) { const x = ((k * 0.37 - cam * 0.15) % 1.5 + 1.5) % 1.5 * sc - 40; const y = (0.12 + k * 0.13) * H; g.beginPath(); g.ellipse(x, y, 34, 12, 0, 0, 7); g.fill(); }
+    for (const p of pipes) { const x = (p.x - cam) * sc; if (x > W) break; if (x + PW * sc < 0) continue; const top = (p.c - p.gap / 2) * H, bot = (p.c + p.gap / 2) * H;
+      g.fillStyle = '#3DBB54'; g.fillRect(x, 0, PW * sc, top); g.fillRect(x, bot, PW * sc, H - bot); g.fillStyle = '#2A8E3C'; g.fillRect(x - 4, top - 14, PW * sc + 8, 14); g.fillRect(x - 4, bot, PW * sc + 8, 14); g.fillStyle = 'rgba(255,255,255,.25)'; g.fillRect(x + 4, 0, 5, top - 14); g.fillRect(x + 4, bot + 14, 5, H - bot); }
+    g.fillStyle = '#D9C27A'; g.fillRect(0, H * 0.97, W, H * 0.03); g.fillStyle = '#8BC34A'; g.fillRect(0, H * 0.965, W, 4);
+    const bx = BX * sc;
+    for (const id of order) {
+      const b = birds[id]; if (!b) continue; let y = b.y * H, rot = clamp(b.vy * 0.6, -0.5, 1.2);
+      if (!b.alive) { const k = (now2 - b.dead) / 1000; if (k > 1.2) continue; y = Math.min(H * 0.97, y + k * k * H); rot = 1.5; }
+      const isMe = id === me; g.save(); g.translate(bx + (isMe ? 0 : 0), y); g.rotate(rot); g.globalAlpha = isMe ? 1 : 0.55;
+      g.fillStyle = isMe ? '#FFD23F' : b.col; g.beginPath(); g.ellipse(0, 0, BR * H * 1.15, BR * H, 0, 0, 7); g.fill(); g.lineWidth = 2; g.strokeStyle = '#3A2A00'; g.stroke();
+      g.fillStyle = '#FFFFFF'; g.beginPath(); g.arc(BR * H * 0.45, -BR * H * 0.3, BR * H * 0.35, 0, 7); g.fill(); g.fillStyle = '#111'; g.beginPath(); g.arc(BR * H * 0.55, -BR * H * 0.3, BR * H * 0.15, 0, 7); g.fill();
+      g.fillStyle = '#FF8A00'; g.beginPath(); g.moveTo(BR * H * 1.0, 0); g.lineTo(BR * H * 1.6, BR * H * 0.2); g.lineTo(BR * H * 1.0, BR * H * 0.4); g.fill();
+      g.restore(); g.globalAlpha = 1;
+      if (!isMe && live) { g.font = `${Math.round(BR * H * 1.4)}px system-ui, sans-serif`; g.textAlign = 'center'; g.textBaseline = 'bottom'; g.fillText(A.emoji(id), bx - BR * H * 1.8, y - BR * H * 0.4); }
+    }
+    const mb = birds[me]; g.fillStyle = '#FFFFFF'; g.strokeStyle = 'rgba(0,0,0,.45)'; g.lineWidth = 4; g.font = `bold ${Math.round(W * 0.11)}px system-ui, sans-serif`; g.textAlign = 'center'; g.textBaseline = 'top';
+    if (mb) { g.strokeText(String(mb.score), W / 2, 14); g.fillText(String(mb.score), W / 2, 14); }
+    if (!live && !started) { g.fillStyle = 'rgba(8,12,30,.45)'; g.fillRect(0, H * 0.4, W, H * 0.16); g.fillStyle = '#FFFFFF'; g.font = `bold ${Math.round(W * 0.07)}px system-ui, sans-serif`; g.textBaseline = 'middle'; g.fillText('Tippen zum Starten', W / 2, H * 0.48); }
+    if (live) drawArenaOverlay(g, W, H, A, life.sub, cfg);
+  }
+}
+
 /* ---------- Zahlenmerker ---------- */
 function playMerk(ctx) {
   const { root, R } = ctx; let n = 3, val = '', phase = 'show', num = '';
@@ -2032,6 +3110,7 @@ $('#mechip').addEventListener('click', () => { if (S.needLogin) login(); else go
 window.addEventListener('hashchange', () => { if (S.view === 'game') return; const pm = location.hash.match(/^#party-([A-Za-z]{4})$/); if (pm) { partyJoin(pm[1].toUpperCase()); return; } const v = location.hash.slice(1); if (['spiele', 'turniere', 'bestenliste', 'profil'].includes(v) && v !== S.view && !(v === 'turniere' && S.view === 'tour')) { S.view = v; render(); } });
 
 function toast(text, kind) {
+  if (document.body.classList.contains('ingame') && hudNote(text, kind)) return;
   const box = $('#toasts'); while (box.children.length > 2) box.firstChild.remove();
   const t = h('div', { class: 'toast' + (kind ? ' ' + kind : '') }, text); box.append(t); setTimeout(() => t.remove(), kind === 'big' ? 5200 : 3600);
 }
@@ -2051,12 +3130,12 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#sheet
 function greet() { const hr = new Date().getHours(); return hr < 5 ? 'Noch wach?' : hr < 11 ? 'Guten Morgen' : hr < 17 ? 'Moin' : hr < 22 ? 'Guten Abend' : 'Späte Runde?'; }
 const dateLabel = () => new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' });
 function viewHome() {
-  const me = myDoc(); const done = GAMES.filter(g => dailyRes(S.me.id, g.id)).length;
+  const me = myDoc(); const done = DAILY_GAMES.filter(g => dailyRes(S.me.id, g.id)).length;
   const hero = h('section', { class: 'hero' },
     h('div', { class: 'hero-eyebrow' }, greet()),
     h('h1', { class: 'hero-title' }, `${me.emoji} ${me.nick || 'Neuling'}`),
     h('p', { class: 'hero-spruch' }, me.spruch ? `„${me.spruch}“` : 'Noch kein Angeber-Spruch. Leg einen im Profil fest.'),
-    h('div', { class: 'stats' }, stat(crownCount(S.me.id), 'Kronen'), stat(`${done}/${GAMES.length}`, 'Tagesrunde'), stat(activeTours().length, 'Turniere offen')));
+    h('div', { class: 'stats' }, stat(crownCount(S.me.id), 'Kronen'), stat(`${done}/${DAILY_GAMES.length}`, 'Tagesrunde'), stat(activeTours().length, 'Turniere offen')));
   const notes = [];
   if (S.mode === 'shared' && !playersReady && S.loadSlow) notes.push(h('div', { class: 'note warn' }, h('span', null, h('b', null, 'Die gemeinsame Bestenliste antwortet noch nicht. '), 'Du kannst warten oder ohne sie spielen.'), h('button', { class: 'btn sm', type: 'button', onclick: goLocal }, 'Ohne spielen')));
   if (S.mode === 'local' && S.needLogin) notes.push(h('div', { class: 'note warn' }, h('span', null, h('b', null, 'Du spielst gerade nur für dich. '), 'Melde dich mit Discord an, dann landen deine Ergebnisse in der gemeinsamen Bestenliste.'), h('button', { class: 'btn sm blue', type: 'button', onclick: login }, 'Mit Discord anmelden')));
@@ -2064,7 +3143,7 @@ function viewHome() {
   const daily = h('section', { class: 'card' },
     h('div', { class: 'sec-head' }, h('h2', null, 'Tagesrunde'), h('span', { class: 'fine' }, dateLabel())),
     h('p', { class: 'fine', style: 'margin-bottom:12px' }, 'Heute bekommen alle dieselben Aufgaben. Nur der erste Versuch zählt – kein Rumprobieren.'),
-    h('div', { class: 'daily-dots' }, GAMES.map(g => { const r = dailyRes(S.me.id, g.id); return h('button', { class: 'dd' + (r ? ' done' : ''), type: 'button', style: catStyle(g), title: g.name, 'aria-label': `${g.name}: ${r ? (r.done ? r.p + ' Punkte' : 'abgebrochen') : 'offen'}`, onclick: () => openGameSheet(g.id) }, icon(g.id), h('span', { class: 'dd-v digits' }, r ? (r.done ? r.p : '0') : '–')); })));
+    h('div', { class: 'daily-dots' }, DAILY_GAMES.map(g => { const r = dailyRes(S.me.id, g.id); return h('button', { class: 'dd' + (r ? ' done' : ''), type: 'button', style: catStyle(g), title: g.name, 'aria-label': `${g.name}: ${r ? (r.done ? r.p + ' Punkte' : 'abgebrochen') : 'offen'}`, onclick: () => openGameSheet(g.id) }, icon(g.id), h('span', { class: 'dd-v digits' }, r ? (r.done ? r.p : '0') : '–')); })));
   const filt = h('div', { class: 'filters', role: 'group', 'aria-label': 'Nach Kategorie filtern' }, [['alle', 'Alle'], ...Object.entries(CATS).map(([k, c]) => [k, c.label])].map(([k, l]) => h('button', { class: 'fchip', type: 'button', 'aria-pressed': S.cat === k ? 'true' : 'false', onclick: () => { S.cat = k; render(); } }, l)));
   const tiles = h('div', { class: 'tiles' }, GAMES.filter(g => S.cat === 'alle' || g.cat === S.cat).map(tile));
   const side = h('div', { class: 'home-side' }, onlineBox(), tickerBox(), shareHint());
@@ -2116,11 +3195,13 @@ function openGameSheet(gid) {
     h('p', { class: 'gs-rules' }, g.rules),
     h('dl', { class: 'kv' }, h('dt', null, 'Dein Bestwert'), h('dd', null, mine ? `${mine.p} · ${mine.d}` : '–'), h('dt', null, 'Rekord'), h('dd', null, top ? `👑 ${nameFor(top.id)} · ${top.p}` : 'noch frei'), h('dt', null, 'Gespielt'), h('dd', null, `${Number(myDoc().plays[gid]) || 0}×`)),
     today.length ? h('div', { class: 'field' }, h('div', { class: 'field-l' }, 'Heute vorne'), h('ol', { class: 'minirank' }, today.map(x => h('li', null, h('span', null, `${x.rank}. ${emojiFor(x.id)} ${nameFor(x.id)}`), h('b', { class: 'digits' }, x.p))))) : null,
-    h('div', { class: 'gs-actions' },
+    g.noAsync ? h('div', { class: 'gs-actions' }, h('button', { class: 'btn primary lg', type: 'button', disabled: !ok, onclick: () => startGame(gid, { mode: 'f' }) }, '🤖 Gegen Bots trainieren'), partyAvailable() ? h('button', { class: 'btn lg', type: 'button', onclick: () => { closeSheet(); partyCreate(); } }, '🎉 Live-Party eröffnen') : null) : null,
+    g.noAsync ? h('p', { class: 'fine' }, 'Richtig Spaß macht das in der Live-Party mit euch allen. Das Bot-Training zählt nicht für die Bestenliste.') : null,
+    g.noAsync ? null : h('div', { class: 'gs-actions' },
       dr ? h('div', { class: 'gs-done' }, 'Tagesrunde erledigt: ', h('b', { class: 'digits' }, dr.done ? `${dr.p} Punkte` : '0 Punkte (abgebrochen)'), dr.done ? ` · ${dr.d}` : '')
         : h('button', { class: 'btn primary lg', type: 'button', disabled: !ok, onclick: () => startGame(gid, { mode: 'd' }) }, ok ? 'Tagesrunde spielen' : 'Verbinde …'),
       h('button', { class: 'btn lg', type: 'button', disabled: !ok, onclick: () => startGame(gid, { mode: 'f' }) }, 'Freies Training')),
-    h('p', { class: 'fine' }, dr ? 'Morgen gibt es eine neue Tagesrunde.' : 'In der Tagesrunde zählt nur der erste Versuch. Wer abbricht, bekommt 0 Punkte. Training zählt für deinen Bestwert.')));
+    g.noAsync ? null : h('p', { class: 'fine' }, dr ? 'Morgen gibt es eine neue Tagesrunde.' : 'In der Tagesrunde zählt nur der erste Versuch. Wer abbricht, bekommt 0 Punkte. Training zählt für deinen Bestwert.')));
 }
 
 /* =========================================================
@@ -2159,11 +3240,13 @@ function exitGame() {
 function finishGame(r) {
   const { gid, opt, seed, dk } = S.game; const G = GAME[gid];
   const p = clamp(Math.round(Number(r.p) || 0), 0, 1000); const d = String(r.d || '').slice(0, 40); const now = Date.now();
+  const botRun = !!G.noAsync;
   const others = bestList(gid).filter(x => x.id !== S.me.id); const prevBest = res(myDoc().best[gid]);
-  const pb = !prevBest || p > prevBest.p; const crown = p > 0 && (!others.length || p > others[0].p) && pb;
+  const pb = !botRun && (!prevBest || p > prevBest.p); const crown = pb && p > 0 && (!others.length || p > others[0].p);
   const dethroned = crown && others.length ? others[0].id : null;
   saveMe(x => {
     x.plays[gid] = (Number(x.plays[gid]) || 0) + 1;
+    if (botRun) return;
     if (pb) x.best[gid] = { p, d, at: now };
     if (opt.mode === 'd') (x.daily[dk] = isObj(x.daily[dk]) ? x.daily[dk] : {})[gid] = { p, d, at: now, done: true };
     if (opt.mode === 't') (x.tour[opt.tid] = isObj(x.tour[opt.tid]) ? x.tour[opt.tid] : {})[opt.gi] = { p, d, at: now, done: true };
@@ -2173,12 +3256,13 @@ function finishGame(r) {
   let ctxLine = null;
   if (opt.mode === 'd') { const l = withRanks(dailyList(gid, dk)); const me = l.find(x => x.id === S.me.id); if (me) ctxLine = `Platz ${me.rank} von ${l.length} in der heutigen Tagesrunde`; }
   else if (opt.mode === 't') { const t = S.tours[opt.tid]; if (t) { const st = tourStandings(opt.tid, t); const me = st.find(x => x.id === S.me.id); const per = me && me.per[opt.gi]; if (per && per.rank) ctxLine = `Platz ${per.rank} in diesem Spiel · ${per.pts} Turnierpunkte`; } }
+  else if (botRun) ctxLine = 'Training gegen Bots – zählt nicht für die Bestenliste';
   else { const l = withRanks(bestList(gid)); const me = l.find(x => x.id === S.me.id); if (me && l.length > 1) ctxLine = `Bestenliste: Platz ${me.rank} von ${l.length}`; }
   const scoreEl = h('div', { class: 'result-score', 'aria-live': 'polite' }, '0');
   const actions = h('div', { class: 'result-actions' });
   if (opt.mode === 'f') {
     actions.append(h('button', { class: 'btn primary lg', type: 'button', onclick: () => startGame(gid, { mode: 'f' }) }, 'Nochmal'));
-    if (!S.readOnly) actions.append(h('button', { class: 'btn blue lg', type: 'button', onclick: (e) => { e.currentTarget.disabled = true; challenge(gid, seed, p, d); } }, 'Genau diese Runde als Duell'));
+    if (!S.readOnly && !botRun) actions.append(h('button', { class: 'btn blue lg', type: 'button', onclick: (e) => { e.currentTarget.disabled = true; challenge(gid, seed, p, d); } }, 'Genau diese Runde als Duell'));
   } else if (opt.mode === 't') actions.append(h('button', { class: 'btn primary lg', type: 'button', onclick: () => { exitGame(); openTour(opt.tid); } }, 'Zum Turnier'));
   else actions.append(h('button', { class: 'btn primary lg', type: 'button', onclick: () => startGame(gid, { mode: 'f' }) }, 'Weiter trainieren'));
   actions.append(h('button', { class: 'btn lg', type: 'button', onclick: exitGame }, 'Zurück'));
@@ -2214,11 +3298,11 @@ function viewBoard() {
     body.push(rows.length ? h('div', { class: 'tbl-wrap' }, h('table', null, h('thead', null, h('tr', null, h('th', null, '#'), h('th', null, 'Spieler'), h('th', { class: 'num' }, '👑'), h('th', { class: 'num' }, 'Punkte'), h('th', { class: 'num' }, 'Spiele'))),
       h('tbody', null, rows.map((r, i) => h('tr', { class: r.id === S.me.id ? 'me' : '' }, h('td', null, posEl(r.rank)), h('td', null, who(r.id, (i === rows.length - 1 && rows.length >= 3 ? '🐌 Schlusslicht · ' : '') + (S.players[r.id]?.spruch ? `„${String(S.players[r.id].spruch).slice(0, 60)}“` : ''))), h('td', { class: 'num' }, r.c), h('td', { class: 'num' }, fmt(r.sum)), h('td', { class: 'num' }, r.n)))))) : h('div', { class: 'empty' }, 'Noch niemand hat gespielt.'));
   } else if (S.boardTab === 'heute') {
-    const dk = dayKey(); const rows = withRanks(ids.map(id => { const n = GAMES.filter(g => dailyRes(id, g.id, dk)?.done).length; return { id, n, p: GAMES.reduce((a, g) => a + (dailyRes(id, g.id, dk)?.p || 0), 0) }; }).filter(x => x.n > 0).sort((a, b) => b.p - a.p));
+    const dk = dayKey(); const rows = withRanks(ids.map(id => { const n = DAILY_GAMES.filter(g => dailyRes(id, g.id, dk)?.done).length; return { id, n, p: DAILY_GAMES.reduce((a, g) => a + (dailyRes(id, g.id, dk)?.p || 0), 0) }; }).filter(x => x.n > 0).sort((a, b) => b.p - a.p));
     body.push(h('p', { class: 'lede' }, `Tagesrunde vom ${dateLabel()}. Alle hatten dieselben Aufgaben.`));
     body.push(rows.length ? h('div', { class: 'tbl-wrap' }, h('table', null, h('thead', null, h('tr', null, h('th', null, '#'), h('th', null, 'Spieler'), h('th', { class: 'num' }, 'Spiele'), h('th', { class: 'num' }, 'Punkte'))),
-      h('tbody', null, rows.map(r => h('tr', { class: r.id === S.me.id ? 'me' : '' }, h('td', null, posEl(r.rank)), h('td', null, who(r.id)), h('td', { class: 'num' }, `${r.n}/${GAMES.length}`), h('td', { class: 'num' }, fmt(r.p))))))) : h('div', { class: 'empty' }, 'Heute hat noch niemand die Tagesrunde gespielt.'));
-    body.push(h('div', { class: 'gb-grid' }, GAMES.map(g => gameCard(g, withRanks(dailyList(g.id, dk))))));
+      h('tbody', null, rows.map(r => h('tr', { class: r.id === S.me.id ? 'me' : '' }, h('td', null, posEl(r.rank)), h('td', null, who(r.id)), h('td', { class: 'num' }, `${r.n}/${DAILY_GAMES.length}`), h('td', { class: 'num' }, fmt(r.p))))))) : h('div', { class: 'empty' }, 'Heute hat noch niemand die Tagesrunde gespielt.'));
+    body.push(h('div', { class: 'gb-grid' }, DAILY_GAMES.map(g => gameCard(g, withRanks(dailyList(g.id, dk))))));
   } else {
     body.push(h('p', { class: 'lede' }, 'Die Bestwerte aller Zeiten, egal ob Training, Tagesrunde oder Turnier.'));
     body.push(h('div', { class: 'gb-grid' }, GAMES.map(g => gameCard(g, withRanks(bestList(g.id))))));
@@ -2286,15 +3370,15 @@ function openCreateTour() {
   const sugg = () => { const n = myDoc().nick; const opts = n ? [...TOUR_NAMES, `Schlag ${n}`] : TOUR_NAMES; return opts[Math.floor(Math.random() * opts.length)]; };
   const nameIn = h('input', { id: 'tc-name', class: 'inp', type: 'text', maxlength: '40', placeholder: sugg() });
   const count = h('span', { class: 'fine' }); const chips = h('div', { class: 'chips' });
-  function drawChips() { chips.replaceChildren(...GAMES.map(g => h('button', { type: 'button', class: 'chip-btn', style: catStyle(g), 'aria-pressed': sel.has(g.id) ? 'true' : 'false', onclick: () => { sel.has(g.id) ? sel.delete(g.id) : sel.add(g.id); drawChips(); } }, icon(g.id), g.name))); count.textContent = `${sel.size} ausgewählt`; }
-  const rnd = (n) => { sel.clear(); shuffleMath(GAMES.map(g => g.id)).slice(0, n).forEach(x => sel.add(x)); drawChips(); };
+  function drawChips() { chips.replaceChildren(...DAILY_GAMES.map(g => h('button', { type: 'button', class: 'chip-btn', style: catStyle(g), 'aria-pressed': sel.has(g.id) ? 'true' : 'false', onclick: () => { sel.has(g.id) ? sel.delete(g.id) : sel.add(g.id); drawChips(); } }, icon(g.id), g.name))); count.textContent = `${sel.size} ausgewählt`; }
+  const rnd = (n) => { sel.clear(); shuffleMath(DAILY_GAMES.map(g => g.id)).slice(0, n).forEach(x => sel.add(x)); drawChips(); };
   const DURS = [['1h', '1 Stunde'], ['mn', 'Bis Mitternacht'], ['24h', '24 Stunden'], ['3d', '3 Tage'], ['7d', '1 Woche']];
   const durBox = h('div', { class: 'seg' }); function drawDur() { durBox.replaceChildren(...DURS.map(([k, l]) => h('button', { type: 'button', class: 'seg-b', 'aria-pressed': dur === k ? 'true' : 'false', onclick: () => { dur = k; drawDur(); } }, l))); }
   const err = h('p', { class: 'err', hidden: true }); const go_ = h('button', { class: 'btn primary lg wide', type: 'button', onclick: create }, 'Turnier starten');
   rnd(3); drawDur();
   openSheet(h('div', { class: 'page' }, h('h2', { class: 'gs-title' }, 'Neues Turnier'),
     h('div', { class: 'field' }, h('label', { class: 'field-l', for: 'tc-name' }, 'Name'), h('div', { class: 'row', style: 'flex-wrap:nowrap' }, nameIn, h('button', { class: 'btn sm', type: 'button', 'aria-label': 'Zufälliger Name', onclick: () => { nameIn.value = sugg(); } }, '🎲'))),
-    h('div', { class: 'field' }, h('div', { class: 'field-l' }, 'Spiele ', count), h('div', { class: 'row' }, h('button', { class: 'btn sm', type: 'button', onclick: () => rnd(3) }, '3 zufällige'), h('button', { class: 'btn sm', type: 'button', onclick: () => rnd(5) }, '5 zufällige'), h('button', { class: 'btn sm', type: 'button', onclick: () => { GAMES.forEach(g => sel.add(g.id)); drawChips(); } }, 'Alle'), h('button', { class: 'btn sm', type: 'button', onclick: () => { sel.clear(); drawChips(); } }, 'Keine')), chips),
+    h('div', { class: 'field' }, h('div', { class: 'field-l' }, 'Spiele ', count), h('div', { class: 'row' }, h('button', { class: 'btn sm', type: 'button', onclick: () => rnd(3) }, '3 zufällige'), h('button', { class: 'btn sm', type: 'button', onclick: () => rnd(5) }, '5 zufällige'), h('button', { class: 'btn sm', type: 'button', onclick: () => { DAILY_GAMES.forEach(g => sel.add(g.id)); drawChips(); } }, 'Alle'), h('button', { class: 'btn sm', type: 'button', onclick: () => { sel.clear(); drawChips(); } }, 'Keine')), chips),
     h('div', { class: 'field' }, h('div', { class: 'field-l' }, 'Läuft'), durBox), err, go_));
   function calcEnd() { const n = Date.now(); if (dur === '1h') return n + 3600e3; if (dur === 'mn') { const d = new Date(); d.setHours(23, 59, 59, 0); return d.getTime() > n + 600e3 ? d.getTime() : n + 3600e3; } if (dur === '3d') return n + 3 * 86400e3; if (dur === '7d') return n + 7 * 86400e3; return n + 86400e3; }
   async function create() {
@@ -2405,7 +3489,7 @@ function fxConfetti() {
 /* =========================================================
    Live-Party: alle spielen gleichzeitig, mit Waffen
    ========================================================= */
-const LIVE_CAP = { wort: 150, quiz: 190, schaetz: 210, zeit: 120, hl: 100, golf: 210, kreis: 60, reakt: 80, gefuehl: 80, rechnen: 63, farbe: 110, merk: 110, laender: 180 };
+const LIVE_CAP = { wort: 150, quiz: 190, schaetz: 210, zeit: 300, hl: 140, golf: 210, kreis: 60, reakt: 80, gefuehl: 80, rechnen: 63, farbe: 130, merk: 110, laender: 180, marke: 175, nadel: 200, flappy: 175, sumo: 215, tron: 215 };
 /* p = Stärke (1 harmlos … 3 fies). g = nur in diesen Spielen, sonst überall */
 const ITEMS = {
   tomato: { e: '🍅', n: 'Tomate', d: 'klatscht dem Ziel drei Sekunden lang Tomate auf den Bildschirm', t: 'atk', p: 1 },
@@ -2416,13 +3500,13 @@ const ITEMS = {
   ice: { e: '🧊', n: 'Eisblock', d: 'friert das Ziel zweieinhalb Sekunden lang ein', t: 'atk', p: 3 },
   shield: { e: '🛡️', n: 'Schild', d: 'blockt den nächsten Angriff (30 Sekunden lang)', t: 'self', p: 1 },
   bolt: { e: '⚡', n: 'Blitz', d: 'trifft alle anderen gleichzeitig mit Nebel und Gewackel', t: 'all', p: 3 },
-  mix: { e: '🔀', n: 'Mischmaschine', d: 'wirbelt die Antwortknöpfe fünf Sekunden lang durcheinander', t: 'atk', p: 2, g: ['quiz'] },
-  censor: { e: '🖍️', n: 'Zensur', d: 'schwärzt zwei Antworten der aktuellen Frage', t: 'atk', p: 2, g: ['quiz'] },
-  whisper: { e: '👀', n: 'Einflüsterer', d: 'markiert eine falsche Antwort mit „Psst … die hier!“', t: 'atk', p: 1, g: ['quiz'] },
-  thief: { e: '⏳', n: 'Zeitdieb', d: 'klaut fünf Sekunden Bedenkzeit', t: 'atk', p: 2, g: ['quiz', 'schaetz'] },
-  snail: { e: '🐌', n: 'Schneckenpost', d: 'lässt die Frage Buchstabe für Buchstabe erscheinen', t: 'atk', p: 1, g: ['quiz', 'schaetz'] },
-  fifty: { e: '✂️', n: '50:50', d: 'streicht bei dir zwei falsche Antworten', t: 'self', p: 2, g: ['quiz'] },
-  double: { e: '✖️', n: 'Doppelt', d: 'verdoppelt deine Punkte für die nächste Antwort', t: 'self', p: 2, g: ['quiz', 'schaetz'] },
+  mix: { e: '🔀', n: 'Mischmaschine', d: 'wirbelt die Antwortknöpfe fünf Sekunden lang durcheinander', t: 'atk', p: 2, g: ['quiz', 'marke'] },
+  censor: { e: '🖍️', n: 'Zensur', d: 'schwärzt zwei Antworten der aktuellen Frage', t: 'atk', p: 2, g: ['quiz', 'marke'] },
+  whisper: { e: '👀', n: 'Einflüsterer', d: 'markiert eine falsche Antwort mit „Psst … die hier!“', t: 'atk', p: 1, g: ['quiz', 'marke'] },
+  thief: { e: '⏳', n: 'Zeitdieb', d: 'klaut fünf Sekunden Bedenkzeit', t: 'atk', p: 2, g: ['quiz', 'schaetz', 'farbe', 'hl', 'marke', 'nadel', 'zeit'] },
+  snail: { e: '🐌', n: 'Schneckenpost', d: 'lässt die Frage Buchstabe für Buchstabe erscheinen (bei Marken: Hinweise kommen später)', t: 'atk', p: 1, g: ['quiz', 'schaetz', 'marke'] },
+  fifty: { e: '✂️', n: '50:50', d: 'streicht bei dir zwei falsche Antworten', t: 'self', p: 2, g: ['quiz', 'marke'] },
+  double: { e: '✖️', n: 'Doppelt', d: 'verdoppelt deine Punkte für die nächste Antwort', t: 'self', p: 2, g: ['quiz', 'schaetz', 'farbe', 'hl', 'marke', 'nadel'] },
   keyswap: { e: '🔢', n: 'Zahlendreher', d: 'vertauscht sieben Sekunden lang die Zifferntasten', t: 'atk', p: 2, g: ['schaetz', 'rechnen', 'merk'] },
   wind: { e: '💨', n: 'Windstoß', d: 'pustet den Ball des Ziels quer über die Bahn', t: 'atk', p: 2, g: ['golf'] },
   rock: { e: '🪨', n: 'Felsbrocken', d: 'legt 20 Sekunden lang einen Felsen vor das Loch des Ziels', t: 'atk', p: 2, g: ['golf'] },
@@ -2432,7 +3516,15 @@ const ITEMS = {
   reset: { e: '🔙', n: 'Zurück auf Start', d: 'setzt den Ball des Ziels zurück an den Abschlag', t: 'atk', p: 3, g: ['golf'] },
   magnet: { e: '🧲', n: 'Magnetloch', d: 'dein Loch zieht 20 Sekunden lang den Ball an', t: 'self', p: 2, g: ['golf'] },
   mulligan: { e: '↩️', n: 'Mulligan', d: 'macht deinen letzten Schlag rückgängig', t: 'self', p: 3, g: ['golf'] },
-  spin: { e: '🌍', n: 'Weltenbummler', d: 'dreht den Globus des Ziels wild herum', t: 'atk', p: 1, g: ['laender'] }
+  spin: { e: '🌍', n: 'Weltenbummler', d: 'dreht den Globus des Ziels wild herum', t: 'atk', p: 1, g: ['laender', 'nadel'] },
+  quake: { e: '📳', n: 'Erdbeben', d: 'verschiebt die gesetzte Nadel des Ziels um Hunderte Kilometer', t: 'atk', p: 2, g: ['nadel'] },
+  shut: { e: '🫣', n: 'Augen zu', d: 'das Ziel sieht die nächste Farbe nur eine Sekunde lang', t: 'atk', p: 2, g: ['farbe'] },
+  sliders: { e: '🎚️', n: 'Reglersalat', d: 'würfelt die Farbregler des Ziels durcheinander und versteckt ihre Namen', t: 'atk', p: 2, g: ['farbe'] },
+  flip: { e: '🙃', n: 'Kopfstand', d: 'vertauscht die Höher/Tiefer-Knöpfe des Ziels und stellt die Karten auf den Kopf', t: 'atk', p: 2, g: ['hl'] },
+  blind: { e: '🙈', n: 'Augenbinde', d: 'versteckt beim nächsten Zug des Ziels alle Jahreszahlen', t: 'atk', p: 3, g: ['zeit'] },
+  banana: { e: '🍌', n: 'Bananenschale', d: 'lässt das Ziel sechs Sekunden lang wild rutschen', t: 'atk', p: 2, g: ['sumo'] },
+  superpush: { e: '💥', n: 'Superstoß', d: 'dein nächster Stoß ist fast doppelt so stark', t: 'self', p: 2, g: ['sumo'] },
+  gust: { e: '🌬️', n: 'Böe', d: 'wirbelt den Vogel des Ziels durch die Luft', t: 'atk', p: 2, g: ['flappy'] }
 };
 const ITEM_KEYS = Object.keys(ITEMS);
 const itemFits = (k, gid) => !ITEMS[k].g || ITEMS[k].g.includes(gid);
@@ -2441,6 +3533,14 @@ const LIVE_RULES = {
   golf: 'Drei Bahnen. Rollt über die ?-Kisten auf der Bahn, um Perks zu bekommen, und für ein Birdie gibt es einen extra. Die halbdurchsichtigen Bälle sind die der anderen.',
   quiz: 'Alle bekommen dieselbe Frage zur selben Zeit. Nach jeder Frage seht ihr, wer was getippt hat. Schnelle richtige Antworten bringen mehr Punkte, drei richtige in Folge einen Perk.',
   schaetz: 'Alle schätzen gleichzeitig dieselbe Zahl. Danach seht ihr alle Tipps auf einem Zahlenstrahl. Ein Volltreffer bringt einen Perk.',
+  sumo: 'Alle auf eine Plattform! Steuer mit dem Finger und ramm die anderen mit „Stoß“ über den Rand. Die Plattform schrumpft. Wer zuletzt steht, gewinnt die Runde. Drei Runden.',
+  tron: 'Jeder zieht eine Leuchtspur. Wer in eine Spur oder die Wand fährt, ist raus. Links oder rechts tippen zum Abbiegen. Drei Runden.',
+  flappy: 'Alle fliegen gleichzeitig durch denselben Parcours, die anderen Vögel siehst du halb durchsichtig. Wer am längsten durchhält, gewinnt die Runde. Zwei Runden.',
+  zeit: 'Ein gemeinsamer Zeitstrahl für alle: Ihr seid reihum dran und ordnet je ein Ereignis ein. Zwei Fehler und du bist raus. Wer zuletzt übrig ist, gewinnt, und jeder Treffer bringt Punkte.',
+  farbe: 'Alle sehen dieselbe Farbe und mischen sie gleichzeitig nach. Danach liegen alle Mischungen nebeneinander, und man sieht, wer am nächsten dran war.',
+  hl: 'Alle bekommen dasselbe Duell. Danach seht ihr, wer auf höher und wer auf tiefer getippt hat. Schnell und richtig bringt am meisten.',
+  marke: 'Alle raten dieselbe Marke. Die Hinweise kommen nach und nach, wer früher richtig tippt, bekommt mehr. Danach seht ihr, wer was nach wie vielen Hinweisen getippt hat.',
+  nadel: 'Alle bekommen denselben Ort. Setzt eure Nadel auf dem Globus, danach steckt jede Nadel auf einem gemeinsamen Globus. Unter 100 km gibt es einen Perk.',
   laender: 'Errate das gesuchte Land. Jeder Tipp zeigt, wie weit du entfernt bist. Je röter, desto heißer. Wer unter 1000 km kommt, bekommt einen Perk.'
 };
 const PHASE_LABEL = { lobby: 'wartet auf den Start', countdown: 'startet gleich', play: 'läuft gerade', results: 'Zwischenstand', final: 'Siegerehrung' };
@@ -2450,7 +3550,7 @@ function storeAns(from, d) {
   if (typeof from !== 'string' || !isObj(d)) return; const q = Number(d.q); if (!(Number.isInteger(q) && q >= 0 && q < 20)) return;
   const a = Number(d.a); if (!Number.isFinite(a)) return;
   const key = Number(d.r) + ':' + Number(d.gi); const A = P.ans[key] = P.ans[key] || {}; const Q = A[q] = A[q] || {};
-  Q[from] = { a, ok: !!d.ok, pts: clamp(Math.round(Number(d.pts) || 0), 0, 2000), tot: clamp(Math.round(Number(d.tot) || 0), 0, 3000), s: clamp(Number(d.s) || 0, 0, 1) };
+  Q[from] = { a, ok: !!d.ok, pts: clamp(Math.round(Number(d.pts) || 0), 0, 2000), tot: clamp(Math.round(Number(d.tot) || 0), 0, 3000), s: clamp(Number(d.s) || 0, 0, 1), b: Number.isFinite(Number(d.b)) && d.b !== null && d.b !== '' ? Number(d.b) : null };
   if (S.ctx && S.ctx.alive && S.ctx.onAns) S.ctx.onAns();
 }
 const fxTimers = {};
@@ -2481,7 +3581,7 @@ function partyCard() {
   const ok = partyAvailable();
   return h('section', { class: 'party-card' },
     h('div', { class: 'sec-head' }, h('h2', null, 'Live-Party'), P.code ? h('span', { class: 'live' }, `du bist in ${P.code}`) : h('span', { class: 'fine' }, 'alle gleichzeitig')),
-    h('p', { class: 'fine' }, 'Alle spielen im selben Moment dieselbe Runde. Beim Quiz seht ihr nach jeder Frage, wer was getippt hat. Perks gibt es zum Start, nach jeder Runde und für starke Aktionen, und damit verpasst ihr euch Tomaten, Zensur, Felsbrocken und mehr.'),
+    h('p', { class: 'fine' }, 'Alle spielen im selben Moment dieselbe Runde. Bei Quiz, Schätzen, Farben, Höher-tiefer, Marken und Nadelstich seht ihr nach jeder Runde, wer was getippt hat, und den Zeitstrahl spielt ihr reihum. Perks gibt es zum Start, nach jeder Runde und für starke Aktionen, und damit verpasst ihr euch Tomaten, Zensur, Felsbrocken und mehr.'),
     P.code ? h('button', { class: 'btn primary lg', type: 'button', onclick: () => openPartyView() }, `Zurück zur Party ${P.code}`) : null,
     !P.code && open.length ? h('div', { class: 'people' }, open.map(o => h('div', { class: 'person' }, h('span', { class: 'em' }, '🎉'), h('span', { class: 'person-t' }, h('b', null, o.n), h('span', null, `Code ${o.c} · ${o.k} dabei · ${PHASE_LABEL[o.ph] || ''}`)), h('button', { class: 'btn sm primary', type: 'button', disabled: !ok, onclick: () => partyJoin(o.c) }, 'Rein da')))) : null,
     !P.code ? h('div', { class: 'row' }, h('button', { class: 'btn primary', type: 'button', disabled: !ok, onclick: partyCreate }, '🎉 Party eröffnen'), h('div', { class: 'code-in' }, codeIn, h('button', { class: 'btn', type: 'button', disabled: !ok, onclick: join }, 'Beitreten'))) : null,
@@ -2521,6 +3621,9 @@ async function partyConnect(code) {
   ch.on('broadcast', { event: 'atk' }, (msg) => { if (P.ch === ch) onAtk(msg.payload || {}); });
   ch.on('broadcast', { event: 'hit' }, (msg) => { if (P.ch === ch) onHit(msg.payload || {}); });
   ch.on('broadcast', { event: 'ans' }, (msg) => { const d = msg.payload || {}; if (P.ch === ch) storeAns(d.from, d); });
+  ch.on('broadcast', { event: 'ag' }, (msg) => { const d = msg.payload || {}; if (P.ch === ch && P.st && typeof d.from === 'string' && Number(d.gi) === P.st.gi && Number(d.r) === P.st.round && S.ctx && S.ctx.alive && S.ctx.onNet && P.mounted === P.st.round + ':' + P.st.gi) S.ctx.onNet(d.from, d); });
+  ch.on('broadcast', { event: 'aout' }, (msg) => { const d = msg.payload || {}; if (P.ch === ch) arenaOut(d.from, d); });
+  ch.on('broadcast', { event: 'zm' }, (msg) => { const d = msg.payload || {}; if (P.ch === ch) zeitMove(d.from, d); });
   ch.on('broadcast', { event: 'ball' }, (msg) => { const d = msg.payload || {}; if (typeof d.from === 'string') P.ghosts[d.from] = { gi: Number(d.gi), r: Number(d.r), h: Number(d.h), x: Number(d.x), y: Number(d.y), t: Date.now() }; });
   S.view = 'party'; try { history.replaceState(null, '', location.pathname + '#party-' + code); } catch (e) {}
   partyRender(); window.scrollTo(0, 0);
@@ -2551,9 +3654,14 @@ function cleanState(d) {
   const games = Array.isArray(d.games) ? d.games.filter(g => GAME[g]).slice(0, 8) : []; if (!games.length) return null;
   const seeds = Array.isArray(d.seeds) ? d.seeds.map(x => Number(x) >>> 0) : []; if (seeds.length < games.length) return null;
   const results = {};
-  if (isObj(d.results)) for (const gi of Object.keys(d.results)) { if (!/^\d$/.test(gi) || !isObj(d.results[gi])) continue; results[gi] = {}; for (const [u, r] of Object.entries(d.results[gi])) { const x = res(r); if (x && u.length < 80) results[gi][u] = { p: x.p, d: x.d }; } }
+  if (isObj(d.results)) for (const gi of Object.keys(d.results)) { if (!/^\d$/.test(gi) || !isObj(d.results[gi])) continue; results[gi] = {}; for (const [u, r] of Object.entries(d.results[gi])) { const x = res(r); if (x && u.length < 80) results[gi][u] = { p: x.p, d: x.d, x: cleanX(r && r.x) }; } }
   const gi = clamp(Number(d.gi) || 0, 0, games.length - 1);
-  let sub = null; if (isObj(d.sub) && ['ask', 'rev', 'end'].includes(d.sub.ph) && Number.isInteger(Number(d.sub.i)) && Number(d.sub.i) >= 0 && Number(d.sub.i) < 20) sub = { i: Number(d.sub.i), ph: d.sub.ph, rem: clamp(Number(d.sub.rem) || 0, 0, 60000) };
+  let sub = null; if (isObj(d.sub) && ['pre', 'ask', 'rev', 'end'].includes(d.sub.ph) && Number.isInteger(Number(d.sub.i)) && Number(d.sub.i) >= 0 && Number(d.sub.i) < (d.sub.z ? 600 : 20)) {
+    sub = { i: Number(d.sub.i), ph: d.sub.ph, rem: clamp(Number(d.sub.rem) || 0, 0, 90000) };
+    if (d.sub.z) { const nd = Array.isArray(d.qs) ? Math.min(80, d.qs.length) : 1; cleanZeitSub(d.sub, sub, Math.max(1, nd)); }
+    const ids = (x) => Array.isArray(x) ? x.filter(v => typeof v === 'string' && v.length < 80).slice(0, 12) : null;
+    if (!d.sub.z && ids(d.sub.pl)) { sub.pl = ids(d.sub.pl); sub.out = ids(d.sub.out) || []; sub.win = ids(d.sub.win) || []; sub.tot = {}; if (isObj(d.sub.tot)) for (const [k, v] of Object.entries(d.sub.tot)) if (k.length < 80) sub.tot[k] = clamp(Math.round(Number(v) || 0), 0, 500); sub.max = clamp(Math.round(Number(d.sub.max) || 0), 0, 500); }
+  }
   const qs = d.qs ? cleanQs(games[gi], d.qs) : null;
   return { v: Number(d.v) || 0, code: d.code, name: String(d.name || 'Party').slice(0, 30), host: typeof d.host === 'string' ? d.host : '', phase: ['lobby', 'countdown', 'play', 'results', 'final'].includes(d.phase) ? d.phase : 'lobby', games, seeds, gi, rem: clamp(Number(d.rem) || 0, 0, 900000), results, tid: typeof d.tid === 'string' ? d.tid.slice(0, 40) : null, round: Number(d.round) || 1, sub, qs };
 }
@@ -2583,12 +3691,14 @@ function partyTick() {
   const cd = $('#cd-num'); if (cd) cd.textContent = Math.max(1, Math.ceil((P.localEnd - now) / 1000));
   const nx = $('#nx-num'); if (nx) nx.textContent = Math.max(0, Math.ceil((P.localEnd - now) / 1000));
 }
-function prepGame(st) { const gid = st.games[st.gi]; st.qs = SYNC[gid] ? syncPayload(gid, st.seeds[st.gi]) : null; st.sub = null; }
+function prepGame(st) { const gid = st.games[st.gi]; st.qs = SYNC[gid] || TURN[gid] ? syncPayload(gid, st.seeds[st.gi]) : null; st.sub = null; P.zMove = null; }
 function hostTick(now) {
   const st = P.st; let changed = false; const gid = st.games[st.gi];
   if (st.phase === 'countdown' && now >= P.hostEnd) {
     st.phase = 'play'; P.hostEnd = now + LIVE_CAP[gid] * 1000; changed = true;
     if (SYNC[gid] && st.qs) { st.sub = { i: 0, ph: 'ask', rem: 0 }; P.subEnd = now + SYNC[gid].ask; P.subLocalEnd = P.subEnd; }
+    if (ARENA[gid]) { st.sub = { i: 0, ph: 'pre', rem: 0, pl: arenaPlayers(), out: [], win: [], tot: {}, max: 0 }; P.subEnd = now + ARENA[gid].pre; P.subLocalEnd = P.subEnd; }
+    if (TURN[gid] && st.qs) { const pl = shuffleMath(arenaPlayers()); st.sub = { z: 1, i: 0, ph: 'pre', rem: 0, pl, out: [], cur: pl[0] || S.me.id, tl: [0], card: 1, nx: 2, sk: {}, ok: {}, last: null, zt: null }; P.zMove = null; P.subEnd = now + TURN[gid].pre; P.subLocalEnd = P.subEnd; }
   } else if (st.phase === 'play') {
     const ids = Object.keys(P.members); const r = st.results[st.gi] || {};
     if ((ids.length && ids.every(id => r[id])) || now >= P.hostEnd + 2500) { st.phase = 'results'; P.hostEnd = now + 10000; changed = true; }
@@ -2600,6 +3710,14 @@ function hostTick(now) {
         changed = true;
       }
       if (changed) { P.subLocalEnd = P.subEnd; st.v++; sendState(); if (S.ctx && S.ctx.alive && S.ctx.sync) S.ctx.sync(st.sub); hudSoon(); return; }
+    } else if (TURN[gid] && st.sub && st.sub.z && st.sub.ph !== 'end') {
+      if (zeitHost(now, st)) { P.subLocalEnd = P.subEnd; st.v++; sendState(); if (S.ctx && S.ctx.alive && S.ctx.sync) S.ctx.sync(st.sub); hudSoon(); return; }
+    } else if (ARENA[gid] && st.sub && st.sub.pl && st.sub.ph !== 'end') {
+      const cfg = ARENA[gid]; const sb = st.sub;
+      if (sb.ph === 'pre' && now >= P.subEnd) { sb.ph = 'ask'; P.subEnd = now + cfg.cap; changed = true; }
+      else if (sb.ph === 'ask') { const alive = sb.pl.filter(id => !sb.out.includes(id) && P.members[id]); if (alive.length <= (sb.pl.length > 1 ? 1 : 0) || now >= P.subEnd) { arenaScore(sb, alive); sb.ph = 'rev'; P.subEnd = now + cfg.rev; changed = true; } }
+      else if (sb.ph === 'rev' && now >= P.subEnd) { if (sb.i + 1 < cfg.rounds) { sb.i++; sb.ph = 'pre'; sb.out = []; sb.win = []; sb.pl = arenaPlayers(); P.subEnd = now + cfg.pre; } else { sb.ph = 'end'; P.subEnd = now; } changed = true; }
+      if (changed) { P.subLocalEnd = P.subEnd; st.v++; sendState(); if (S.ctx && S.ctx.alive && S.ctx.sync) S.ctx.sync(sb); hudSoon(); return; }
     }
   } else if (st.phase === 'results' && now >= P.hostEnd) {
     if (st.gi + 1 < st.games.length) { st.gi++; st.phase = 'countdown'; P.hostEnd = now + 6000; prepGame(st); } else { st.phase = 'final'; P.hostEnd = now; st.qs = null; st.sub = null; }
@@ -2640,11 +3758,11 @@ function onResult(d, local) {
   const st = P.st; if (!st || !d || typeof d.from !== 'string') return;
   if (Number(d.round) !== st.round) return; const gi = Number(d.gi); if (!(gi >= 0 && gi < st.games.length)) return;
   const x = res({ p: d.p, d: d.d }); if (!x) return;
-  (st.results[gi] = st.results[gi] || {})[d.from] = { p: x.p, d: x.d };
+  (st.results[gi] = st.results[gi] || {})[d.from] = { p: x.p, d: x.d, x: cleanX(d.x) };
   if (P.isHost) { st.v++; sendState(); }
   if (!local) partyRender();
 }
-function roundRank(gi) { const r = P.st.results[gi] || {}; return withRanks(Object.entries(r).map(([id, x]) => ({ id, p: x.p, d: x.d })).sort((a, b) => b.p - a.p)).map(x => ({ ...x, pts: PLACE_PTS[x.rank - 1] ?? 1 })); }
+function roundRank(gi) { const r = P.st.results[gi] || {}; return withRanks(Object.entries(r).map(([id, x]) => ({ id, p: x.p, d: x.d, x: x.x || '' })).sort((a, b) => b.p - a.p)).map(x => ({ ...x, pts: PLACE_PTS[x.rank - 1] ?? 1 })); }
 function partyTotals() {
   const st = P.st; const t = {}; const add = (id) => (t[id] = t[id] || { id, pts: 0, raw: 0, per: [] });
   Object.keys(P.members).forEach(add);
@@ -2659,12 +3777,13 @@ function recordResult(gid, p, d, tid, gi) {
     x.recent.unshift({ g: gid, p, d, at: now, m: 'p', r: pb }); x.recent = x.recent.slice(0, 20);
   });
 }
+const cleanX = (x) => typeof x === 'string' ? x.replace(/[^gyx|]/g, '').slice(0, 41) : '';
 function liveFinish(key, gid, r) {
   const st = P.st; if (!st) return; const [round, gi] = key.split(':').map(Number);
-  const p = clamp(Math.round(Number(r.p) || 0), 0, 1000); const d = String(r.d || '').slice(0, 40);
-  P.myDone[key] = { p, d }; P.progOut = `✓ ${p}`;
-  pbcast('result', { gi, round, p, d });
-  if (st.round === round) onResult({ gi, round, p, d, from: S.me.id }, true);
+  const p = clamp(Math.round(Number(r.p) || 0), 0, 1000); const d = String(r.d || '').slice(0, 40); const x = cleanX(r.x);
+  P.myDone[key] = { p, d, x }; P.progOut = `✓ ${p}`;
+  pbcast('result', { gi, round, p, d, x });
+  if (st.round === round) onResult({ gi, round, p, d, x, from: S.me.id }, true);
   recordResult(gid, p, d, st.tid, gi);
   partyRender();
 }
@@ -2689,14 +3808,16 @@ function mountLive() {
   convertInv(gid);
   hudRender();
   let play = G.play;
-  if (SYNC[gid] && st.qs) { ctx.qs = st.qs; play = gid === 'quiz' ? playQuizLive : playSchaetzLive; }
+  if ((SYNC[gid] || TURN[gid]) && st.qs) { ctx.qs = st.qs; play = LIVE_PLAY[gid] || G.play; }
+  if (ARENA[gid]) ctx.arena = arenaApi(gid);
   try { play(ctx); } catch (e) { console.error(e); }
 }
+const LIVE_PLAY = { quiz: playQuizLive, schaetz: playSchaetzLive, farbe: playFarbeLive, hl: playHLLive, marke: playMarke, nadel: playNadel, zeit: playZeitLive };
 function liveApi(gi, round, gid) {
   return {
     progress(t) { P.progOut = String(t).slice(0, 40); hudSoon(); },
-    earn(reason, max = 4) { if (P.earnedGame >= max) return false; const got = grantItems(1, gid); if (!got.length) return false; P.earnedGame++; toast(`🎁 ${reason}: ${ITEMS[got[0]].e} ${ITEMS[got[0]].n}`); return true; },
-    collect() { if (P.inv.length >= INV_MAX) { toast('Alle drei Plätze sind voll. Setz erst etwas ein!'); return false; } const got = grantItems(1, gid); if (got.length) toast(`📦 Kiste: ${ITEMS[got[0]].e} ${ITEMS[got[0]].n} – ${ITEMS[got[0]].d}`); return got.length > 0; },
+    earn(reason, max = 4) { if (P.earnedGame >= max) return false; if (P.inv.length >= INV_MAX) { invFull(); return false; } const got = grantItems(1, gid); if (!got.length) return false; P.earnedGame++; toast(`🎁 ${reason}: ${ITEMS[got[0]].e} ${ITEMS[got[0]].n}`); return true; },
+    collect() { if (P.inv.length >= INV_MAX) { invFull(); return false; } const got = grantItems(1, gid); if (got.length) toast(`📦 Kiste: ${ITEMS[got[0]].e} ${ITEMS[got[0]].n} – ${ITEMS[got[0]].d}`); return got.length > 0; },
     ball(hNo, x, y, moving, force) {
       const now = Date.now();
       if (force || (moving && now - P.ballLast > 250) || (!moving && P.ballMoving)) { P.ballLast = now; pbcast('ball', { gi, r: round, h: hNo, x: Math.round(x), y: Math.round(y) }); }
@@ -2752,7 +3873,7 @@ function fxClass(el, cls, ms) { if (!el) return; el.classList.add(cls); clearTim
 function fxWord(e, text) { const w = h('div', { class: 'fx-small' }, e, h('small', null, text)); $('#fx').append(w); setTimeout(() => w.remove(), 1400); }
 function applyEffect(k, from) {
   const w = $('#fxw') || $('#shell'); const it = ITEMS[k];
-  toast(`${it.e} ${from} hat dich erwischt!`, 'big');
+  toast(`${it.e} ${from} hat dich erwischt!`);
   if (k === 'tomato') playTaunt('tomato', from, true);
   else if (k === 'dizzy') { bump(w, 'dizzy'); setTimeout(() => w.classList.remove('dizzy'), 3300); }
   else if (k === 'mirror') fxClass(w, 'mirror', 5000);
@@ -2765,8 +3886,17 @@ function applyEffect(k, from) {
 }
 
 /* ---------- Party-Ansichten ---------- */
+/* Im Live-Spiel keine schwebenden Popups: Meldungen landen kurz in der Zeile unter der Spielerleiste */
+function hudNote(text, kind) {
+  if (!$('#hud') || !P.code) return false;
+  P.note = { t: String(text), big: kind === 'big', until: Date.now() + (kind === 'big' ? 3200 : 2600) };
+  const f = $('#feed'); if (f && P.pick < 0) { f.textContent = P.note.t; f.className = 'feed note' + (P.note.big ? ' big' : ''); }
+  clearTimeout(P.noteT); P.noteT = setTimeout(() => { const g = $('#feed'); if (g && P.pick < 0) { g.className = 'feed'; g.textContent = P.feed || ''; } }, P.note.until - Date.now() + 30);
+  return true;
+}
+function invFull() { const el = $('#hud .inv'); if (el) bump(el); const now = Date.now(); if (now - (P.fullAt || 0) < 8000) return; P.fullAt = now; toast('🎒 Alle Plätze voll – setz erst einen Perk ein.'); }
 function hudSoon() { if (P.hudQ) return; P.hudQ = setTimeout(() => { P.hudQ = null; hudRender(); }, 350); }
-function feedLine(t) { P.feed = t; const f = $('#feed'); if (f && P.pick < 0) f.textContent = t; }
+function feedLine(t) { P.feed = t; P.note = null; const f = $('#feed'); if (f && P.pick < 0) { f.className = 'feed'; f.textContent = t; } }
 function updClock() { const el = $('#hud-time'); if (!el || !P.st) return; const s = Math.max(0, Math.ceil((P.localEnd - Date.now()) / 1000)); el.textContent = P.st.phase === 'play' ? mmss(s) : '0:00'; el.classList.toggle('low', P.st.phase === 'play' && s <= 10); }
 function hudRender() {
   const hud = $('#hud'); if (!hud || !P.st) return; const st = P.st; const gid = st.games[st.gi]; const r = st.results[st.gi] || {};
@@ -2782,7 +3912,7 @@ function hudRender() {
   hud.replaceChildren(
     h('div', { class: 'hud-top' }, h('span', { class: 'hud-time', id: 'hud-time' }, ''), h('span', { class: 'hud-round' }, `${st.gi + 1}/${st.games.length} · ${GAME[gid].name}`), Date.now() < P.shieldUntil ? h('span', { title: 'Schild aktiv', style: 'font-size:22px' }, '🛡️') : null, inv),
     strip,
-    h('div', { class: 'feed' + (P.pick >= 0 ? ' pick' : ''), id: 'feed' }, P.pick >= 0 ? `${ITEMS[P.inv[P.pick]].e} Wen willst du treffen? Tipp auf einen Namen. (Nochmal auf die Waffe tippen bricht ab.)` : (P.feed || (P.inv.length ? 'Tipp oben rechts auf einen Perk, um ihn einzusetzen.' : 'Neue Perks gibt es für starke Aktionen und nach jeder Runde.'))));
+    h('div', { class: 'feed' + (P.pick >= 0 ? ' pick' : (P.note && Date.now() < P.note.until ? ' note' + (P.note.big ? ' big' : '') : '')), id: 'feed' }, P.pick < 0 && P.note && Date.now() < P.note.until ? P.note.t : P.pick >= 0 ? `${ITEMS[P.inv[P.pick]].e} Wen willst du treffen? Tipp auf einen Namen. (Nochmal auf die Waffe tippen bricht ab.)` : (P.feed || (P.inv.length ? 'Tipp oben rechts auf einen Perk, um ihn einzusetzen.' : 'Neue Perks gibt es für starke Aktionen und nach jeder Runde.'))));
   updClock();
 }
 function renderWaiting() {
@@ -2829,11 +3959,13 @@ function viewPartyLobby() {
     h('section', { class: 'card' }, h('div', { class: 'sec-head' }, h('h2', null, 'Spiele'), h('span', { class: 'fine' }, P.isHost ? 'Tippen zum Ändern, bis zu sechs' : `${st.games.length} Runden`)), lobbyGames(),
       h('p', { class: 'fine', style: 'margin-top:10px' }, `Gesamtdauer höchstens etwa ${Math.ceil(st.games.reduce((a, g) => a + LIVE_CAP[g] + 16, 0) / 60)} Minuten. Minigolf läuft live mit drei Bahnen, und ihr seht die Bälle der anderen.`)),
     h('section', { class: 'card' }, h('div', { class: 'sec-head' }, h('h2', null, 'Waffenkammer')),
-      h('p', { class: 'fine', style: 'margin-bottom:12px' }, 'Du hast drei Plätze für Perks. Jeder bekommt zum Start einen. Nach jeder Runde gibt es einen zufälligen dazu, der Letzte bekommt zwei. Extra-Perks gibt es für starke Aktionen: drei richtige Antworten in Folge, ein Volltreffer beim Schätzen, ein Birdie oder die ?-Kisten auf der Minigolfbahn. Wer hinten liegt, zieht die fieseren Sachen.'),
-      [['Überall', k => !ITEMS[k].g], ['Quiz & Schätzen', k => ITEMS[k].g && ITEMS[k].g.some(g => g === 'quiz' || g === 'schaetz')], ['Rechnen & Merken', k => k === 'keyswap'], ['Minigolf', k => ITEMS[k].g && ITEMS[k].g.includes('golf')], ['Länderjagd', k => ITEMS[k].g && ITEMS[k].g.includes('laender')]].map(([title, f]) => {
-        const ks = ITEM_KEYS.filter(k => f(k) && (title !== 'Quiz & Schätzen' || k !== 'keyswap')); if (!ks.length) return null;
-        return [h('div', { class: 'il-head' }, title), h('div', { class: 'items-legend' }, ks.map(k => h('div', { class: 'il' }, h('span', null, ITEMS[k].e), h('span', null, h('b', null, ITEMS[k].n), ITEMS[k].t === 'self' ? h('span', { class: 'tag' }, 'für dich') : ITEMS[k].t === 'all' ? h('span', { class: 'tag d' }, 'alle') : null, ' ', ITEMS[k].d))))];
-      })),
+      h('p', { class: 'fine', style: 'margin-bottom:12px' }, 'Du hast drei Plätze für Perks. Jeder bekommt zum Start einen. Nach jeder Runde gibt es einen zufälligen dazu, der Letzte bekommt zwei. Extra-Perks gibt es für starke Aktionen: drei richtige Antworten in Folge, ein Volltreffer beim Schätzen, ein Birdie, die ?-Kisten auf der Minigolfbahn oder ein Rundensieg in den Live-Spielen. Wer hinten liegt, zieht die fieseren Sachen.'),
+      (() => { const groups = [['Überall', k => !ITEMS[k].g], ['Rechnen & Merken', k => k === 'keyswap'], ['Quiz, Schätzen & Marken', k => ITEMS[k].g.some(g => ['quiz', 'schaetz', 'marke'].includes(g))], ['Zeitstrahl', k => ITEMS[k].g.includes('zeit')], ['Farbgedächtnis', k => ITEMS[k].g.includes('farbe')], ['Höher oder tiefer', k => ITEMS[k].g.includes('hl')], ['Minigolf', k => ITEMS[k].g.includes('golf')], ['Rempelring', k => ITEMS[k].g.includes('sumo')], ['Flatterflug', k => ITEMS[k].g.includes('flappy')], ['Globus-Spiele', k => ITEMS[k].g.some(g => g === 'laender' || g === 'nadel')]];
+        const left = new Set(ITEM_KEYS);
+        return groups.map(([title, f]) => {
+          const ks = [...left].filter(k => f(k)); ks.forEach(k => left.delete(k)); if (!ks.length) return null;
+          return [h('div', { class: 'il-head' }, title), h('div', { class: 'items-legend' }, ks.map(k => h('div', { class: 'il' }, h('span', null, ITEMS[k].e), h('span', null, h('b', null, ITEMS[k].n), ITEMS[k].t === 'self' ? h('span', { class: 'tag' }, 'für dich') : ITEMS[k].t === 'all' ? h('span', { class: 'tag d' }, 'alle') : null, ' ', ITEMS[k].d))))];
+        }); })()),
     P.isHost ? h('button', { class: 'btn primary lg wide', type: 'button', onclick: partyStart }, ids.length > 1 ? `Los geht’s mit ${ids.length} Leuten` : 'Alleine starten (zum Testen)') : h('div', { class: 'empty' }, `Warte, bis ${pname(st.host)} startet …`));
 }
 function viewPartyCountdown() {
@@ -2843,6 +3975,7 @@ function viewPartyCountdown() {
     P.inv.length ? h('p', { class: 'fine' }, 'Deine Perks: ', P.inv.map(k => `${ITEMS[k].e} ${ITEMS[k].n}`).join(' · ')) : null,
     h('div', { class: 'cd-num', id: 'cd-num' }, Math.max(1, Math.ceil((P.localEnd - Date.now()) / 1000))), h('p', { class: 'fine' }, `Zeitlimit ${mmss(LIVE_CAP[g.id])}`));
 }
+function wordGrid(x) { return h('span', { class: 'wgrid', title: 'So hat sie oder er geraten' }, x.split('|').filter(Boolean).map(row => h('span', { class: 'wg-row' }, [...row].map(c => h('i', { class: 'wg-' + c }))))); }
 function totalsTable(tot, st) {
   return h('div', { class: 'tbl-wrap' }, h('table', null,
     h('thead', null, h('tr', null, h('th', null, '#'), h('th', null, 'Spieler'), st.games.map(gid => h('th', { class: 'num', title: GAME[gid].name }, GAME[gid].name.split(/[ -]/)[0])), h('th', { class: 'num' }, 'Punkte'))),
@@ -2854,7 +3987,7 @@ function viewPartyResults(final) {
   const st = P.st; const tot = partyTotals(); const g = GAME[st.games[st.gi]]; const rr = roundRank(st.gi);
   const parts = [h('div', { class: 'page-head' }, h('div', null, h('div', { class: 'eyebrow' }, final ? 'Siegerehrung' : `Runde ${st.gi + 1} von ${st.games.length}`), h('h1', { class: 'page-title' }, final ? st.name : g.name)), h('button', { class: 'btn ghost sm', type: 'button', onclick: () => partyLeave() }, 'Verlassen'))];
   if (final) parts.push(tot.length ? h('div', { class: 'podium', style: 'margin-inline:auto;width:100%' }, [1, 0, 2].map(k => { const x = tot[k]; if (!x) return h('div'); return h('div', { class: 'pod p' + (k + 1) }, h('span', { class: 'em' }, pemoji(x.id)), h('b', null, pname(x.id)), h('div', { class: 'pod-block' }, x.pts)); })) : null);
-  else parts.push(h('section', { class: 'card' }, rr.length ? h('ol', { class: 'rank' }, rr.map(x => h('li', { class: 'rr' + (x.id === S.me.id ? ' me' : '') }, posEl(x.rank), h('span', { class: 'rr-who' }, `${pemoji(x.id)} ${pname(x.id)} `, h('small', null, x.d)), h('span', { class: 'rr-p digits' }, `${x.p} · +${x.pts}`)))) : h('p', { class: 'fine' }, 'Niemand hat rechtzeitig fertig gespielt.')));
+  else parts.push(h('section', { class: 'card' }, rr.length ? h('ol', { class: 'rank' }, rr.map(x => h('li', { class: 'rr' + (x.id === S.me.id ? ' me' : '') }, posEl(x.rank), h('span', { class: 'rr-who' }, `${pemoji(x.id)} ${pname(x.id)} `, h('small', null, x.d), g.id === 'wort' && x.x ? wordGrid(x.x) : null), h('span', { class: 'rr-p digits' }, `${x.p} · +${x.pts}`)))) : h('p', { class: 'fine' }, 'Niemand hat rechtzeitig fertig gespielt.')));
   const lg = P.lastGrant; if (!final && lg && lg.key === st.round + ':' + st.gi) parts.push(h('section', { class: 'grant' }, h('div', { class: 'eyebrow' }, lg.n > 1 ? 'Trostpreis für den letzten Platz' : 'Deine Belohnung für die Runde'), lg.items.length ? h('div', { class: 'grant-items' }, lg.items.map(k => h('div', { class: 'gi' }, h('span', { class: 'gi-e' }, ITEMS[k].e), h('span', null, h('b', null, ITEMS[k].n), h('small', null, ITEMS[k].d))))) : h('p', { class: 'fine' }, 'Deine drei Plätze sind voll. Setz in der nächsten Runde etwas ein!')));
   parts.push(h('h2', { class: 'sec-title' }, final ? 'Endstand' : 'Zwischenstand'), totalsTable(tot, st));
   if (final) parts.push(h('div', { class: 'row' }, P.isHost ? h('button', { class: 'btn primary lg', type: 'button', onclick: partyAgain }, 'Neue Runde mit allen') : h('span', { class: 'fine' }, `${pname(st.host)} kann eine neue Runde starten.`), h('button', { class: 'btn lg', type: 'button', onclick: () => partyLeave() }, 'Party verlassen')));
