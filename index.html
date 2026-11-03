@@ -116,8 +116,8 @@ body.ingame .tabbar{display:none}
 .stat b{font-family:var(--f-mono);font-size:22px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
 .stat span{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
 
-.daily-dots{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
-@media (min-width:560px){.daily-dots{grid-template-columns:repeat(12,minmax(0,1fr))}}
+.daily-dots{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+@media (min-width:560px){.daily-dots{grid-template-columns:repeat(13,minmax(0,1fr))}}
 .dd{display:grid;justify-items:center;gap:4px;border:2px dashed var(--line);background:transparent;border-radius:12px;padding:8px 2px 6px;cursor:pointer;color:var(--ink-2)}
 .dd .ic svg{width:20px;height:20px}
 .dd.done{border-style:solid;border-color:var(--c);background:var(--c);color:var(--oc)}
@@ -479,8 +479,69 @@ tr.me td{background:color-mix(in oklab,var(--tomato) 9%,var(--surface))}
 .fx-small{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font-family:var(--f-display);font-size:clamp(28px,9vw,54px);color:var(--cobalt);text-shadow:3px 3px 0 var(--ink);text-align:center;animation:pop 1.3s ease forwards;white-space:nowrap}
 .fx-small small{display:block;font-family:var(--f-body);font-weight:800;font-size:15px;color:var(--ink);text-shadow:none}
 @media (prefers-reduced-motion:reduce){.bubble,.pchip.target{animation:none}.fxw{transition:none}}
+
+/* Live-Quiz & Schätzen */
+.stage{position:relative}
+.live-wrap,.hud,.game,.page,.qz,.sz,.lj,.zs,.hl,.mk,.fb,.rc{grid-template-columns:minmax(0,1fr)}
+.lj{justify-items:stretch}
+.ans-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:34px}
+.ans-chip{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:var(--surface-2);opacity:.35;filter:grayscale(1);transition:opacity .2s,transform .2s}
+.ans-chip.on{opacity:1;filter:none;background:color-mix(in oklab,var(--good) 22%,var(--surface));transform:scale(1.08)}
+.qz-opt{position:relative;flex-wrap:wrap;row-gap:6px}
+.qz-opt.picked{outline:3px solid var(--cobalt);outline-offset:2px;opacity:1}
+.qz-opt.gone{opacity:.25!important;text-decoration:line-through}
+.qz-opt.censored .opt-t{background:var(--ink);color:transparent;border-radius:4px;user-select:none}
+.psst{position:absolute;top:-10px;right:8px;background:var(--gold);color:var(--on-gold);font-size:11px;font-weight:800;padding:3px 8px;border-radius:99px;animation:pulse 1s ease-in-out infinite;pointer-events:none}
+.pickers{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+.picker{font-size:18px;line-height:1;background:color-mix(in oklab,var(--surface) 70%,transparent);border-radius:50%;width:28px;height:28px;display:grid;place-items:center}
+.qz-foot{min-height:24px}
+.mini-stand{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-size:13.5px;padding:10px 12px;border-radius:12px;background:var(--surface-2)}
+.ms b{font-size:15px}
+.ms small{color:var(--good);font-weight:800}
+.ms.me{color:var(--tomato);font-weight:700}
+.fly{position:absolute;left:50%;top:0;transform:translateX(-50%);font-family:var(--f-display);font-size:34px;color:var(--tomato);text-shadow:2px 2px 0 var(--ink);animation:flyup 1.3s ease forwards;pointer-events:none;z-index:5}
+@keyframes flyup{0%{opacity:0;transform:translate(-50%,10px) scale(.6)}20%{opacity:1;transform:translate(-50%,0) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40px)}}
+.nline{position:relative;height:132px;margin:6px 6px 0}
+.nl-axis{position:absolute;left:0;right:0;top:22px;height:4px;border-radius:99px;background:var(--line)}
+.nl-true{position:absolute;top:0;transform:translateX(-50%);display:grid;justify-items:center;font-size:26px;line-height:1}
+.nl-true::after{content:"";width:3px;height:110px;background:var(--good);border-radius:99px;margin-top:2px;opacity:.6}
+.nl-dot{position:absolute;transform:translateX(-50%);font-size:22px;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--surface);border:2px solid var(--line);animation:tin .3s ease}
+.nl-dot.me{border-color:var(--tomato)}
+.kp.scrambled .kp-k{--b:color-mix(in oklab,var(--violet) 30%,var(--surface-2))}
+
+/* Perks */
+.il-head{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:14px 0 8px}
+.il .tag{margin-left:6px}
+.grant{border:2px solid var(--gold);background:color-mix(in oklab,var(--gold) 14%,var(--surface));border-radius:18px;padding:14px;display:grid;gap:10px}
+.grant-items{display:grid;gap:8px}
+.gi{display:flex;gap:12px;align-items:center}
+.gi-e{font-size:34px;width:52px;height:52px;border-radius:14px;background:var(--surface);display:grid;place-items:center;flex:none;box-shadow:0 3px 0 var(--gold);animation:pop2 .5s ease}
+@keyframes pop2{0%{transform:scale(.3) rotate(-20deg)}70%{transform:scale(1.15) rotate(6deg)}100%{transform:none}}
+.gi small{display:block;color:var(--ink-2);font-size:12.5px}
+
+/* Länderjagd */
+.lj{display:grid;gap:10px;justify-items:center}
+.lj > *{width:100%}
+.lj-globe{position:relative;display:grid;justify-items:center}
+.lj-cv{touch-action:none;cursor:grab;border-radius:50%;max-width:100%}
+.lj-cv:active{cursor:grabbing}
+.lj-zoom{position:absolute;right:0;bottom:0;display:grid;gap:6px}
+.lj-zoom .btn{width:40px;height:40px;padding:0;font-size:20px}
+.lj-msg{min-height:2.9em}
+.lj-input{display:flex;gap:8px}
+.lj-input .inp{min-width:0;flex:1}
+.lj-sugg{display:flex;flex-wrap:wrap;gap:6px;min-height:0}
+.lj-s{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;font-weight:700;font-size:14px;cursor:pointer}
+.lj-s.used{opacity:.45;text-decoration:line-through}
+.lj-list{list-style:none;margin:0;padding:0;display:grid;gap:4px;max-height:260px;overflow-y:auto}
+.lj-li{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 10px;border-radius:10px;background:var(--surface);border:2px solid transparent;font-size:14px}
+.lj-li.last{border-color:var(--ink-2)}
+.lj-dot{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
+.lj-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lj-km{font-size:13px}
 </style>
 <script src="config.js"></script>
+<script src="fragen.js?v=3"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0"></script>
 </head>
 <body>
@@ -567,6 +628,7 @@ const ICONS = {
   gefuehl: '<circle cx="12" cy="14" r="7.5"/><path d="M12 14v-4M10 2.5h4M18.3 6.7l1.6-1.6"/>',
   rechnen: '<path d="M5 7h5M7.5 4.5v5M14 7h5M5 16.5h5M14.5 14.5l4 4M18.5 14.5l-4 4"/>',
   farbe: '<path d="M12 3c3.5 4.2 6 7.4 6 10.5a6 6 0 0 1-12 0C6 10.4 8.5 7.2 12 3z"/>',
+  laender: '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.6 4 5.8 4 9.5s-1.4 6.9-4 9.5c-2.6-2.6-4-5.8-4-9.5s1.4-6.9 4-9.5z"/>',
   merk: '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M6.5 10l1.5-1v6M11 9.5h2.4c.9 0 1.1 1.2.3 1.7L11 14.8h3M17 9h2l-1.2 2.2c1.5 0 1.6 2.8-.2 2.8H17"/>',
   grid: '<rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/>',
   trophy: '<path d="M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M9 17h6"/>',
@@ -746,7 +808,31 @@ const HL = [
 function hlFmt(v, f) {
   if (f === 'pop') return v >= 1e9 ? `${fmt(v / 1e9, 2)} Mrd.` : v >= 1e6 ? `${fmt(v / 1e6, v < 1e7 ? 1 : 0)} Mio.` : fmt(v);
   if (f === 'kg') return v < 1 ? `${fmt(v * 1000)} g` : v >= 1000 ? `${fmt(v / 1000, v < 10000 ? 1 : 0)} t` : `${fmtAuto(v)} kg`;
-  return `${fmt(v)} ${f}`;
+  return `${fmtAuto(v)} ${f}`;
+}
+
+/* Fragenkatalog aus fragen.js dazunehmen (fehlt die Datei, bleiben die eingebauten Fragen) */
+(function mergeFragen() {
+  const F = window.ZZ_FRAGEN || {};
+  const okStr = (x) => typeof x === 'string' && x.trim().length > 0;
+  const sq = new Set(QUIZ.map(q => q[0]));
+  if (Array.isArray(F.quiz)) for (const q of F.quiz) if (Array.isArray(q) && q.length === 5 && q.every(okStr) && new Set(q.slice(1)).size === 4 && !sq.has(q[0])) { sq.add(q[0]); QUIZ.push(q.map(x => x.slice(0, 220))); }
+  const se = new Set(EST.map(x => x.q));
+  if (Array.isArray(F.schaetz)) for (const x of F.schaetz) if (x && okStr(x.q) && Number(x.a) > 0 && !se.has(x.q)) { se.add(x.q); const o = { q: x.q.slice(0, 220), a: Number(x.a), u: String(x.u || '').slice(0, 20) }; if (x.yr) { o.yr = true; o.abs = Number(x.abs) || 30; } EST.push(o); }
+  const sz = new Set(EVENTS.map(x => x[0]));
+  if (Array.isArray(F.zeit)) for (const x of F.zeit) if (Array.isArray(x) && okStr(x[0]) && Number.isInteger(x[1]) && !sz.has(x[0])) { sz.add(x[0]); EVENTS.push([x[0].slice(0, 120), x[1]]); }
+  if (Array.isArray(F.hl)) for (const c of F.hl) if (c && okStr(c.k) && Array.isArray(c.items) && c.items.length > 3) HL.push({ k: c.k, what: String(c.what || ''), up: String(c.up || 'Mehr'), down: String(c.down || 'Weniger'), f: String(c.f || ''), items: c.items.filter(it => Array.isArray(it) && okStr(it[0]) && Number(it[1]) > 0) });
+})();
+/* Im Training zuerst Fragen, die man noch nicht gesehen hat */
+function pickFresh(ctx, key, pool, n, idOf) {
+  if (ctx.mode !== 'f') return ctx.R.shuffle(pool).slice(0, n);
+  const seen = new Set(lsGet('zz.seen.' + key, []));
+  let fresh = pool.filter(x => !seen.has(hash(idOf(x))));
+  if (fresh.length < n) { seen.clear(); fresh = pool.slice(); }
+  const pick = ctx.R.shuffle(fresh).slice(0, n);
+  pick.forEach(x => seen.add(hash(idOf(x))));
+  lsSet('zz.seen.' + key, [...seen].slice(-Math.floor(pool.length * 0.9)));
+  return pick;
 }
 
 const HOLES = [
@@ -775,7 +861,7 @@ const PLACE_PTS = [10, 7, 5, 3, 2];
 function makeCtx(root, seed, onDone) {
   const timers = new Set(), offs = []; let alive = true, rafId = 0, loops = [];
   const ctx = {
-    root, R: makeRng(seed), live: null, partial: null, effect: null,
+    root, R: makeRng(seed), live: null, partial: null, effect: null, mode: 'f', kp: null, sync: null, onAns: null, qs: null,
     progress(t) { if (ctx.live) ctx.live.progress(t); },
     after(ms, fn) { const t = setTimeout(() => { timers.delete(t); if (alive) fn(); }, ms); timers.add(t); return t; },
     every(ms, fn) { const t = setInterval(() => { if (alive) fn(); }, ms); timers.add(t); return t; },
@@ -793,15 +879,27 @@ function makeCtx(root, seed, onDone) {
   return ctx;
 }
 function keypad(ctx, onKey, { comma = false, ok = null } = {}) {
-  const kp = h('div', { class: 'kp' });
+  const kp = h('div', { class: 'kp' }); const digitBtns = {}; let perm = null, permT = 0;
   ['1', '2', '3', '4', '5', '6', '7', '8', '9', comma ? ',' : null, '0', '⌫'].forEach(k => {
     if (k === null) { kp.append(h('span')); return; }
-    kp.append(h('button', { class: 'btn kp-k', type: 'button', 'aria-label': k === '⌫' ? 'Löschen' : k, onclick: () => onKey(k) }, k));
+    const b = h('button', { class: 'btn kp-k', type: 'button', 'aria-label': k === '⌫' ? 'Löschen' : k, onclick: () => onKey(k) }, k);
+    if (/^\d$/.test(k)) digitBtns[k] = b; kp.append(b);
   });
   if (ok) kp.append(h('button', { class: 'btn primary lg kp-ok', type: 'button', onclick: () => onKey('OK') }, ok));
+  /* Zahlendreher: Ziffern wild vertauscht – auf dem Bildschirm und auf der Tastatur */
+  ctx.kp = {
+    scramble(ms) {
+      const kids = [...kp.children]; const slots = kids.map((c, i) => i).filter(i => /^\d$/.test(kids[i].textContent));
+      const sh = shuffleMath(slots); kids.forEach((c, i) => { c.style.order = String(i); });
+      Object.values(digitBtns).forEach((b, j) => { b.style.order = String(sh[j]); });
+      const d = shuffleMath('0123456789'.split('')); perm = {}; '0123456789'.split('').forEach((x, i) => { perm[x] = d[i]; });
+      kp.classList.add('scrambled'); clearTimeout(permT);
+      permT = setTimeout(() => { perm = null; kp.classList.remove('scrambled'); [...kp.children].forEach(c => { c.style.order = ''; }); }, ms);
+    }
+  };
   ctx.listen(window, 'keydown', e => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
-    if (/^[0-9]$/.test(e.key)) { onKey(e.key); e.preventDefault(); }
+    if (/^[0-9]$/.test(e.key)) { onKey(perm ? perm[e.key] : e.key); e.preventDefault(); }
     else if (comma && (e.key === ',' || e.key === '.')) onKey(',');
     else if (e.key === 'Backspace') { onKey('⌫'); e.preventDefault(); }
     else if (e.key === 'Enter' && ok) { onKey('OK'); e.preventDefault(); }
@@ -823,7 +921,7 @@ const GAMES = [
   { id: 'zeit', name: 'Zeitstrahl', cat: 'wissen', short: 'Sortiere Ereignisse in die Geschichte ein.',
     rules: 'Ordne jedes neue Ereignis an der richtigen Stelle in deinen Zeitstrahl ein. Drei Fehler und du bist raus. 15 richtig eingeordnete Ereignisse geben die volle Punktzahl.', play: playZeit },
   { id: 'hl', name: 'Höher oder tiefer', cat: 'wissen', short: 'Mehr oder weniger? Halte die Serie.',
-    rules: 'Du siehst einen Wert und tippst, ob der nächste größer oder kleiner ist: Einwohner, Berge, Flüsse, Bauwerke, Tiere. Ein Fehler beendet die Serie. 15 in Folge geben die volle Punktzahl.', play: playHL },
+    rules: 'Du siehst einen Wert und tippst, ob der nächste größer oder kleiner ist: Einwohner, Flächen, Berge, Flüsse, Bauwerke, Planeten, Tiere. Ein Fehler beendet die Serie. 15 in Folge geben die volle Punktzahl.', play: playHL },
   { id: 'golf', name: 'Minigolf', cat: 'geschick', short: 'Fünf Bahnen mit Wasser, Sand und Windmühle.',
     rules: 'Zieh irgendwo auf der Bahn nach hinten und lass los, um zu schlagen. Fünf Bahnen, höchstens acht Schläge pro Bahn. Wasser kostet einen Strafschlag. Jeder Schlag unter Par bringt 70 Bonuspunkte.', play: playGolf },
   { id: 'kreis', name: 'Perfekter Kreis', cat: 'geschick', short: 'Zeichne den rundesten Kreis deines Lebens.',
@@ -837,7 +935,9 @@ const GAMES = [
   { id: 'farbe', name: 'Farbgedächtnis', cat: 'schaetzen', short: 'Merk dir die Farbe und misch sie nach.',
     rules: 'Du siehst drei Sekunden lang eine Farbe und mischst sie danach mit drei Reglern nach. Je kleiner der Farbabstand, desto mehr Punkte. Fünf Runden.', play: playFarbe },
   { id: 'merk', name: 'Zahlenmerker', cat: 'denken', short: 'Wie viele Ziffern passen in deinen Kopf?',
-    rules: 'Eine Zahl blitzt kurz auf, danach tippst du sie ein. Jede Runde kommt eine Ziffer dazu. Ein Fehler beendet das Spiel. Jede geschaffte Ziffer bringt 80 Punkte.', play: playMerk }
+    rules: 'Eine Zahl blitzt kurz auf, danach tippst du sie ein. Jede Runde kommt eine Ziffer dazu. Ein Fehler beendet das Spiel. Jede geschaffte Ziffer bringt 80 Punkte.', play: playMerk },
+  { id: 'laender', name: 'Länderjagd', cat: 'wissen', short: 'Finde das Land auf dem Globus. Heiß oder kalt?',
+    rules: 'Ein Land wird gesucht. Tipp irgendein Land ein und du siehst, wie weit es vom gesuchten entfernt ist, gemessen von Grenze zu Grenze. Auf dem Globus wird jeder Tipp eingefärbt: je röter, desto heißer. Weniger Tipps bringen mehr Punkte.', play: playLaender }
 ];
 const GAME = Object.fromEntries(GAMES.map(g => [g.id, g]));
 const CATS = {
@@ -882,7 +982,8 @@ function playWort(ctx) {
     res.forEach((s, i) => { ctx.after(i * 110, () => tiles[row][i].classList.add('flip', 's-' + s)); if (!kstate[g[i]] || rank[s] > rank[kstate[g[i]]]) kstate[g[i]] = s; });
     ctx.after(5 * 110 + 200, () => { for (const [ch, s] of Object.entries(kstate)) { const k = keyEls[ch]; if (!k) continue; k.classList.remove('s-x', 's-y', 's-g'); k.classList.add('s-' + s); } });
     bestRow = Math.max(bestRow, res.reduce((a, s) => a + (s === 'g' ? 30 : s === 'y' ? 10 : 0), 0));
-    r++; cur = ''; ctx.progress(`Versuch ${r}/6`);
+    if (ctx.live && g !== word && res.filter(s => s === 'g').length >= 3 && !ctx._wEarn) { ctx._wEarn = 1; ctx.live.earn('Drei grüne Buchstaben'); }
+    r++; cur = ''; ctx.progress(`${r}/6 ` + res.map(s => s === 'g' ? '🟩' : s === 'y' ? '🟨' : '⬛').join(''));
     if (g === word) {
       over = true; const sec = (performance.now() - t0) / 1000;
       const p = Math.max(50, [1000, 880, 760, 640, 520, 400][r - 1] - Math.min(150, Math.floor(sec / 2)));
@@ -904,7 +1005,7 @@ function playWort(ctx) {
 /* ---------- Quiz-Blitz ---------- */
 function playQuiz(ctx) {
   const { root, R } = ctx; const LIMIT = 12000;
-  const qs = R.shuffle(QUIZ).slice(0, 10).map(q => ({ q: q[0], a: q[1], opts: R.shuffle(q.slice(1)) }));
+  const qs = pickFresh(ctx, 'quiz', QUIZ, 10, q => q[0]).map(q => ({ q: q[0], a: q[1], opts: R.shuffle(q.slice(1)) }));
   let i = 0, p = 0, right = 0, t0 = 0, timer = null, locked = true;
   ctx.partial = () => ({ p: Math.min(1000, p), d: `${right}/10 richtig` });
   const head = h('div', { class: 'g-head' }); const bar = h('div', { class: 'tbar' }, h('i')); const qEl = h('div', { class: 'qz-q' }); const opts = h('div', { class: 'qz-opts' });
@@ -931,7 +1032,7 @@ function playQuiz(ctx) {
 
 /* ---------- Schätzmeister ---------- */
 function playSchaetz(ctx) {
-  const { root, R } = ctx; const qs = R.shuffle(EST).slice(0, 6); let i = 0, sum = 0, val = ''; const accs = []; let phase = 'in';
+  const { root, R } = ctx; const qs = pickFresh(ctx, 'schaetz', EST, 6, x => x.q); let i = 0, sum = 0, val = ''; const accs = []; let phase = 'in';
   const head = h('div', { class: 'g-head' }); const qEl = h('div', { class: 'sz-q' }); const disp = h('div', { class: 'numdisp' }); const area = h('div', { class: 'sz' });
   let kp;
   const box = h('div', { class: 'sz' }, head, qEl, area); root.append(box);
@@ -969,6 +1070,194 @@ function playSchaetz(ctx) {
   show();
 }
 
+/* ---------- Live: Quiz & Schätzen im Gleichschritt ---------- */
+const SYNC = { quiz: { ask: 13000, rev: 4500 }, schaetz: { ask: 25000, rev: 8000 } };
+function syncPayload(gid, seed) {
+  const R = makeRng(seed);
+  if (gid === 'quiz') return R.shuffle(QUIZ).slice(0, 10).map(q => [q[0], q[1], ...R.shuffle(q.slice(1))]);
+  if (gid === 'schaetz') return R.shuffle(EST).slice(0, 6).map(x => { const o = { q: x.q, a: x.a, u: x.u || '' }; if (x.yr) { o.yr = true; o.abs = x.abs; } return o; });
+  return null;
+}
+function cleanQs(gid, arr) {
+  if (!Array.isArray(arr) || !arr.length || arr.length > 12) return null;
+  const s = (x, n) => String(x ?? '').slice(0, n);
+  if (gid === 'quiz') { const out = arr.filter(q => Array.isArray(q) && q.length === 6).map(q => q.map(x => s(x, 240))); return out.length === arr.length ? out : null; }
+  if (gid === 'schaetz') { const out = arr.filter(x => isObj(x) && Number(x.a) > 0).map(x => { const o = { q: s(x.q, 240), a: Number(x.a), u: s(x.u, 20) }; if (x.yr) { o.yr = true; o.abs = Number(x.abs) || 30; } return o; }); return out.length === arr.length ? out : null; }
+  return null;
+}
+function liveFly(root, text) { const f = h('div', { class: 'fly' }, text); root.append(f); setTimeout(() => f.remove(), 1300); }
+function liveTyper(ctx, el, text, ms) {
+  if (el._typer) ctx.clear(el._typer); el.textContent = ''; let n = 0; const step = Math.max(1, Math.ceil(text.length / (ms / 90)));
+  el._typer = ctx.every(90, () => { n = Math.min(text.length, n + step); el.textContent = text.slice(0, n); if (n >= text.length) { ctx.clear(el._typer); el._typer = 0; } });
+}
+function liveStandings(q, A) {
+  const ids = new Set([...Object.keys(P.members), ...Object.keys(A)]); const out = [];
+  for (const id of ids) { let tot = 0, pts = 0; for (let k = q; k >= 0; k--) { const x = ansFor(k)[id]; if (x) { tot = x.tot; if (k === q) pts = x.pts; break; } } out.push({ id, tot, pts }); }
+  return out.sort((a, b) => b.tot - a.tot);
+}
+function standingsEl(list) { return h('div', { class: 'mini-stand' }, list.map((x, i) => h('span', { class: 'ms' + (x.id === S.me.id ? ' me' : '') }, `${i + 1}. ${pemoji(x.id)} ${pname(x.id)} `, h('b', { class: 'digits' }, x.tot), x.pts ? h('small', null, ` +${x.pts}`) : null))); }
+function answeredRow(q) { const A = ansFor(q); return [h('span', { class: 'fine' }, 'Schon geantwortet: '), ...Object.keys(P.members).map(id => h('span', { class: 'ans-chip' + (A[id] ? ' on' : ''), title: pname(id) }, pemoji(id)))]; }
+
+function playQuizLive(ctx) {
+  const { root } = ctx; const qs = ctx.qs; const N = qs.length; const ASK = SYNC.quiz.ask;
+  let cur = { i: -1, ph: '' }, total = 0, right = 0, streak = 0, dbl = false, stolen = 0, shownAt = 0, earned = 0, earnNow = '';
+  const mine = {}; let pend = [];
+  const head = h('div', { class: 'g-head' }); const bar = h('div', { class: 'tbar' }, h('i')); const qEl = h('div', { class: 'qz-q' }); const opts = h('div', { class: 'qz-opts' }); const who = h('div', { class: 'ans-row' }); const foot = h('div', { class: 'qz-foot' });
+  root.append(h('div', { class: 'qz' }, head, bar, qEl, opts, who, foot));
+  ctx.partial = () => ({ p: Math.min(1000, total), d: `${right}/${N} richtig` });
+  const deadline = () => P.subLocalEnd - stolen;
+  const active = () => cur.ph === 'ask' && !mine[cur.i];
+  function setHead(extra) { head.replaceChildren(h('span', null, `Frage ${cur.i + 1} von ${N}`), h('span', null, dbl ? h('span', { class: 'tag r' }, '×2 aktiv') : null, ' ', extra || '', h('span', { class: 'digits' }, total), ' Punkte')); }
+  function renderAsk() {
+    const q = qs[cur.i]; stolen = 0; shownAt = Date.now(); setHead(); ctx.progress(`Frage ${cur.i + 1}/${N} · ${total} P`);
+    if (qEl._typer) { ctx.clear(qEl._typer); qEl._typer = 0; } qEl.textContent = q[0];
+    opts.replaceChildren(...q.slice(2).map((o, k) => h('button', { class: 'btn qz-opt', type: 'button', 'data-k': k, onclick: () => answer(k) }, h('span', { class: 'digits', style: 'opacity:.5' }, k + 1), h('span', { class: 'opt-t' }, o))));
+    foot.replaceChildren(); who.replaceChildren(...answeredRow(cur.i));
+    const p = pend; pend = []; p.forEach(k => quizFx(k));
+  }
+  function sendAns(a, ok, pts) { const d = { gi: P.st.gi, r: P.st.round, q: cur.i, a, ok, pts, tot: total }; pbcast('ans', d); storeAns(S.me.id, d); }
+  function answer(k) {
+    if (!active() || Date.now() > deadline() || Date.now() < P.frozenUntil) return;
+    const b = opts.querySelector(`[data-k="${k}"]`); if (!b || b.disabled) return;
+    const q = qs[cur.i]; const ok = q[2 + k] === q[1]; const el = Date.now() - shownAt;
+    let pts = ok ? 50 + Math.round(50 * Math.max(0, 1 - el / ASK)) : 0;
+    if (ok && dbl) { pts *= 2; dbl = false; }
+    total += pts; if (ok) { right++; streak++; if (streak % 3 === 0 && earned < 3) { earned++; earnNow = `${streak} richtige in Folge`; } } else streak = 0;
+    mine[cur.i] = { a: k, ok, pts }; sendAns(k, ok, pts);
+    [...opts.children].forEach(x => { x.disabled = true; if (x === b) x.classList.add('picked'); });
+    foot.replaceChildren(h('p', { class: 'g-msg' }, 'Antwort eingeloggt. Warte auf die anderen …'));
+  }
+  function timeout() { if (!active()) return; mine[cur.i] = { a: -1, ok: false, pts: 0 }; streak = 0; sendAns(-1, false, 0); [...opts.children].forEach(x => { x.disabled = true; }); foot.replaceChildren(h('p', { class: 'g-msg' }, '⏱ Zeit um!')); }
+  function renderRev() {
+    timeout(); const q = qs[cur.i]; const A = ansFor(cur.i); const me = mine[cur.i];
+    if (qEl._typer) { ctx.clear(qEl._typer); qEl._typer = 0; qEl.textContent = q[0]; }
+    opts.querySelectorAll('.psst').forEach(x => x.remove());
+    [...opts.children].forEach(b => {
+      const k = +b.dataset.k; b.disabled = true; b.style.order = ''; b.classList.remove('censored', 'gone', 'picked');
+      if (q[2 + k] === q[1]) b.classList.add('ok'); else if (me && me.a === k) b.classList.add('no');
+      const pickers = Object.keys(A).filter(id => A[id].a === k);
+      if (pickers.length) b.append(h('span', { class: 'pickers' }, pickers.map(id => h('span', { class: 'picker', title: pname(id) }, pemoji(id)))));
+    });
+    setHead(me && me.ok ? `Richtig! +${me.pts} · ` : me && me.a >= 0 ? 'Falsch · ' : 'Zeit um · ');
+    who.replaceChildren(); foot.replaceChildren(standingsEl(liveStandings(cur.i, A)));
+    ctx.progress(`${right}/${cur.i + 1} richtig · ${total} P`);
+    if (earnNow) { ctx.live.earn(earnNow); earnNow = ''; }
+  }
+  function quizFx(k, self) {
+    if (self) {
+      if (k === 'double') { dbl = true; setHead(); return true; }
+      if (k === 'fifty') { if (!active()) return false; const q = qs[cur.i]; shuffleMath([...opts.children].filter(b => q[2 + +b.dataset.k] !== q[1] && !b.disabled)).slice(0, 2).forEach(b => { b.disabled = true; b.classList.add('gone'); }); return true; }
+      return false;
+    }
+    if (!['mix', 'censor', 'whisper', 'thief', 'snail'].includes(k)) return false;
+    if (!active()) { pend.push(k); return true; }
+    const btns = [...opts.children]; const q = qs[cur.i];
+    if (k === 'mix') { let n = 0; const iv = ctx.every(550, () => { const ord = shuffleMath(btns.map((_, i) => i)); btns.forEach((b, i) => { b.style.order = String(ord[i]); }); if (++n >= 9 || cur.ph !== 'ask') { ctx.clear(iv); btns.forEach(b => { b.style.order = ''; }); } }); }
+    else if (k === 'censor') shuffleMath(btns.filter(b => !b.classList.contains('gone'))).slice(0, 2).forEach(b => b.classList.add('censored'));
+    else if (k === 'whisper') { const b = shuffleMath(btns.filter(b => q[2 + +b.dataset.k] !== q[1] && !b.classList.contains('gone')))[0]; if (b) b.append(h('span', { class: 'psst' }, '👀 Psst … die hier!')); }
+    else if (k === 'thief') { stolen += 5000; liveFly(root, '−5 s'); }
+    else if (k === 'snail') liveTyper(ctx, qEl, q[0], 5500);
+    return true;
+  }
+  ctx.effect = quizFx;
+  ctx.onAns = () => { if (cur.ph === 'ask') who.replaceChildren(...answeredRow(cur.i)); };
+  ctx.sync = (sub) => {
+    if (!sub || cur.ph === 'end') return;
+    if (sub.ph === 'end') { if (cur.ph === 'ask') timeout(); cur = { i: sub.i, ph: 'end' }; ctx.after(700, () => ctx.done({ p: Math.min(1000, total), d: `${right}/${N} richtig` })); return; }
+    if ((sub.i === cur.i && sub.ph === cur.ph) || sub.i >= N) return;
+    const newQ = sub.i !== cur.i; cur = { i: sub.i, ph: sub.ph };
+    if (newQ) renderAsk();
+    if (sub.ph === 'rev') renderRev();
+  };
+  ctx.listen(window, 'keydown', e => { if (/^[1-4]$/.test(e.key)) { const vis = [...opts.children].sort((a, b) => (+a.style.order || 0) - (+b.style.order || 0)); const b = vis[+e.key - 1]; if (b) answer(+b.dataset.k); } });
+  ctx.loop(() => { const fill = bar.firstChild; if (cur.ph === 'ask' && !mine[cur.i]) { const rem = deadline() - Date.now(); fill.style.width = clamp(rem / ASK * 100, 0, 100) + '%'; if (rem <= 0) timeout(); } else if (cur.ph !== 'ask') fill.style.width = '0%'; });
+  if (P.st && P.st.sub) ctx.sync(P.st.sub);
+}
+
+function playSchaetzLive(ctx) {
+  const { root } = ctx; const qs = ctx.qs; const N = qs.length; const ASK = SYNC.schaetz.ask;
+  let cur = { i: -1, ph: '' }, total = 0, val = '', stolen = 0, dbl = false, earned = 0, earnNow = '';
+  const mine = {}; const accs = []; let pend = [];
+  const head = h('div', { class: 'g-head' }); const bar = h('div', { class: 'tbar' }, h('i')); const qEl = h('div', { class: 'sz-q' }); const area = h('div', { class: 'sz' }); const who = h('div', { class: 'ans-row' });
+  const disp = h('div', { class: 'numdisp' });
+  root.append(h('div', { class: 'sz' }, head, bar, qEl, area, who));
+  ctx.partial = () => ({ p: Math.min(1000, total), d: `${accs.length}/${N} geschätzt` });
+  const deadline = () => P.subLocalEnd - stolen;
+  const active = () => cur.ph === 'ask' && !mine[cur.i];
+  const fmtVal = (q, g) => (q.yr ? String(g) : fmtAuto(g)) + (q.u ? ' ' + q.u : '');
+  function fmtIn(v, yr) { if (!v) return ''; const [a, b] = v.split(','); const ai = yr ? a : (a ? Number(a).toLocaleString('de-DE') : '0'); return b !== undefined ? ai + ',' + b : ai; }
+  function paint() { const q = qs[cur.i]; disp.classList.toggle('empty', !val); disp.replaceChildren(val ? fmtIn(val, q.yr) : 'Dein Tipp', q.u ? h('span', { class: 'unit' }, q.u) : null); }
+  function setHead(extra) { head.replaceChildren(h('span', null, `Frage ${cur.i + 1} von ${N}`), h('span', null, dbl ? h('span', { class: 'tag r' }, '×2 aktiv') : null, ' ', extra || '', h('span', { class: 'digits' }, total), ' Punkte')); }
+  function onKey(k) {
+    if (!active() || Date.now() < P.frozenUntil) return;
+    if (k === '⌫') val = val.slice(0, -1);
+    else if (k === ',') { if (!val.includes(',') && !qs[cur.i].yr) val = (val || '0') + ','; }
+    else if (k === 'OK') { submit(false); return; }
+    else if (val.replace(',', '').length < 12) { val = (val === '0' ? '' : val) + k; }
+    paint();
+  }
+  const kp = keypad(ctx, onKey, { comma: true, ok: 'Tipp abgeben' });
+  function score(q, g) {
+    if (q.abs) return Math.max(0, 1 - Math.abs(g - q.a) / q.abs);
+    return Math.max(0, 1 - Math.abs(Math.log(g / q.a)) / Math.log(3));
+  }
+  function sendAns(a, pts, s) { const d = { gi: P.st.gi, r: P.st.round, q: cur.i, a, ok: s >= 0.85, pts, tot: total, s: Math.round(s * 1000) / 1000 }; pbcast('ans', d); storeAns(S.me.id, d); }
+  function waitView(text) { area.replaceChildren(h('div', { class: 'reveal' }, h('p', { class: 'g-msg' }, text))); }
+  function submit(auto) {
+    if (!active()) return; const q = qs[cur.i]; const g = parseFloat(val.replace(',', '.'));
+    if (!(g > 0)) { if (auto) { mine[cur.i] = { a: -1, pts: 0, s: 0 }; sendAns(-1, 0, 0); waitView('⏱ Kein Tipp abgegeben.'); } else bump(disp); return; }
+    const s = score(q, g); let pts = Math.round(s * 1000 / N); if (dbl && pts > 0) { pts *= 2; dbl = false; }
+    total += pts; accs.push(s); mine[cur.i] = { a: g, pts, s }; sendAns(g, pts, s);
+    if (s >= 0.85 && earned < 3) { earned++; earnNow = 'Volltreffer beim Schätzen'; }
+    waitView(`Dein Tipp: ${fmtVal(q, g)}. Warte auf die anderen …`);
+  }
+  function renderAsk() {
+    const q = qs[cur.i]; stolen = 0; val = ''; setHead(); ctx.progress(`Frage ${cur.i + 1}/${N} · ${total} P`);
+    if (qEl._typer) { ctx.clear(qEl._typer); qEl._typer = 0; } qEl.textContent = q.q;
+    area.replaceChildren(disp, kp); paint(); who.replaceChildren(...answeredRow(cur.i));
+    const p = pend; pend = []; p.forEach(k => szFx(k));
+  }
+  function renderRev() {
+    submit(true); const q = qs[cur.i]; const A = ansFor(cur.i); const me = mine[cur.i];
+    if (qEl._typer) { ctx.clear(qEl._typer); qEl._typer = 0; qEl.textContent = q.q; }
+    const es = Object.keys(A).filter(id => Number(A[id].a) > 0).map(id => ({ id, g: Number(A[id].a), pts: A[id].pts, s: A[id].s }));
+    const vals = es.map(e => e.g).concat([q.a]); let lo = Math.min(...vals), hi = Math.max(...vals);
+    const useLog = !q.yr && hi / lo > 4; const tf = useLog ? Math.log : (x => x);
+    let a = tf(lo), b = tf(hi); if (b - a < 1e-9) { a -= 1; b += 1; } const pad = (b - a) * 0.1; a -= pad; b += pad;
+    const pos = (v) => clamp((tf(v) - a) / (b - a) * 100, 2, 98);
+    const sorted = es.slice().sort((x, y) => y.s - x.s);
+    area.replaceChildren(
+      h('div', { class: 'nline' }, h('div', { class: 'nl-axis' }), h('div', { class: 'nl-true', style: `left:${pos(q.a)}%` }, h('span', null, '🎯')),
+        ...sorted.map((e, i) => h('div', { class: 'nl-dot' + (e.id === S.me.id ? ' me' : ''), style: `left:${pos(e.g)}%;top:${36 + (i % 3) * 30}px`, title: `${pname(e.id)}: ${fmtVal(q, e.g)}` }, pemoji(e.id)))),
+      h('div', { class: 'reveal' }, h('div', { class: 'reveal-row' }, h('span', null, 'Richtig'), h('b', null, fmtVal(q, q.a))),
+        sorted.length ? h('ol', { class: 'rank' }, sorted.map((e, i) => h('li', { class: 'rr' + (e.id === S.me.id ? ' me' : '') }, posEl(i + 1), h('span', { class: 'rr-who' }, `${pemoji(e.id)} ${pname(e.id)} `, h('small', null, fmtVal(q, e.g))), h('span', { class: 'rr-p digits' }, `+${e.pts}`)))) : h('p', { class: 'fine' }, 'Niemand hat getippt.')),
+      standingsEl(liveStandings(cur.i, A)));
+    setHead(me && me.pts ? `+${me.pts} · ` : '');
+    who.replaceChildren(); ctx.progress(`${accs.length}/${N} · ${total} P`);
+    if (earnNow) { ctx.live.earn(earnNow); earnNow = ''; }
+  }
+  function szFx(k, self) {
+    if (self) { if (k === 'double') { dbl = true; setHead(); return true; } return false; }
+    if (!['thief', 'snail'].includes(k)) return false;
+    if (!active()) { pend.push(k); return true; }
+    if (k === 'thief') { stolen += 5000; liveFly(root, '−5 s'); }
+    else liveTyper(ctx, qEl, qs[cur.i].q, 6000);
+    return true;
+  }
+  ctx.effect = szFx;
+  ctx.onAns = () => { if (cur.ph === 'ask') who.replaceChildren(...answeredRow(cur.i)); };
+  ctx.sync = (sub) => {
+    if (!sub || cur.ph === 'end') return;
+    if (sub.ph === 'end') { if (cur.ph === 'ask') submit(true); cur = { i: sub.i, ph: 'end' }; const avg = accs.length ? accs.reduce((x, y) => x + y, 0) / N : 0; ctx.after(700, () => ctx.done({ p: Math.min(1000, total), d: `${Math.round(avg * 100)} % Treffsicherheit` })); return; }
+    if ((sub.i === cur.i && sub.ph === cur.ph) || sub.i >= N) return;
+    const newQ = sub.i !== cur.i; cur = { i: sub.i, ph: sub.ph };
+    if (newQ) renderAsk();
+    if (sub.ph === 'rev') renderRev();
+  };
+  ctx.loop(() => { const fill = bar.firstChild; if (cur.ph === 'ask' && !mine[cur.i]) { const rem = deadline() - Date.now(); fill.style.width = clamp(rem / ASK * 100, 0, 100) + '%'; if (rem <= 0) submit(true); } else if (cur.ph !== 'ask') fill.style.width = '0%'; });
+  if (P.st && P.st.sub) ctx.sync(P.st.sub);
+}
+
 /* ---------- Zeitstrahl ---------- */
 function playZeit(ctx) {
   const { root, R } = ctx; const deck = R.shuffle(EVENTS); let di = 0;
@@ -989,7 +1278,7 @@ function playZeit(ctx) {
     if (busy) return; const y = card[1];
     const ok = (k === 0 || tl[k - 1][1] <= y) && (k === tl.length || y <= tl[k][1]);
     busy = true;
-    if (ok) { tl.splice(k, 0, card); correct++; msg.textContent = `Richtig: ${fy(y)}.`; paintTl(k); }
+    if (ok) { tl.splice(k, 0, card); correct++; msg.textContent = `Richtig: ${fy(y)}.`; paintTl(k); if (ctx.live && correct % 4 === 0) ctx.live.earn(`${correct} richtig eingeordnet`); }
     else { strikes++; msg.textContent = `Daneben – das war ${fy(y)}.`; paintCard(true); paintTl(-1); }
     paintHead();
     ctx.after(ok ? 700 : 1500, () => {
@@ -1035,7 +1324,7 @@ function playHL(ctx) {
     const stop = ctx.loop(() => { const k = Math.min(1, (performance.now() - t0) / 650); const e = 1 - Math.pow(1 - k, 3); bVal.textContent = hlFmt(cat.f === 'kg' && target < 1 ? target : (k < 1 ? target * e : target), cat.f); if (k >= 1) stop(); });
     ctx.after(700, () => {
       const card = $('#hl-b', cards); card.classList.add(ok ? 'ok' : 'no');
-      if (ok) { streak++; msg.textContent = 'Richtig!'; } else msg.textContent = `Falsch! ${B[0]}: ${hlFmt(B[1], cat.f)}.`;
+      if (ok) { streak++; msg.textContent = 'Richtig!'; if (ctx.live && streak % 4 === 0) ctx.live.earn(`${streak}er-Serie`); } else msg.textContent = `Falsch! ${B[0]}: ${hlFmt(B[1], cat.f)}.`;
       head.lastChild.lastChild.textContent = streak;
       ctx.after(ok ? 800 : 1700, () => {
         if (!ok || streak >= 15) { ctx.done({ p: Math.round(Math.min(15, streak) / 15 * 1000), d: `${streak}er-Serie` }); return; }
@@ -1055,7 +1344,8 @@ function playGolf(ctx) {
   const { root, R } = ctx; const order = R.shuffle(HOLES.map((_, i) => i)).slice(0, N);
   const W = 360, H = 600, BR = 7, CR = 11;
   const boxes = ctx.live ? order.map(hix => golfBoxes(HOLES[hix], R)) : null; let ghostPos = {};
-  if (ctx.live) ctx.live.noBubbles = true;
+  const fx = { glue: 0, slick: 0, tiny: 0, magnet: 0, rock: null };
+  const on = (k) => Date.now() < fx[k];
   const hud = h('div', { class: 'golf-hud' }); const wrap = h('div', { class: 'golf-wrap' }); const cv = h('canvas', { class: 'golf-cv', 'aria-label': 'Minigolf-Bahn' });
   const tip = h('div', { class: 'g-msg' }, 'Zieh nach hinten und lass los. Je weiter du ziehst, desto fester der Schlag.');
   wrap.append(cv); root.append(hud, wrap, tip);
@@ -1068,7 +1358,7 @@ function playGolf(ctx) {
     segs = [[10, 10, 350, 10], [350, 10, 350, 590], [350, 590, 10, 590], [10, 590, 10, 10]];
     for (const [x, y, w, hh] of hole.blocks || []) segs.push([x, y, x + w, y], [x + w, y, x + w, y + hh], [x + w, y + hh, x, y + hh], [x, y + hh, x, y]);
     for (const s of hole.walls || []) segs.push(s);
-    ball = { x: hole.ball[0], y: hole.ball[1], vx: 0, vy: 0, s: 1 }; strokes = 0; t = 0; state = 'aim'; lastPos = { x: ball.x, y: ball.y }; bumpHit = {}; ghostPos = {};
+    ball = { x: hole.ball[0], y: hole.ball[1], vx: 0, vy: 0, s: 1 }; strokes = 0; t = 0; state = 'aim'; lastPos = { x: ball.x, y: ball.y }; bumpHit = {}; ghostPos = {}; fx.rock = null;
     tip.textContent = `Bahn ${hi + 1}: ${hole.n}` + (boxes ? ' · Roll über die ?-Kisten!' : ''); hudPaint();
     if (ctx.live) ctx.live.ball(hi, ball.x, ball.y, false, true);
   }
@@ -1077,9 +1367,21 @@ function playGolf(ctx) {
     for (let k = from; k < N; k++) { const Hh = HOLES[order[k]]; parAll += Hh.par; est += k === hi ? Math.max(strokes + 3, Hh.par + 2) : Hh.par + 4; }
     return { p: clamp(Math.round(600 + (parAll - est) * 70), 0, 1000), d: `${Math.min(from, N)}/${N} Bahnen geschafft` };
   };
-  ctx.effect = (k) => {
-    if (k !== 'wind' || state === 'sunk' || state === 'next') return false;
-    const a = Math.random() * Math.PI * 2; ball.vx += Math.cos(a) * 480; ball.vy += Math.sin(a) * 480; aim = null; return true;
+  ctx.effect = (k, self) => {
+    const now = Date.now(); const playing = state === 'aim' || state === 'roll';
+    if (self) {
+      if (k === 'magnet') { fx.magnet = now + 20000; return true; }
+      if (k === 'mulligan') { if (state !== 'aim' || strokes < 1) return false; ball.x = lastPos.x; ball.y = lastPos.y; ball.vx = ball.vy = 0; strokes--; hudPaint(); tip.textContent = '↩️ Mulligan! Der letzte Schlag zählt nicht.'; return true; }
+      return false;
+    }
+    if (k === 'glue') { fx.glue = now + 12000; fx.slick = 0; return true; }
+    if (k === 'slick') { fx.slick = now + 12000; fx.glue = 0; return true; }
+    if (k === 'tinycup') { fx.tiny = now + 20000; return true; }
+    if (!playing) return false;
+    if (k === 'wind') { const a = Math.random() * Math.PI * 2; ball.vx += Math.cos(a) * 480; ball.vy += Math.sin(a) * 480; aim = null; return true; }
+    if (k === 'rock') { let dx = ball.x - hole.cup[0], dy = ball.y - hole.cup[1]; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d; fx.rock = { x: hole.cup[0] + dx * 36, y: hole.cup[1] + dy * 36, r: 14, until: now + 20000 }; return true; }
+    if (k === 'reset') { ball.x = hole.ball[0]; ball.y = hole.ball[1]; ball.vx = ball.vy = 0; aim = null; state = 'aim'; lastPos = { x: ball.x, y: ball.y }; tip.textContent = '🔙 Zurück auf Start!'; return true; }
+    return false;
   };
   function hudPaint() { ctx.progress(`Bahn ${Math.min(hi + 1, N)}/${N} · ${total + (state === 'next' ? 0 : strokes)} Schläge`); hud.replaceChildren(h('span', null, 'Bahn ', h('span', { class: 'digits' }, `${Math.min(hi + 1, N)}/${N}`)), h('span', null, 'Par ', h('span', { class: 'digits' }, hole.par)), h('span', null, 'Schläge ', h('span', { class: 'digits' }, strokes)), h('span', null, 'Gesamt ', h('span', { class: 'digits' }, total))); }
   const inRect = (b, r) => b.x > r[0] && b.x < r[0] + r[2] && b.y > r[1] && b.y < r[1] + r[3];
@@ -1106,12 +1408,17 @@ function playGolf(ctx) {
         let dx = ball.x - bx, dy = ball.y - by; const d = Math.hypot(dx, dy);
         if (d < br + BR && d > 0) { dx /= d; dy /= d; ball.x = bx + dx * (br + BR); ball.y = by + dy * (br + BR); const vn = ball.vx * dx + ball.vy * dy; if (vn < 0) { ball.vx -= 2 * vn * dx; ball.vy -= 2 * vn * dy; ball.vx *= 1.12; ball.vy *= 1.12; bumpHit[bi] = t; } }
       });
+      const rk = fx.rock && Date.now() < fx.rock.until ? fx.rock : null;
+      if (rk) { let dx = ball.x - rk.x, dy = ball.y - rk.y; const d = Math.hypot(dx, dy); if (d < rk.r + BR && d > 0) { dx /= d; dy /= d; ball.x = rk.x + dx * (rk.r + BR); ball.y = rk.y + dy * (rk.r + BR); const vn = ball.vx * dx + ball.vy * dy; if (vn < 0) { ball.vx -= 1.8 * vn * dx; ball.vy -= 1.8 * vn * dy; } } }
       const inSand = (hole.sand || []).some(r => inRect(ball, r));
+      const fr = on('glue') ? 4.5 : on('slick') ? 0.18 : 1;
       sp = Math.hypot(ball.vx, ball.vy);
-      if (sp > 0) { const dec = (inSand ? 420 : 55) + (inSand ? 3.2 : 0.85) * sp; const ns = Math.max(0, sp - dec * hd); ball.vx *= ns / sp; ball.vy *= ns / sp; sp = ns; }
+      if (sp > 0) { const dec = ((inSand ? 420 : 55) + (inSand ? 3.2 : 0.85) * sp) * fr; const ns = Math.max(0, sp - dec * hd); ball.vx *= ns / sp; ball.vy *= ns / sp; sp = ns; }
       const cdx = hole.cup[0] - ball.x, cdy = hole.cup[1] - ball.y, cd = Math.hypot(cdx, cdy);
-      if (cd < CR) { if (sp < 420) { sink(); return; } ball.vx *= 0.93; ball.vy *= 0.93; }
-      else if (cd < CR + 10 && sp < 260 && sp > 0) { ball.vx += cdx / cd * 240 * hd; ball.vy += cdy / cd * 240 * hd; }
+      const cr = on('tiny') ? 6 : CR; const mag = on('magnet');
+      if (cd < cr) { if (sp < (mag ? 560 : on('tiny') ? 260 : 420)) { sink(); return; } ball.vx *= 0.93; ball.vy *= 0.93; }
+      else if (mag && cd < 85 && sp < 560 && cd > 0) { ball.vx += cdx / cd * 620 * hd; ball.vy += cdy / cd * 620 * hd; }
+      else if (cd < cr + 10 && sp < 260 && sp > 0) { ball.vx += cdx / cd * 240 * hd; ball.vy += cdy / cd * 240 * hd; }
       if ((hole.water || []).some(r => inRect(ball, r))) { splash(); return; }
     }
     if (boxes) for (const b of boxes[hi]) if (!b.taken && Math.hypot(ball.x - b.x, ball.y - b.y) < 20) { if (ctx.live.collect()) b.taken = true; }
@@ -1126,6 +1433,7 @@ function playGolf(ctx) {
   function afterStroke() { if (state === 'aim' && strokes >= 8) { strokes = 9; finishHole(false); } }
   function finishHole(sunk) {
     state = 'next'; total += strokes; parSum += hole.par; hudPaint();
+    if (sunk && ctx.live && strokes < hole.par) ctx.live.earn(strokes === 1 ? 'Ass' : 'Birdie');
     tip.textContent = sunk ? `${label(strokes, hole.par)} ${strokes} Schl${strokes === 1 ? 'ag' : 'äge'} auf Par ${hole.par}.` : 'Acht Schläge sind genug. Mit Strafschlag geht es weiter.';
     ctx.after(1500, () => { hi++; if (hi < N) load(); else ctx.done({ p: clamp(Math.round(600 + (parSum - total) * 70), 0, 1000), d: `${total} Schläge · Par ${parSum}` }); });
   }
@@ -1148,7 +1456,8 @@ function playGolf(ctx) {
     for (const [x, y, w, hh] of hole.water || []) { g.fillStyle = '#3A8BD6'; g.fillRect(x, y, w, hh); g.strokeStyle = 'rgba(255,255,255,.45)'; g.lineWidth = 2; for (let k = 0; k < 3; k++) { g.beginPath(); const yy = y + 16 + k * 20; for (let xx = x; xx <= x + w; xx += 6) g.lineTo(xx, yy + Math.sin(xx / 12 + t * 2 + k) * 3); g.stroke(); } }
     if (t - splashT < 0.6) { g.fillStyle = `rgba(255,255,255,${0.6 - (t - splashT)})`; g.beginPath(); g.arc(lastPos.x, lastPos.y, 30 * (t - splashT) + 8, 0, 7); g.fill(); }
     g.fillStyle = 'rgba(255,255,255,.25)'; g.beginPath(); g.arc(hole.ball[0], hole.ball[1], 12, 0, 7); g.fill();
-    g.fillStyle = '#163A1E'; g.beginPath(); g.arc(hole.cup[0], hole.cup[1], CR, 0, 7); g.fill();
+    if (on('magnet')) { g.strokeStyle = `rgba(122,142,255,${0.35 + Math.sin(t * 6) * 0.2})`; g.lineWidth = 3; g.beginPath(); g.arc(hole.cup[0], hole.cup[1], 30 + Math.sin(t * 6) * 6, 0, 7); g.stroke(); }
+    g.fillStyle = '#163A1E'; g.beginPath(); g.arc(hole.cup[0], hole.cup[1], on('tiny') ? 6 : CR, 0, 7); g.fill();
     g.strokeStyle = '#EDEDED'; g.lineWidth = 2.5; g.beginPath(); g.moveTo(hole.cup[0] + 1, hole.cup[1]); g.lineTo(hole.cup[0] + 1, hole.cup[1] - 44); g.stroke();
     g.fillStyle = '#E3412A'; g.beginPath(); g.moveTo(hole.cup[0] + 2, hole.cup[1] - 44); g.lineTo(hole.cup[0] + 26 + Math.sin(t * 4) * 2, hole.cup[1] - 37); g.lineTo(hole.cup[0] + 2, hole.cup[1] - 30); g.fill();
     for (const [x, y, w, hh] of hole.blocks || []) { g.fillStyle = '#8C5A33'; g.fillRect(x, y, w, hh); g.fillStyle = '#A8743F'; g.fillRect(x, y, w, Math.min(5, hh)); }
@@ -1161,6 +1470,13 @@ function playGolf(ctx) {
       g.font = '14px system-ui, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'bottom'; g.fillText(gh.emoji, dp.x, dp.y - 8);
     }
     for (const [cx, cy, L, w] of hole.mills || []) { const a = t * w; g.strokeStyle = '#3B2414'; g.lineWidth = 11; g.beginPath(); g.moveTo(cx - Math.cos(a) * L, cy - Math.sin(a) * L); g.lineTo(cx + Math.cos(a) * L, cy + Math.sin(a) * L); g.stroke(); g.strokeStyle = '#F4F1EC'; g.lineWidth = 7; g.stroke(); g.fillStyle = '#E3412A'; g.beginPath(); g.arc(cx, cy, 8, 0, 7); g.fill(); }
+    const rk = fx.rock && Date.now() < fx.rock.until ? fx.rock : null;
+    if (rk) { g.fillStyle = '#7D7F86'; g.beginPath(); g.arc(rk.x, rk.y, rk.r, 0, 7); g.fill(); g.fillStyle = '#A3A6AE'; g.beginPath(); g.arc(rk.x - 4, rk.y - 4, rk.r * 0.45, 0, 7); g.fill(); }
+    const tags = []; const nowMs = Date.now();
+    for (const [k, e] of [['glue', '🍬'], ['slick', '⛸️'], ['tiny', '🕳️'], ['magnet', '🧲']]) if (nowMs < fx[k]) tags.push(`${e} ${Math.ceil((fx[k] - nowMs) / 1000)}s`);
+    if (rk) tags.push(`🪨 ${Math.ceil((rk.until - nowMs) / 1000)}s`);
+    if (tags.length) { g.font = 'bold 13px system-ui, sans-serif'; g.textAlign = 'left'; g.textBaseline = 'middle'; const txt = tags.join('   '); const tw = g.measureText(txt).width; g.fillStyle = 'rgba(0,0,0,.5)'; rr(16, 16, tw + 16, 24, 8); g.fill(); g.fillStyle = '#FFFFFF'; g.fillText(txt, 24, 28); }
+    if (on('slick')) { g.fillStyle = 'rgba(200,235,255,.18)'; g.fillRect(10, 10, 340, 580); }
     if (aim && state === 'aim') {
       const dx = aim.sx - aim.x, dy = aim.sy - aim.y, len = Math.hypot(dx, dy);
       if (len > 4) { const pw = Math.min(len, 140) / 140; const ux = dx / len, uy = dy / len; g.setLineDash([6, 7]); g.strokeStyle = 'rgba(255,255,255,.9)'; g.lineWidth = 3; g.beginPath(); g.moveTo(ball.x, ball.y); g.lineTo(ball.x + ux * (30 + pw * 130), ball.y + uy * (30 + pw * 130)); g.stroke(); g.setLineDash([]);
@@ -1174,7 +1490,7 @@ function playGolf(ctx) {
 function segDist(x, y, [x1, y1, x2, y2]) { const dx = x2 - x1, dy = y2 - y1, L2 = dx * dx + dy * dy || 1; let u = ((x - x1) * dx + (y - y1) * dy) / L2; u = Math.max(0, Math.min(1, u)); return Math.hypot(x - (x1 + u * dx), y - (y1 + u * dy)); }
 function golfBoxes(hole, R) {
   const out = []; let tries = 0;
-  while (out.length < 2 && tries++ < 300) {
+  while (out.length < 3 && tries++ < 400) {
     const x = 34 + R.f() * 292, y = 60 + R.f() * 480;
     if ((hole.blocks || []).some(([bx, by, bw, bh]) => x > bx - 16 && x < bx + bw + 16 && y > by - 16 && y < by + bh + 16)) continue;
     if ((hole.water || []).some(([bx, by, bw, bh]) => x > bx - 14 && x < bx + bw + 14 && y > by - 14 && y < by + bh + 14)) continue;
@@ -1182,7 +1498,7 @@ function golfBoxes(hole, R) {
     if ((hole.walls || []).some(s => segDist(x, y, s) < 18)) continue;
     if ((hole.bumpers || []).some(([bx, by, br]) => Math.hypot(x - bx, y - by) < br + 18)) continue;
     if ((hole.mills || []).some(([cx, cy, L]) => Math.hypot(x - cx, y - cy) < L + 14)) continue;
-    if (out.some(o => Math.hypot(o.x - x, o.y - y) < 90)) continue;
+    if (out.some(o => Math.hypot(o.x - x, o.y - y) < 75)) continue;
     out.push({ x, y, taken: false });
   }
   return out;
@@ -1227,6 +1543,7 @@ function playKreis(ctx) {
     if (!drawing) return; drawing = false; const r = evalPts(pts, true);
     if (!r.valid) { msg.textContent = r.reason; live.textContent = ''; bump(wrap); return; }
     results.push(r.score); live.textContent = fmt(r.score * 100, 1) + ' %';
+    if (ctx.live && r.score > 0.9) ctx.live.earn('Fast perfekter Kreis', 1);
     const best = Math.max(...results); ctx.progress(`Versuch ${results.length}/3 · ${fmt(best * 100, 1)} %`);
     tries.replaceChildren(...results.map(s => h('span', { class: 'kr-try' + (s === best ? ' best' : '') }, fmt(s * 100, 1) + ' %')));
     if (results.length < 3) msg.textContent = r.score > 0.93 ? 'Wahnsinn. Geht da noch mehr?' : r.score > 0.85 ? 'Schon ziemlich rund.' : 'Eher ein Ei. Nächster Versuch!';
@@ -1255,7 +1572,7 @@ function playReakt(ctx) {
   function tap() {
     if (state === 'ready') { start(); return; }
     if (state === 'wait' || state === 'fake') { tmr.forEach(t => ctx.clear(t)); tmr = []; times.push(PEN); state = 'show'; set('', 'Zu früh!', `Strafe: ${PEN} ms. Tippe für weiter.`); paintHead(); return; }
-    if (state === 'go') { const ms = performance.now() - t0; times.push(ms); state = 'show'; set('', `${Math.round(ms)} ms`, ms < 200 ? 'Blitzschnell! Tippe für weiter.' : ms < 280 ? 'Gut! Tippe für weiter.' : 'Geht schneller. Tippe für weiter.'); paintHead(); return; }
+    if (state === 'go') { const ms = performance.now() - t0; times.push(ms); if (ctx.live && ms < 250) ctx.live.earn('Blitzreaktion', 2); state = 'show'; set('', `${Math.round(ms)} ms`, ms < 200 ? 'Blitzschnell! Tippe für weiter.' : ms < 280 ? 'Gut! Tippe für weiter.' : 'Geht schneller. Tippe für weiter.'); paintHead(); return; }
     if (state === 'show') {
       i++;
       if (i < 5) ready();
@@ -1282,7 +1599,7 @@ function playGefuehl(ctx) {
     if (state === 'ready') { state = 'run'; t0 = performance.now(); btn.textContent = 'Stopp!'; btn.className = 'btn blue lg'; info.textContent = 'Zähl mit …'; return; }
     if (state === 'run') {
       const el = (performance.now() - t0) / 1000; const err = Math.abs(el - targets[i]); const pts = Math.round(1000 / 3 * Math.max(0, 1 - err / 1.5));
-      sum += pts; errs.push(err); state = 'show'; ring.classList.remove('on'); clock.textContent = s2(el);
+      sum += pts; errs.push(err); if (ctx.live && err < 0.15) ctx.live.earn('Auf die Zehntel genau', 2); state = 'show'; ring.classList.remove('on'); clock.textContent = s2(el);
       info.textContent = err < 0.05 ? `Irre! Nur ${s2(err)} s daneben. +${pts}` : `${s2(err)} s ${el < targets[i] ? 'zu früh' : 'zu spät'}. +${pts}`;
       paint(); btn.textContent = i < 2 ? 'Nächste Runde' : 'Auswertung'; btn.className = 'btn lg'; return;
     }
@@ -1316,7 +1633,7 @@ function playRechnen(ctx) {
     if (!/^[0-9]$/.test(key)) return;
     val += key; const ans = probs[k].ans;
     if (val.length >= ans.length) {
-      if (val === ans) { right++; k++; val = ''; paint(); }
+      if (val === ans) { right++; k++; val = ''; paint(); if (ctx.live && right % 6 === 0) ctx.live.earn(`${right} Aufgaben gelöst`); }
       else { wrong++; paint(true); bump(task); msg.textContent = `${probs[k].text} = ${ans}`; const kk = k; ctx.after(450, () => { if (k === kk) { k++; val = ''; paint(); } }); }
       paintHead(DUR - (performance.now() - t0) / 1000);
     } else paint();
@@ -1366,12 +1683,179 @@ function playFarbe(ctx) {
   }
   function reveal(cur) {
     const c = cols[i]; const a = hsv2rgb(c.h, c.s, c.v), b = hsv2rgb(cur.h, cur.s, cur.v); const la = rgb2lab(a), lb = rgb2lab(b);
-    const dE = Math.hypot(la[0] - lb[0], la[1] - lb[1], la[2] - lb[2]); const pts = Math.round(200 * Math.max(0, 1 - dE / 45)); sum += pts; des.push(dE); paintHead();
+    const dE = Math.hypot(la[0] - lb[0], la[1] - lb[1], la[2] - lb[2]); const pts = Math.round(200 * Math.max(0, 1 - dE / 45)); sum += pts; des.push(dE); if (ctx.live && dE < 8) ctx.live.earn('Farbe fast perfekt getroffen', 2); paintHead();
     area.replaceChildren(h('div', { class: 'fb-split' }, h('div', { style: `background:${rgbCss(a)}` }, 'Original'), h('div', { style: `background:${rgbCss(b)}` }, 'Deine')),
       h('div', { class: 'reveal' }, h('div', { class: 'reveal-row' }, h('span', null, 'Farbabstand ΔE'), h('b', null, fmt(dE, 1))), h('div', { class: 'reveal-row' }, h('span', { class: 'muted' }, dE < 5 ? 'Kaum zu unterscheiden!' : dE < 12 ? 'Sehr nah dran.' : dE < 25 ? 'Ungefähr.' : 'Andere Baustelle.'), h('b', null, '+' + pts))),
       h('button', { class: 'btn primary lg wide', type: 'button', onclick: () => { i++; if (i < 5) show(); else ctx.done({ p: Math.min(1000, sum), d: `Ø ΔE ${fmt(des.reduce((x, y) => x + y, 0) / des.length, 1)}` }); } }, i < 4 ? 'Nächste Farbe' : 'Auswertung'));
   }
   show();
+}
+
+/* ---------- Länderjagd (Globus) ---------- */
+const LAND = [[242,"FJ","Fidschi",["Fiji"]],[834,"TZ","Tansania",["Tanzania"]],[732,"EH","Westsahara",["W. Sahara"]],[124,"CA","Kanada",["Canada"]],[840,"US","USA",["Vereinigte Staaten","Vereinigte Staaten","Vereinigte Staaten von Amerika","Amerika","US","United States of America"]],[398,"KZ","Kasachstan",["Kazakhstan"]],[860,"UZ","Usbekistan",["Uzbekistan"]],[598,"PG","Papua-Neuguinea",["Papua Neuguinea","Papua New Guinea"]],[360,"ID","Indonesien",["Indonesia"]],[32,"AR","Argentinien",["Argentina"]],[152,"CL","Chile",["Chile"]],[180,"CD","Demokratische Republik Kongo",["Kongo-Kinshasa","Kongo-Kinshasa","DR Kongo","Zaire","Dem. Rep. Congo"]],[706,"SO","Somalia",["Somalia"]],[404,"KE","Kenia",["Kenya"]],[729,"SD","Sudan",["Sudan"]],[148,"TD","Tschad",["Chad"]],[332,"HT","Haiti",["Haiti"]],[214,"DO","Dominikanische Republik",["Dominikanische Rep","Dominican Rep."]],[643,"RU","Russland",["Russia"]],[44,"BS","Bahamas",["Bahamas"]],[238,"FK","Falklandinseln",["Falkland Is."]],[578,"NO","Norwegen",["Norway"]],[304,"GL","Grönland",["Greenland"]],[260,"TF","Französische Südgebiete",["Französische Süd- und Antarktisgebiete","Französische Süd- und Antarktisgebiete","Fr. S. Antarctic Lands"]],[626,"TL","Osttimor",["Timor-Leste","Timor-Leste","Timor-Leste"]],[710,"ZA","Südafrika",["Suedafrika","South Africa"]],[426,"LS","Lesotho",["Lesotho"]],[484,"MX","Mexiko",["Mexico"]],[858,"UY","Uruguay",["Uruguay"]],[76,"BR","Brasilien",["Brazil"]],[68,"BO","Bolivien",["Bolivia"]],[604,"PE","Peru",["Peru"]],[170,"CO","Kolumbien",["Colombia"]],[591,"PA","Panama",["Panama"]],[188,"CR","Costa Rica",["Costa Rica"]],[558,"NI","Nicaragua",["Nicaragua"]],[340,"HN","Honduras",["Honduras"]],[222,"SV","El Salvador",["El Salvador"]],[320,"GT","Guatemala",["Guatemala"]],[84,"BZ","Belize",["Belize"]],[862,"VE","Venezuela",["Venezuela"]],[328,"GY","Guyana",["Guyana"]],[740,"SR","Suriname",["Suriname"]],[250,"FR","Frankreich",["France"]],[218,"EC","Ecuador",["Ecuador"]],[630,"PR","Puerto Rico",["Puerto Rico"]],[388,"JM","Jamaika",["Jamaica"]],[192,"CU","Kuba",["Cuba"]],[716,"ZW","Simbabwe",["Zimbabwe"]],[72,"BW","Botsuana",["Botswana"]],[516,"NA","Namibia",["Namibia"]],[686,"SN","Senegal",["Senegal"]],[466,"ML","Mali",["Mali"]],[478,"MR","Mauretanien",["Mauritania"]],[204,"BJ","Benin",["Benin"]],[562,"NE","Niger",["Niger"]],[566,"NG","Nigeria",["Nigeria"]],[120,"CM","Kamerun",["Cameroon"]],[768,"TG","Togo",["Togo"]],[288,"GH","Ghana",["Ghana"]],[384,"CI","Elfenbeinküste",["Côte d’Ivoire","Côte d'Ivoire","Côte d'Ivoire"]],[324,"GN","Guinea",["Guinea"]],[624,"GW","Guinea-Bissau",["Guinea-Bissau"]],[430,"LR","Liberia",["Liberia"]],[694,"SL","Sierra Leone",["Sierra Leone"]],[854,"BF","Burkina Faso",["Burkina Faso"]],[140,"CF","Zentralafrikanische Republik",["ZAR","Central African Rep."]],[178,"CG","Republik Kongo",["Kongo-Brazzaville","Kongo-Brazzaville","Kongo","Congo"]],[266,"GA","Gabun",["Gabon"]],[226,"GQ","Äquatorialguinea",["Aequatorialguinea","Eq. Guinea"]],[894,"ZM","Sambia",["Zambia"]],[454,"MW","Malawi",["Malawi"]],[508,"MZ","Mosambik",["Mozambique"]],[748,"SZ","Eswatini",["Swasiland","eSwatini"]],[24,"AO","Angola",["Angola"]],[108,"BI","Burundi",["Burundi"]],[376,"IL","Israel",["Israel"]],[422,"LB","Libanon",["Lebanon"]],[450,"MG","Madagaskar",["Madagascar"]],[275,"PS","Palästina",["Palästinensische Autonomiegebiete","Palästinensische Autonomiegebiete","Westjordanland","Palestine"]],[270,"GM","Gambia",["Gambia"]],[788,"TN","Tunesien",["Tunisia"]],[12,"DZ","Algerien",["Algeria"]],[400,"JO","Jordanien",["Jordan"]],[784,"AE","Vereinigte Arabische Emirate",["VAE","Emirate","United Arab Emirates"]],[634,"QA","Katar",["Qatar"]],[414,"KW","Kuwait",["Kuwait"]],[368,"IQ","Irak",["Iraq"]],[512,"OM","Oman",["Oman"]],[548,"VU","Vanuatu",["Vanuatu"]],[116,"KH","Kambodscha",["Cambodia"]],[764,"TH","Thailand",["Thailand"]],[418,"LA","Laos",["Laos"]],[104,"MM","Myanmar",["Birma","Burma","Myanmar"]],[704,"VN","Vietnam",["Vietnam"]],[408,"KP","Nordkorea",["North Korea"]],[410,"KR","Südkorea",["Korea","South Korea"]],[496,"MN","Mongolei",["Mongolia"]],[356,"IN","Indien",["India"]],[50,"BD","Bangladesch",["Bangladesh"]],[64,"BT","Bhutan",["Bhutan"]],[524,"NP","Nepal",["Nepal"]],[586,"PK","Pakistan",["Pakistan"]],[4,"AF","Afghanistan",["Afghanistan"]],[762,"TJ","Tadschikistan",["Tajikistan"]],[417,"KG","Kirgisistan",["Kyrgyzstan"]],[795,"TM","Turkmenistan",["Turkmenistan"]],[364,"IR","Iran",["Persien","Iran"]],[760,"SY","Syrien",["Syria"]],[51,"AM","Armenien",["Armenia"]],[752,"SE","Schweden",["Sweden"]],[112,"BY","Belarus",["Weißrussland","Belarus"]],[804,"UA","Ukraine",["Ukraine"]],[616,"PL","Polen",["Poland"]],[40,"AT","Österreich",["Austria"]],[348,"HU","Ungarn",["Hungary"]],[498,"MD","Moldau",["Republik Moldau","Moldawien","Moldova","Republik Moldau","Moldova"]],[642,"RO","Rumänien",["Romania"]],[440,"LT","Litauen",["Lithuania"]],[428,"LV","Lettland",["Latvia"]],[233,"EE","Estland",["Estonia"]],[276,"DE","Deutschland",["Germany"]],[100,"BG","Bulgarien",["Bulgaria"]],[300,"GR","Griechenland",["Greece"]],[792,"TR","Türkei",["Turkey"]],[8,"AL","Albanien",["Albania"]],[191,"HR","Kroatien",["Croatia"]],[756,"CH","Schweiz",["Switzerland"]],[442,"LU","Luxemburg",["Luxembourg"]],[56,"BE","Belgien",["Belgium"]],[528,"NL","Niederlande",["Holland","Netherlands"]],[620,"PT","Portugal",["Portugal"]],[724,"ES","Spanien",["Spain"]],[372,"IE","Irland",["Ireland"]],[540,"NC","Neukaledonien",["New Caledonia"]],[90,"SB","Salomonen",["Solomon Is."]],[554,"NZ","Neuseeland",["Neu Seeland","New Zealand"]],[36,"AU","Australien",["Australia"]],[144,"LK","Sri Lanka",["Ceylon","Sri Lanka"]],[156,"CN","China",["Volksrepublik China","China"]],[158,"TW","Taiwan",["Republik China","Taiwan"]],[380,"IT","Italien",["Italy"]],[208,"DK","Dänemark",["Denmark"]],[826,"GB","Großbritannien",["Vereinigtes Königreich","Vereinigtes Königreich","England","UK","Schottland","Wales","Britannien","United Kingdom"]],[352,"IS","Island",["Iceland"]],[31,"AZ","Aserbaidschan",["Azerbaijan"]],[268,"GE","Georgien",["Georgia"]],[608,"PH","Philippinen",["Philippines"]],[458,"MY","Malaysia",["Malaysia"]],[96,"BN","Brunei",["Brunei Darussalam","Brunei Darussalam","Brunei"]],[705,"SI","Slowenien",["Slovenia"]],[246,"FI","Finnland",["Finland"]],[703,"SK","Slowakei",["Slovakia"]],[203,"CZ","Tschechien",["Tschechische Republik","Czechia"]],[232,"ER","Eritrea",["Eritrea"]],[392,"JP","Japan",["Japan"]],[600,"PY","Paraguay",["Paraguay"]],[887,"YE","Jemen",["Yemen"]],[682,"SA","Saudi-Arabien",["Saudi Arabien","Saudi Arabia"]],[10,"AQ","Antarktis",["Antarctica"]],[196,"CY","Zypern",["Cyprus"]],[504,"MA","Marokko",["Morocco"]],[818,"EG","Ägypten",["Egypt"]],[434,"LY","Libyen",["Libya"]],[231,"ET","Äthiopien",["Ethiopia"]],[262,"DJ","Dschibuti",["Djibouti"]],[800,"UG","Uganda",["Uganda"]],[646,"RW","Ruanda",["Rwanda"]],[70,"BA","Bosnien und Herzegowina",["Bosnien","Herzegowina","Bosnia and Herz."]],[807,"MK","Nordmazedonien",["Mazedonien","Macedonia"]],[688,"RS","Serbien",["Serbia"]],[499,"ME","Montenegro",["Montenegro"]],[-1,"XK","Kosovo",["Kosovo"]],[780,"TT","Trinidad und Tobago",["Trinidad and Tobago"]],[728,"SS","Südsudan",["S. Sudan"]]];
+const LAND_NOT_TARGET = new Set(['AQ', 'TF', 'FK', 'EH', 'PR', 'GL', 'NC']);
+const landNorm = (s) => String(s || '').toLowerCase().replace(/ß/g, 'ss').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ae/g, 'a').replace(/oe/g, 'o').replace(/ue/g, 'u').replace(/[^a-z]/g, '');
+const LAND_SMALL = new Set(['Singapur', 'Malta', 'Andorra', 'Liechtenstein', 'Monaco', 'San Marino', 'Vatikanstadt', 'Vatikan', 'Bahrain', 'Malediven', 'Seychellen', 'Mauritius', 'Barbados', 'Grenada', 'Tonga', 'Samoa', 'Palau', 'Nauru', 'Tuvalu', 'Kiribati', 'Marshallinseln', 'Mikronesien', 'St. Lucia', 'Antigua und Barbuda', 'Dominica', 'St. Kitts und Nevis', 'St. Vincent und die Grenadinen', 'Komoren', 'São Tomé und Príncipe', 'Kap Verde', 'Hongkong', 'Macau'].map(landNorm));
+const GEO_URLS = { d3: 'https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js', world: 'https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json' };
+let GEO = null, GEO_P = null;
+function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = () => res(); s.onerror = () => rej(new Error('Skript nicht geladen')); document.head.append(s); }); }
+function topoFeatures(topo, name) {
+  const T = topo.transform;
+  const arcs = topo.arcs.map(arc => { let x = 0, y = 0; return arc.map(p => { if (T) { x += p[0]; y += p[1]; return [x * T.scale[0] + T.translate[0], y * T.scale[1] + T.translate[1]]; } return [p[0], p[1]]; }); });
+  const arcPts = (i) => i < 0 ? arcs[~i].slice().reverse() : arcs[i];
+  const ring = (idx) => { const pts = []; idx.forEach((i, k) => { const a = arcPts(i); for (let j = k ? 1 : 0; j < a.length; j++) pts.push(a[j]); }); return pts; };
+  const geom = (g) => g.type === 'Polygon' ? { type: 'Polygon', coordinates: g.arcs.map(ring) } : g.type === 'MultiPolygon' ? { type: 'MultiPolygon', coordinates: g.arcs.map(p => p.map(ring)) } : null;
+  return topo.objects[name].geometries.map(g => ({ type: 'Feature', id: g.id, properties: g.properties || {}, geometry: geom(g) })).filter(f => f.geometry);
+}
+function landVerts(f) {
+  const g = f.geometry; const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates; const pts = [];
+  for (const poly of polys) for (const ring of poly) for (const p of ring) pts.push(p[0], p[1]);
+  const n = pts.length / 2; const v = new Float64Array(n * 3); const rad = Math.PI / 180;
+  for (let i = 0; i < n; i++) { const lo = pts[2 * i] * rad, la = pts[2 * i + 1] * rad, c = Math.cos(la); v[3 * i] = c * Math.cos(lo); v[3 * i + 1] = c * Math.sin(lo); v[3 * i + 2] = Math.sin(la); }
+  return v;
+}
+/* kürzester Abstand zwischen den Grenzen zweier Länder, Nachbarn = 0 km */
+function landDist(a, b) {
+  if (a === b) return 0; const A = a.verts, B = b.verts; let best = -2;
+  for (let i = 0; i < A.length; i += 3) { const x = A[i], y = A[i + 1], z = A[i + 2]; for (let j = 0; j < B.length; j += 3) { const d = x * B[j] + y * B[j + 1] + z * B[j + 2]; if (d > best) best = d; } }
+  const km = Math.acos(Math.min(1, best)) * 6371;
+  return km < 15 ? 0 : Math.round(km / 10) * 10;
+}
+function loadGeo() {
+  if (GEO) return Promise.resolve(GEO);
+  if (GEO_P) return GEO_P;
+  GEO_P = (async () => {
+    if (!window.d3 || !window.d3.geoOrthographic) await loadScript(GEO_URLS.d3);
+    const r = await fetch(GEO_URLS.world); if (!r.ok) throw new Error('Weltkarte nicht geladen');
+    const topo = await r.json();
+    const feats = topoFeatures(topo, 'countries');
+    const byNum = new Map(LAND.filter(x => x[0] > 0).map(x => [x[0], x])); const byEn = new Map(LAND.map(x => [landNorm(x[3][x[3].length - 1]), x]));
+    const all = [], names = new Map(); const used = new Set();
+    for (const f of feats) {
+      const num = f.id != null && f.id !== '' ? parseInt(f.id, 10) : NaN;
+      let row = Number.isFinite(num) ? byNum.get(num) : null;
+      if (!row) row = byEn.get(landNorm(f.properties && f.properties.name));
+      if (!row || used.has(row[1])) { all.push({ f, a2: null }); continue; }
+      used.add(row[1]);
+      const c = { a2: row[1], name: row[2], f, verts: landVerts(f), centroid: window.d3.geoCentroid(f) };
+      all.push(c);
+      for (const n of [row[2], ...row[3]]) { const k = landNorm(n); if (k && !names.has(k)) names.set(k, c); }
+    }
+    const countries = all.filter(c => c.a2).sort((a, b) => a.name.localeCompare(b.name, 'de'));
+    const targets = countries.filter(c => !LAND_NOT_TARGET.has(c.a2)).sort((a, b) => a.a2 < b.a2 ? -1 : 1);
+    if (targets.length < 20) throw new Error('Zu wenige Länder');
+    GEO = { all, countries, targets, names };
+    return GEO;
+  })();
+  GEO_P.catch(() => { GEO_P = null; });
+  return GEO_P;
+}
+function landColor(km) { const t = clamp(km / 9000, 0, 1); return `hsl(${Math.round(t * 52)} ${Math.round(88 - t * 30)}% ${Math.round(38 + t * 48)}%)`; }
+function landTemp(km) { return km === 0 ? '🔥 Nachbarland!' : km < 500 ? '🔥 Glühend heiß' : km < 1500 ? '🌶️ Heiß' : km < 3000 ? '☀️ Warm' : km < 6000 ? '🌤️ Lauwarm' : km < 10000 ? '❄️ Kalt' : '🧊 Eiskalt'; }
+
+function playLaender(ctx) {
+  const { root, R } = ctx; const box = h('div', { class: 'lj' }); root.append(box);
+  let best = Infinity;
+  ctx.partial = () => ({ p: best === Infinity ? 0 : Math.round(140 * Math.max(0, 1 - best / 4000)), d: best === Infinity ? 'kein Tipp' : `nicht gefunden · ${fmt(best)} km` });
+  function boot() {
+    box.replaceChildren(h('div', { class: 'wait-card' }, h('div', { style: 'font-size:54px' }, '🌍'), h('p', { class: 'muted' }, 'Globus wird geladen …')));
+    loadGeo().then(geo => { if (ctx.alive) start(geo); }).catch(() => {
+      if (!ctx.alive) return;
+      box.replaceChildren(h('div', { class: 'empty' }, h('p', null, 'Die Weltkarte konnte nicht geladen werden. Prüf deine Internetverbindung.'), h('button', { class: 'btn', type: 'button', style: 'margin-top:10px', onclick: boot }, 'Nochmal versuchen')));
+    });
+  }
+  function start(geo) {
+    const d3 = window.d3; const target = R.pick(geo.targets);
+    const guesses = [], guessed = new Set(); let last = null, over = false, earnedNear = false, earnedNb = false, hits = [];
+    const head = h('div', { class: 'g-head' }); const cv = h('canvas', { class: 'lj-cv', 'aria-label': 'Globus mit deinen Tipps' });
+    const zoomBtn = (t, f, lab) => h('button', { class: 'btn sm', type: 'button', 'aria-label': lab, onclick: () => setZoom(zoom * f) }, t);
+    const msg = h('div', { class: 'g-msg lj-msg' }, 'Welches Land wird gesucht? Tipp einfach irgendein Land.');
+    const inp = h('input', { class: 'inp', id: 'lj-in', type: 'text', placeholder: 'Land eingeben …', autocomplete: 'off', autocapitalize: 'words', spellcheck: 'false', enterkeyhint: 'go' });
+    const sugg = h('div', { class: 'lj-sugg' }); const list = h('ol', { class: 'lj-list' });
+    const giveUp = ctx.live ? null : h('div', { class: 'row', style: 'justify-content:center' }, h('button', { class: 'btn ghost sm', type: 'button', onclick: () => finish(false) }, 'Aufgeben'));
+    box.replaceChildren(head,
+      h('div', { class: 'lj-globe' }, cv, h('div', { class: 'lj-zoom' }, zoomBtn('+', 1.35, 'Hineinzoomen'), zoomBtn('−', 1 / 1.35, 'Herauszoomen'))),
+      msg, h('div', { class: 'lj-input' }, inp, h('button', { class: 'btn primary', type: 'button', onclick: () => submit(inp.value) }, 'Tippen')), sugg, list,
+      giveUp);
+    const g = cv.getContext('2d'); const proj = d3.geoOrthographic().clipAngle(90).precision(0.6); const path = d3.geoPath(proj, g);
+    const sphere = { type: 'Sphere' }; const grat = d3.geoGraticule10();
+    let rot = [-10, -35], zoom = 1, S = 300, dpr = 1, dirty = true, drag = null, anim = null, spinUntil = 0;
+    function size() { S = Math.max(220, Math.min(box.clientWidth || 320, Math.round(window.innerHeight * (ctx.live ? 0.42 : 0.5)), 470)); dpr = window.devicePixelRatio || 1; cv.style.width = cv.style.height = S + 'px'; cv.width = cv.height = Math.round(S * dpr); dirty = true; }
+    function setZoom(z) { zoom = clamp(z, 0.8, 6); dirty = true; }
+    function draw() {
+      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, S, S);
+      proj.translate([S / 2, S / 2]).scale((S / 2 - 3) * zoom).rotate(rot);
+      g.beginPath(); path(sphere); g.fillStyle = '#1D3B6F'; g.fill();
+      g.beginPath(); path(grat); g.strokeStyle = 'rgba(255,255,255,.09)'; g.lineWidth = 1; g.stroke();
+      g.beginPath(); for (const x of geo.all) path(x.f); g.fillStyle = '#E9E3D0'; g.fill();
+      for (const gu of guesses) { g.beginPath(); path(gu.c.f); g.fillStyle = gu.c === target ? '#1FAE5B' : landColor(gu.km); g.fill(); }
+      g.beginPath(); for (const x of geo.all) path(x.f); g.strokeStyle = 'rgba(25,32,55,.38)'; g.lineWidth = 0.6; g.stroke();
+      if (last) { g.beginPath(); path(last.c.f); g.strokeStyle = '#0E1228'; g.lineWidth = 1.8; g.stroke(); }
+      g.beginPath(); path(sphere); g.strokeStyle = 'rgba(0,0,0,.4)'; g.lineWidth = 1.5; g.stroke();
+    }
+    function flyTo(c) { const [lon, lat] = c.centroid; const from = rot.slice(); const to = [-lon, clamp(-lat, -80, 80)]; const d = ((to[0] - from[0]) % 360 + 540) % 360 - 180; to[0] = from[0] + d; anim = { from, to, t0: performance.now(), ms: 900 }; }
+    ctx.listen(cv, 'pointerdown', e => { drag = { x: e.clientX, y: e.clientY, r: rot.slice() }; anim = null; try { cv.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); });
+    ctx.listen(cv, 'pointermove', e => { if (!drag) return; const k = 0.42 / zoom; rot = [drag.r[0] + (e.clientX - drag.x) * k, clamp(drag.r[1] - (e.clientY - drag.y) * k, -85, 85)]; dirty = true; });
+    ctx.listen(cv, 'pointerup', () => { drag = null; }); ctx.listen(cv, 'pointercancel', () => { drag = null; });
+    ctx.listen(cv, 'wheel', e => { e.preventDefault(); setZoom(zoom * (e.deltaY < 0 ? 1.15 : 1 / 1.15)); }, { passive: false });
+    ctx.listen(window, 'resize', size);
+    ctx.loop(() => {
+      const now = performance.now();
+      if (anim) { const k = Math.min(1, (now - anim.t0) / anim.ms); const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; rot = [anim.from[0] + (anim.to[0] - anim.from[0]) * e, anim.from[1] + (anim.to[1] - anim.from[1]) * e]; dirty = true; if (k >= 1) anim = null; }
+      if (Date.now() < spinUntil) { rot = [rot[0] + 17, clamp(rot[1] + Math.sin(now / 90) * 4, -80, 80)]; dirty = true; }
+      if (dirty) { dirty = false; draw(); }
+    });
+    function paintHead() {
+      head.replaceChildren(h('span', null, 'Tipps ', h('span', { class: 'digits' }, guesses.filter(x => x.n).length)), h('span', null, 'Am nächsten ', h('span', { class: 'digits' }, best === Infinity ? '–' : best === 0 ? 'Nachbar' : fmt(best) + ' km')));
+      ctx.progress(over && last && last.c === target ? `🎯 nach ${guesses.length} Tipps` : `${guesses.length} Tipps · ${best === Infinity ? '–' : fmt(best) + ' km'}`);
+    }
+    function renderList() {
+      list.replaceChildren(...guesses.slice().sort((a, b) => (a.c === target ? -1 : b.c === target ? 1 : a.km - b.km)).map(x => h('li', { class: 'lj-li' + (x === last ? ' last' : '') },
+        h('span', { class: 'lj-dot', style: `background:${x.c === target ? '#1FAE5B' : landColor(x.km)}` }), h('span', { class: 'lj-name' }, x.c.name),
+        h('span', { class: 'lj-km digits' }, x.c === target ? '🎯' : x.km === 0 ? 'grenzt an' : fmt(x.km) + ' km'))));
+    }
+    function suggest() {
+      const q = landNorm(inp.value); hits = []; sugg.replaceChildren(); if (!q) return;
+      const seen = new Set(); const add = (c) => { if (!seen.has(c)) { seen.add(c); hits.push(c); } };
+      for (const c of geo.countries) if (landNorm(c.name).startsWith(q)) add(c);
+      for (const [k, c] of geo.names) if (k.startsWith(q)) add(c);
+      for (const c of geo.countries) if (landNorm(c.name).includes(q)) add(c);
+      hits = hits.slice(0, 6);
+      hits.forEach(c => sugg.append(h('button', { type: 'button', class: 'lj-s' + (guessed.has(c) ? ' used' : ''), onclick: () => { guess(c); inp.focus(); } }, c.name)));
+    }
+    ctx.listen(inp, 'input', suggest);
+    ctx.listen(inp, 'keydown', e => { if (e.key === 'Enter') { e.preventDefault(); submit(inp.value); } });
+    function submit(text) {
+      if (over) return; const k = landNorm(text); if (!k) return;
+      const c = geo.names.get(k) || (hits.length === 1 ? hits[0] : null) || (hits.length && landNorm(hits[0].name) === k ? hits[0] : null);
+      if (c) { guess(c); return; }
+      bump(inp);
+      if (LAND_SMALL.has(k)) msg.textContent = `${text.trim()} ist auf diesem Globus zu klein. Nimm ein größeres Land.`;
+      else if (hits.length) msg.textContent = 'Meinst du eins davon? Tipp auf einen Vorschlag.';
+      else msg.textContent = `„${text.trim().slice(0, 30)}“ kenne ich nicht. Prüf die Schreibweise.`;
+    }
+    function guess(c) {
+      if (over || Date.now() < P.frozenUntil) return;
+      if (guessed.has(c)) { msg.textContent = `${c.name} hattest du schon.`; bump(inp); return; }
+      guessed.add(c); inp.value = ''; hits = []; sugg.replaceChildren();
+      const km = c === target ? 0 : landDist(c, target); const prev = best;
+      const entry = { c, km, n: guesses.length + 1 }; guesses.push(entry); last = entry; flyTo(c); dirty = true;
+      if (c === target) { finish(true); renderList(); return; }
+      best = Math.min(best, km);
+      const trend = guesses.length > 1 ? (km < prev ? ' · wärmer!' : km > prev ? ' · kälter' : '') : '';
+      msg.replaceChildren(h('b', null, c.name), `: ${km === 0 ? 'grenzt direkt an das gesuchte Land' : fmt(km) + ' km entfernt'} – ${landTemp(km)}${trend}`);
+      if (ctx.live) { if (!earnedNear && km < 1000) { earnedNear = true; ctx.live.earn('Unter 1000 km'); } if (!earnedNb && km === 0) { earnedNb = true; ctx.live.earn('Nachbarland erwischt'); } }
+      renderList(); paintHead();
+    }
+    function finish(ok) {
+      if (over) return; over = true; inp.disabled = true; sugg.replaceChildren(); if (giveUp) giveUp.remove(); const n = guesses.length;
+      if (ok) { best = 0; msg.replaceChildren('🎯 Gefunden! Es war ', h('strong', null, target.name), ` – nach ${n} Tipp${n === 1 ? '' : 's'}.`); paintHead(); if (ctx.mode !== 'p') fxConfetti(); ctx.after(1900, () => ctx.done({ p: Math.max(150, 1000 - (n - 1) * 45), d: `${target.name} in ${n} Tipps` })); }
+      else { const res = ctx.partial(); guesses.push({ c: target, km: 0, n: 0 }); last = guesses[guesses.length - 1]; flyTo(target); renderList(); msg.replaceChildren('Gesucht war ', h('strong', null, target.name), '.'); ctx.after(2300, () => ctx.done(res)); }
+    }
+    ctx.effect = (k) => { if (k !== 'spin' || over) return false; spinUntil = Date.now() + 2600; anim = null; return true; };
+    size(); paintHead(); dirty = true;
+  }
+  boot();
 }
 
 /* ---------- Zahlenmerker ---------- */
@@ -1399,7 +1883,7 @@ function playMerk(ctx) {
   function input() { phase = 'in'; val = ''; if (!kp) kp = keypad(ctx, onKey, { ok: 'Prüfen' }); area.replaceChildren(disp, kp); paintIn(); }
   function check() {
     if (!val) { bump(disp); return; }
-    if (val === num) { phase = 'ok'; area.replaceChildren(h('div', { class: 'mk-num', style: 'color:var(--good)' }, '✓ ' + n + ' Ziffern'), h('div', { class: 'g-msg' }, 'Richtig! Eine mehr …')); n++; if (n > 20) { ctx.after(800, () => ctx.done({ p: 1000, d: '20 Ziffern' })); return; } ctx.after(900, round); }
+    if (val === num) { phase = 'ok'; if (ctx.live && n >= 6 && n % 2 === 0) ctx.live.earn(`${n} Ziffern gemerkt`); area.replaceChildren(h('div', { class: 'mk-num', style: 'color:var(--good)' }, '✓ ' + n + ' Ziffern'), h('div', { class: 'g-msg' }, 'Richtig! Eine mehr …')); n++; if (n > 20) { ctx.after(800, () => ctx.done({ p: 1000, d: '20 Ziffern' })); return; } ctx.after(900, round); }
     else {
       phase = 'end'; const L = n - 1 < 3 ? 0 : n - 1;
       const diff = h('div', { class: 'mk-num diff' }, ...[...num].map((ch, k) => h('span', { class: val[k] === ch ? '' : 'bad' }, ch)));
@@ -1659,7 +2143,7 @@ function mountGame() {
   const quit = h('button', { class: 'btn ghost sm', type: 'button', onclick: () => quitGame(confirmBox) }, '✕ Beenden');
   const modeLabel = opt.mode === 'd' ? 'Tagesrunde' : opt.mode === 't' ? 'Turnier' : 'Training';
   $('#view').replaceChildren(h('div', { class: 'game', id: 'game' }, h('div', { class: 'gbar' }, quit, h('div', { class: 'gbar-t' }, h('span', { class: 'gbar-name' }, G.name), h('span', { class: 'mchip ' + opt.mode }, modeLabel)), confirmBox), stage));
-  S.ctx = makeCtx(stage, seed, (r) => finishGame(r));
+  S.ctx = makeCtx(stage, seed, (r) => finishGame(r)); S.ctx.mode = opt.mode;
   try { G.play(S.ctx); } catch (e) { console.error(e); stage.replaceChildren(h('div', { class: 'empty' }, 'Das Spiel konnte nicht starten.')); }
 }
 function quitGame(box) {
@@ -1921,21 +2405,54 @@ function fxConfetti() {
 /* =========================================================
    Live-Party: alle spielen gleichzeitig, mit Waffen
    ========================================================= */
-const LIVE_CAP = { wort: 150, quiz: 150, schaetz: 130, zeit: 120, hl: 100, golf: 210, kreis: 60, reakt: 80, gefuehl: 80, rechnen: 63, farbe: 110, merk: 110 };
+const LIVE_CAP = { wort: 150, quiz: 190, schaetz: 210, zeit: 120, hl: 100, golf: 210, kreis: 60, reakt: 80, gefuehl: 80, rechnen: 63, farbe: 110, merk: 110, laender: 180 };
+/* p = Stärke (1 harmlos … 3 fies). g = nur in diesen Spielen, sonst überall */
 const ITEMS = {
-  tomato: { e: '🍅', n: 'Tomate', d: 'klatscht dem Ziel drei Sekunden lang Tomate auf den Bildschirm', t: 'atk', w: [3, 3, 2] },
-  dizzy: { e: '🌀', n: 'Schwindel', d: 'lässt das Spielfeld drei Sekunden lang taumeln', t: 'atk', w: [3, 3, 2] },
-  fog: { e: '🌫️', n: 'Nebel', d: 'vernebelt vier Sekunden lang die Sicht', t: 'atk', w: [2, 2, 2] },
-  shrink: { e: '🤏', n: 'Schrumpfstrahl', d: 'macht das Spielfeld fünf Sekunden lang winzig', t: 'atk', w: [2, 2, 2] },
-  mirror: { e: '🪞', n: 'Spiegel', d: 'spiegelt fünf Sekunden lang alles, auch die Steuerung', t: 'atk', w: [1, 2, 3] },
-  ice: { e: '🧊', n: 'Eisblock', d: 'friert das Ziel zweieinhalb Sekunden lang ein', t: 'atk', w: [1, 2, 3] },
-  wind: { e: '💨', n: 'Windstoß', d: 'pustet beim Minigolf den Ball weg, sonst wackelt alles', t: 'atk', w: [2, 2, 2] },
-  shield: { e: '🛡️', n: 'Schild', d: 'blockt den nächsten Angriff (30 Sekunden lang)', t: 'self', w: [3, 2, 1] },
-  bolt: { e: '⚡', n: 'Blitz', d: 'trifft alle anderen gleichzeitig mit Nebel und Gewackel', t: 'all', w: [0, 1, 3] }
+  tomato: { e: '🍅', n: 'Tomate', d: 'klatscht dem Ziel drei Sekunden lang Tomate auf den Bildschirm', t: 'atk', p: 1 },
+  dizzy: { e: '🌀', n: 'Schwindel', d: 'lässt das Spielfeld drei Sekunden lang taumeln', t: 'atk', p: 1 },
+  fog: { e: '🌫️', n: 'Nebel', d: 'vernebelt vier Sekunden lang die Sicht', t: 'atk', p: 1 },
+  shrink: { e: '🤏', n: 'Schrumpfstrahl', d: 'macht das Spielfeld fünf Sekunden lang winzig', t: 'atk', p: 2 },
+  mirror: { e: '🪞', n: 'Spiegel', d: 'spiegelt fünf Sekunden lang alles, auch die Steuerung', t: 'atk', p: 2 },
+  ice: { e: '🧊', n: 'Eisblock', d: 'friert das Ziel zweieinhalb Sekunden lang ein', t: 'atk', p: 3 },
+  shield: { e: '🛡️', n: 'Schild', d: 'blockt den nächsten Angriff (30 Sekunden lang)', t: 'self', p: 1 },
+  bolt: { e: '⚡', n: 'Blitz', d: 'trifft alle anderen gleichzeitig mit Nebel und Gewackel', t: 'all', p: 3 },
+  mix: { e: '🔀', n: 'Mischmaschine', d: 'wirbelt die Antwortknöpfe fünf Sekunden lang durcheinander', t: 'atk', p: 2, g: ['quiz'] },
+  censor: { e: '🖍️', n: 'Zensur', d: 'schwärzt zwei Antworten der aktuellen Frage', t: 'atk', p: 2, g: ['quiz'] },
+  whisper: { e: '👀', n: 'Einflüsterer', d: 'markiert eine falsche Antwort mit „Psst … die hier!“', t: 'atk', p: 1, g: ['quiz'] },
+  thief: { e: '⏳', n: 'Zeitdieb', d: 'klaut fünf Sekunden Bedenkzeit', t: 'atk', p: 2, g: ['quiz', 'schaetz'] },
+  snail: { e: '🐌', n: 'Schneckenpost', d: 'lässt die Frage Buchstabe für Buchstabe erscheinen', t: 'atk', p: 1, g: ['quiz', 'schaetz'] },
+  fifty: { e: '✂️', n: '50:50', d: 'streicht bei dir zwei falsche Antworten', t: 'self', p: 2, g: ['quiz'] },
+  double: { e: '✖️', n: 'Doppelt', d: 'verdoppelt deine Punkte für die nächste Antwort', t: 'self', p: 2, g: ['quiz', 'schaetz'] },
+  keyswap: { e: '🔢', n: 'Zahlendreher', d: 'vertauscht sieben Sekunden lang die Zifferntasten', t: 'atk', p: 2, g: ['schaetz', 'rechnen', 'merk'] },
+  wind: { e: '💨', n: 'Windstoß', d: 'pustet den Ball des Ziels quer über die Bahn', t: 'atk', p: 2, g: ['golf'] },
+  rock: { e: '🪨', n: 'Felsbrocken', d: 'legt 20 Sekunden lang einen Felsen vor das Loch des Ziels', t: 'atk', p: 2, g: ['golf'] },
+  glue: { e: '🍬', n: 'Kaugummi', d: 'lässt den Ball des Ziels 12 Sekunden lang kleben', t: 'atk', p: 1, g: ['golf'] },
+  slick: { e: '⛸️', n: 'Glatteis', d: 'macht die Bahn des Ziels 12 Sekunden lang spiegelglatt', t: 'atk', p: 1, g: ['golf'] },
+  tinycup: { e: '🕳️', n: 'Mini-Loch', d: 'schrumpft 20 Sekunden lang das Loch des Ziels', t: 'atk', p: 2, g: ['golf'] },
+  reset: { e: '🔙', n: 'Zurück auf Start', d: 'setzt den Ball des Ziels zurück an den Abschlag', t: 'atk', p: 3, g: ['golf'] },
+  magnet: { e: '🧲', n: 'Magnetloch', d: 'dein Loch zieht 20 Sekunden lang den Ball an', t: 'self', p: 2, g: ['golf'] },
+  mulligan: { e: '↩️', n: 'Mulligan', d: 'macht deinen letzten Schlag rückgängig', t: 'self', p: 3, g: ['golf'] },
+  spin: { e: '🌍', n: 'Weltenbummler', d: 'dreht den Globus des Ziels wild herum', t: 'atk', p: 1, g: ['laender'] }
 };
 const ITEM_KEYS = Object.keys(ITEMS);
+const itemFits = (k, gid) => !ITEMS[k].g || ITEMS[k].g.includes(gid);
+const INV_MAX = 3;
+const LIVE_RULES = {
+  golf: 'Drei Bahnen. Rollt über die ?-Kisten auf der Bahn, um Perks zu bekommen, und für ein Birdie gibt es einen extra. Die halbdurchsichtigen Bälle sind die der anderen.',
+  quiz: 'Alle bekommen dieselbe Frage zur selben Zeit. Nach jeder Frage seht ihr, wer was getippt hat. Schnelle richtige Antworten bringen mehr Punkte, drei richtige in Folge einen Perk.',
+  schaetz: 'Alle schätzen gleichzeitig dieselbe Zahl. Danach seht ihr alle Tipps auf einem Zahlenstrahl. Ein Volltreffer bringt einen Perk.',
+  laender: 'Errate das gesuchte Land. Jeder Tipp zeigt, wie weit du entfernt bist. Je röter, desto heißer. Wer unter 1000 km kommt, bekommt einen Perk.'
+};
 const PHASE_LABEL = { lobby: 'wartet auf den Start', countdown: 'startet gleich', play: 'läuft gerade', results: 'Zwischenstand', final: 'Siegerehrung' };
-const P = { ch: null, code: null, st: null, members: {}, joinedAt: 0, isHost: false, hostEnd: 0, localEnd: 0, loop: null, hb: 0, hostGone: 0, mounted: null, myDone: {}, inv: [], shieldUntil: 0, frozenUntil: 0, pick: -1, prog: {}, progOut: '', progSent: '', progAt: 0, ghosts: {}, feed: '', ballLast: 0, ballMoving: false, hudQ: null, finalShown: 0 };
+const P = { ch: null, code: null, st: null, members: {}, joinedAt: 0, isHost: false, hostEnd: 0, localEnd: 0, loop: null, hb: 0, hostGone: 0, mounted: null, myDone: {}, inv: [], shieldUntil: 0, frozenUntil: 0, pick: -1, prog: {}, progOut: '', progSent: '', progAt: 0, ghosts: {}, feed: '', ballLast: 0, ballMoving: false, hudQ: null, finalShown: 0, ans: {}, subEnd: 0, subLocalEnd: 0, granted: {}, lastGrant: null, earnedGame: 0 };
+function ansFor(q) { if (!P.st) return {}; return ((P.ans[P.st.round + ':' + P.st.gi] || {})[q]) || {}; }
+function storeAns(from, d) {
+  if (typeof from !== 'string' || !isObj(d)) return; const q = Number(d.q); if (!(Number.isInteger(q) && q >= 0 && q < 20)) return;
+  const a = Number(d.a); if (!Number.isFinite(a)) return;
+  const key = Number(d.r) + ':' + Number(d.gi); const A = P.ans[key] = P.ans[key] || {}; const Q = A[q] = A[q] || {};
+  Q[from] = { a, ok: !!d.ok, pts: clamp(Math.round(Number(d.pts) || 0), 0, 2000), tot: clamp(Math.round(Number(d.tot) || 0), 0, 3000), s: clamp(Number(d.s) || 0, 0, 1) };
+  if (S.ctx && S.ctx.alive && S.ctx.onAns) S.ctx.onAns();
+}
 const fxTimers = {};
 window.addEventListener('keydown', e => { if (Date.now() < P.frozenUntil) { e.stopImmediatePropagation(); e.preventDefault(); } }, true);
 
@@ -1964,7 +2481,7 @@ function partyCard() {
   const ok = partyAvailable();
   return h('section', { class: 'party-card' },
     h('div', { class: 'sec-head' }, h('h2', null, 'Live-Party'), P.code ? h('span', { class: 'live' }, `du bist in ${P.code}`) : h('span', { class: 'fine' }, 'alle gleichzeitig')),
-    h('p', { class: 'fine' }, 'Alle spielen im selben Moment dieselbe Runde. Unterwegs tauchen 🎁-Kisten mit Waffen auf, mit denen ihr euch gegenseitig Tomaten, Nebel oder Eisblöcke verpasst. Pro Spiel gibt es Platzierungspunkte.'),
+    h('p', { class: 'fine' }, 'Alle spielen im selben Moment dieselbe Runde. Beim Quiz seht ihr nach jeder Frage, wer was getippt hat. Perks gibt es zum Start, nach jeder Runde und für starke Aktionen, und damit verpasst ihr euch Tomaten, Zensur, Felsbrocken und mehr.'),
     P.code ? h('button', { class: 'btn primary lg', type: 'button', onclick: () => openPartyView() }, `Zurück zur Party ${P.code}`) : null,
     !P.code && open.length ? h('div', { class: 'people' }, open.map(o => h('div', { class: 'person' }, h('span', { class: 'em' }, '🎉'), h('span', { class: 'person-t' }, h('b', null, o.n), h('span', null, `Code ${o.c} · ${o.k} dabei · ${PHASE_LABEL[o.ph] || ''}`)), h('button', { class: 'btn sm primary', type: 'button', disabled: !ok, onclick: () => partyJoin(o.c) }, 'Rein da')))) : null,
     !P.code ? h('div', { class: 'row' }, h('button', { class: 'btn primary', type: 'button', disabled: !ok, onclick: partyCreate }, '🎉 Party eröffnen'), h('div', { class: 'code-in' }, codeIn, h('button', { class: 'btn', type: 'button', disabled: !ok, onclick: join }, 'Beitreten'))) : null,
@@ -1989,7 +2506,7 @@ async function partyJoin(code) {
 function openPartyView() { closeSheet(); S.view = 'party'; try { history.replaceState(null, '', location.pathname + '#party-' + P.code); } catch (e) {} partyRender(); window.scrollTo(0, 0); }
 async function partyConnect(code) {
   closeSheet();
-  Object.assign(P, { code, joinedAt: Date.now(), members: {}, prog: {}, ghosts: {}, inv: [], myDone: {}, feed: '', pick: -1, mounted: null, hostGone: 0, shieldUntil: 0 });
+  Object.assign(P, { code, joinedAt: Date.now(), members: {}, prog: {}, ghosts: {}, inv: [], myDone: {}, feed: '', pick: -1, mounted: null, hostGone: 0, shieldUntil: 0, ans: {}, granted: {}, lastGrant: null });
   const ch = SB.channel('zz-party-' + code, { config: { presence: { key: S.me.id }, broadcast: { self: false } } });
   P.ch = ch;
   ch.on('presence', { event: 'sync' }, () => {
@@ -2003,6 +2520,7 @@ async function partyConnect(code) {
   ch.on('broadcast', { event: 'prog' }, (msg) => { const d = msg.payload || {}; if (typeof d.from === 'string' && typeof d.t === 'string') { P.prog[d.from] = { gi: Number(d.gi), r: Number(d.r), t: d.t.slice(0, 40) }; hudSoon(); } });
   ch.on('broadcast', { event: 'atk' }, (msg) => { if (P.ch === ch) onAtk(msg.payload || {}); });
   ch.on('broadcast', { event: 'hit' }, (msg) => { if (P.ch === ch) onHit(msg.payload || {}); });
+  ch.on('broadcast', { event: 'ans' }, (msg) => { const d = msg.payload || {}; if (P.ch === ch) storeAns(d.from, d); });
   ch.on('broadcast', { event: 'ball' }, (msg) => { const d = msg.payload || {}; if (typeof d.from === 'string') P.ghosts[d.from] = { gi: Number(d.gi), r: Number(d.r), h: Number(d.h), x: Number(d.x), y: Number(d.y), t: Date.now() }; });
   S.view = 'party'; try { history.replaceState(null, '', location.pathname + '#party-' + code); } catch (e) {}
   partyRender(); window.scrollTo(0, 0);
@@ -2027,14 +2545,17 @@ async function partyLeave(silent) {
 }
 
 /* ---------- Zustand (der Gastgeber steuert) ---------- */
-function sendState() { if (!P.isHost || !P.st) return; P.st.rem = Math.max(0, P.hostEnd - Date.now()); P.hb = Date.now(); pbcast('state', P.st); }
+function sendState() { if (!P.isHost || !P.st) return; const now = Date.now(); P.st.rem = Math.max(0, P.hostEnd - now); if (P.st.sub) P.st.sub.rem = Math.max(0, P.subEnd - now); P.hb = now; pbcast('state', P.st); }
 function cleanState(d) {
   if (!isObj(d) || d.code !== P.code) return null;
   const games = Array.isArray(d.games) ? d.games.filter(g => GAME[g]).slice(0, 8) : []; if (!games.length) return null;
   const seeds = Array.isArray(d.seeds) ? d.seeds.map(x => Number(x) >>> 0) : []; if (seeds.length < games.length) return null;
   const results = {};
   if (isObj(d.results)) for (const gi of Object.keys(d.results)) { if (!/^\d$/.test(gi) || !isObj(d.results[gi])) continue; results[gi] = {}; for (const [u, r] of Object.entries(d.results[gi])) { const x = res(r); if (x && u.length < 80) results[gi][u] = { p: x.p, d: x.d }; } }
-  return { v: Number(d.v) || 0, code: d.code, name: String(d.name || 'Party').slice(0, 30), host: typeof d.host === 'string' ? d.host : '', phase: ['lobby', 'countdown', 'play', 'results', 'final'].includes(d.phase) ? d.phase : 'lobby', games, seeds, gi: clamp(Number(d.gi) || 0, 0, games.length - 1), rem: clamp(Number(d.rem) || 0, 0, 900000), results, tid: typeof d.tid === 'string' ? d.tid.slice(0, 40) : null, round: Number(d.round) || 1 };
+  const gi = clamp(Number(d.gi) || 0, 0, games.length - 1);
+  let sub = null; if (isObj(d.sub) && ['ask', 'rev', 'end'].includes(d.sub.ph) && Number.isInteger(Number(d.sub.i)) && Number(d.sub.i) >= 0 && Number(d.sub.i) < 20) sub = { i: Number(d.sub.i), ph: d.sub.ph, rem: clamp(Number(d.sub.rem) || 0, 0, 60000) };
+  const qs = d.qs ? cleanQs(games[gi], d.qs) : null;
+  return { v: Number(d.v) || 0, code: d.code, name: String(d.name || 'Party').slice(0, 30), host: typeof d.host === 'string' ? d.host : '', phase: ['lobby', 'countdown', 'play', 'results', 'final'].includes(d.phase) ? d.phase : 'lobby', games, seeds, gi, rem: clamp(Number(d.rem) || 0, 0, 900000), results, tid: typeof d.tid === 'string' ? d.tid.slice(0, 40) : null, round: Number(d.round) || 1, sub, qs };
 }
 function onPartyState(raw) {
   const d = cleanState(raw); if (!d) return; const prev = P.st;
@@ -2042,12 +2563,14 @@ function onPartyState(raw) {
   if (P.isHost && prev && d.host !== S.me.id && d.v <= prev.v) return;
   if (prev && prev.round === d.round) for (const gi of Object.keys(prev.results)) d.results[gi] = { ...prev.results[gi], ...(d.results[gi] || {}) };
   P.st = d; P.isHost = d.host === S.me.id; P.localEnd = Date.now() + d.rem; if (P.isHost) P.hostEnd = P.localEnd;
+  if (d.sub) { P.subLocalEnd = Date.now() + d.sub.rem; if (P.isHost) P.subEnd = P.subLocalEnd; }
   if (!prev || prev.phase !== d.phase || prev.gi !== d.gi || prev.round !== d.round) onPhaseChange(); else partyRender();
+  if (d.phase === 'play' && d.sub && S.ctx && S.ctx.alive && S.ctx.sync && P.mounted === d.round + ':' + d.gi) S.ctx.sync(d.sub);
 }
 function electHost() {
   const ids = Object.keys(P.members).sort((a, b) => (P.members[a].joinedAt - P.members[b].joinedAt) || (a < b ? -1 : 1));
   if (ids[0] !== S.me.id || P.isHost) return;
-  P.isHost = true; P.st.host = S.me.id; P.st.v += 1; P.hostEnd = P.localEnd; P.hostGone = 0;
+  P.isHost = true; P.st.host = S.me.id; P.st.v += 1; P.hostEnd = P.localEnd; P.subEnd = P.subLocalEnd || Date.now(); P.hostGone = 0;
   toast('Der Gastgeber ist weg. Du leitest jetzt die Party.', 'big'); sendState(); partyRender();
 }
 function partyTick() {
@@ -2060,14 +2583,26 @@ function partyTick() {
   const cd = $('#cd-num'); if (cd) cd.textContent = Math.max(1, Math.ceil((P.localEnd - now) / 1000));
   const nx = $('#nx-num'); if (nx) nx.textContent = Math.max(0, Math.ceil((P.localEnd - now) / 1000));
 }
+function prepGame(st) { const gid = st.games[st.gi]; st.qs = SYNC[gid] ? syncPayload(gid, st.seeds[st.gi]) : null; st.sub = null; }
 function hostTick(now) {
-  const st = P.st; let changed = false;
-  if (st.phase === 'countdown' && now >= P.hostEnd) { st.phase = 'play'; P.hostEnd = now + LIVE_CAP[st.games[st.gi]] * 1000; changed = true; }
-  else if (st.phase === 'play') {
+  const st = P.st; let changed = false; const gid = st.games[st.gi];
+  if (st.phase === 'countdown' && now >= P.hostEnd) {
+    st.phase = 'play'; P.hostEnd = now + LIVE_CAP[gid] * 1000; changed = true;
+    if (SYNC[gid] && st.qs) { st.sub = { i: 0, ph: 'ask', rem: 0 }; P.subEnd = now + SYNC[gid].ask; P.subLocalEnd = P.subEnd; }
+  } else if (st.phase === 'play') {
     const ids = Object.keys(P.members); const r = st.results[st.gi] || {};
     if ((ids.length && ids.every(id => r[id])) || now >= P.hostEnd + 2500) { st.phase = 'results'; P.hostEnd = now + 10000; changed = true; }
+    else if (SYNC[gid] && st.sub && st.sub.ph !== 'end') {
+      const A = ansFor(st.sub.i); const N = st.qs ? st.qs.length : 0;
+      if (st.sub.ph === 'ask' && ((ids.length && ids.every(id => A[id] || r[id])) || now >= P.subEnd)) { st.sub.ph = 'rev'; P.subEnd = now + SYNC[gid].rev; changed = true; }
+      else if (st.sub.ph === 'rev' && now >= P.subEnd) {
+        if (st.sub.i + 1 < N) { st.sub.i++; st.sub.ph = 'ask'; P.subEnd = now + SYNC[gid].ask; } else { st.sub.ph = 'end'; P.subEnd = now; }
+        changed = true;
+      }
+      if (changed) { P.subLocalEnd = P.subEnd; st.v++; sendState(); if (S.ctx && S.ctx.alive && S.ctx.sync) S.ctx.sync(st.sub); hudSoon(); return; }
+    }
   } else if (st.phase === 'results' && now >= P.hostEnd) {
-    if (st.gi + 1 < st.games.length) { st.gi++; st.phase = 'countdown'; P.hostEnd = now + 6000; } else { st.phase = 'final'; P.hostEnd = now; }
+    if (st.gi + 1 < st.games.length) { st.gi++; st.phase = 'countdown'; P.hostEnd = now + 6000; prepGame(st); } else { st.phase = 'final'; P.hostEnd = now; st.qs = null; st.sub = null; }
     changed = true;
   }
   if (changed) { st.v++; P.localEnd = P.hostEnd; sendState(); onPhaseChange(); }
@@ -2076,16 +2611,23 @@ function hostTick(now) {
 async function partyStart() {
   const st = P.st; if (!P.isHost || st.phase !== 'lobby') return;
   if (!st.tid) { try { st.tid = await createTour({ name: `Live: ${st.name}`.slice(0, 40), games: st.games, ends: Date.now() + 4 * 3600e3, fixed: st.seeds }); } catch (e) { st.tid = null; } }
-  st.phase = 'countdown'; st.gi = 0; st.results = {}; P.hostEnd = Date.now() + 6000; P.localEnd = P.hostEnd; st.v++; sendState(); onPhaseChange();
+  st.phase = 'countdown'; st.gi = 0; st.results = {}; prepGame(st); P.hostEnd = Date.now() + 6000; P.localEnd = P.hostEnd; st.v++; sendState(); onPhaseChange();
 }
 function partyAgain() {
   const st = P.st; if (!P.isHost) return;
-  st.round++; st.phase = 'lobby'; st.gi = 0; st.results = {}; st.tid = null; st.seeds = newSeeds(st.games.length); st.v++; P.hostEnd = 0; sendState(); onPhaseChange();
+  st.round++; st.phase = 'lobby'; st.gi = 0; st.results = {}; st.tid = null; st.qs = null; st.sub = null; st.seeds = newSeeds(st.games.length); st.v++; P.hostEnd = 0; sendState(); onPhaseChange();
 }
 function onPhaseChange() {
   const st = P.st; if (!st) return;
   if (st.phase !== 'play' && S.ctx && S.ctx.alive && P.mounted) forceFinish();
-  if (st.phase === 'lobby') { P.inv = []; P.pick = -1; P.myDone = {}; }
+  if (st.phase === 'lobby') { P.inv = []; P.pick = -1; P.myDone = {}; P.ans = {}; P.lastGrant = null; }
+  if (st.phase === 'countdown' && st.gi === 0 && !P.granted['start:' + st.round]) { P.granted['start:' + st.round] = 1; const got = grantItems(1, st.games[0]); if (got.length) toast(`🎒 Startpaket: ${got.map(k => ITEMS[k].e + ' ' + ITEMS[k].n).join(', ')}`); }
+  if (st.phase === 'results' && st.gi + 1 < st.games.length && !P.granted['r:' + st.round + ':' + st.gi]) {
+    P.granted['r:' + st.round + ':' + st.gi] = 1;
+    const rr = roundRank(st.gi); const me = rr.find(x => x.id === S.me.id); const worst = rr.length ? rr[rr.length - 1].rank : 1;
+    const n = (!me || (rr.length > 1 && me.rank === worst)) ? 2 : 1;
+    const got = grantItems(n, st.games[st.gi + 1]); P.lastGrant = { key: st.round + ':' + st.gi, items: got, n };
+  }
   if ((st.phase === 'countdown' || st.phase === 'play') && S.view !== 'party' && S.view !== 'game') { closeSheet(); S.view = 'party'; try { history.replaceState(null, '', location.pathname + '#party-' + P.code); } catch (e) {} }
   if (st.phase === 'final' && P.finalShown !== st.round) { P.finalShown = st.round; const tot = partyTotals(); if (tot.length > 1 && tot[0].id === S.me.id) fxConfetti(); }
   setPresence(st.phase === 'play' ? `spielt live ${GAME[st.games[st.gi]].name}` : `in Party ${st.code}`);
@@ -2142,17 +2684,19 @@ function mountLive() {
   $('#view').replaceChildren(h('div', { class: 'live-wrap', id: 'live' }, h('div', { class: 'hud', id: 'hud' }), h('div', { class: 'live-stage', id: 'live-stage' }, h('div', { class: 'fxw', id: 'fxw' }, stage))));
   window.scrollTo(0, 0);
   const ctx = makeCtx(stage, seed, (r) => liveFinish(key, gid, r));
-  ctx.live = liveApi(st.gi, st.round);
+  ctx.live = liveApi(st.gi, st.round, gid); ctx.mode = 'p'; P.earnedGame = 0;
   S.ctx = ctx; S.game = null;
+  convertInv(gid);
   hudRender();
-  try { G.play(ctx); } catch (e) { console.error(e); }
-  if (!ctx.live.noBubbles) scheduleBubbles(ctx, seed);
+  let play = G.play;
+  if (SYNC[gid] && st.qs) { ctx.qs = st.qs; play = gid === 'quiz' ? playQuizLive : playSchaetzLive; }
+  try { play(ctx); } catch (e) { console.error(e); }
 }
-function liveApi(gi, round) {
+function liveApi(gi, round, gid) {
   return {
-    noBubbles: false,
     progress(t) { P.progOut = String(t).slice(0, 40); hudSoon(); },
-    collect() { return collectItem(); },
+    earn(reason, max = 4) { if (P.earnedGame >= max) return false; const got = grantItems(1, gid); if (!got.length) return false; P.earnedGame++; toast(`🎁 ${reason}: ${ITEMS[got[0]].e} ${ITEMS[got[0]].n}`); return true; },
+    collect() { if (P.inv.length >= INV_MAX) { toast('Alle drei Plätze sind voll. Setz erst etwas ein!'); return false; } const got = grantItems(1, gid); if (got.length) toast(`📦 Kiste: ${ITEMS[got[0]].e} ${ITEMS[got[0]].n} – ${ITEMS[got[0]].d}`); return got.length > 0; },
     ball(hNo, x, y, moving, force) {
       const now = Date.now();
       if (force || (moving && now - P.ballLast > 250) || (!moving && P.ballMoving)) { P.ballLast = now; pbcast('ball', { gi, r: round, h: hNo, x: Math.round(x), y: Math.round(y) }); }
@@ -2161,38 +2705,36 @@ function liveApi(gi, round) {
     ghosts(hNo) { const now = Date.now(); return Object.entries(P.ghosts).filter(([u, g]) => g.gi === gi && g.r === round && g.h === hNo && now - g.t < 90000 && P.members[u] && u !== S.me.id).map(([u, g]) => ({ uid: u, x: g.x, y: g.y, emoji: P.members[u].emoji })); }
   };
 }
-function scheduleBubbles(ctx, seed) {
-  const R = makeRng((seed ^ 0x9e3779b9) >>> 0); let wait = 5000 + R.f() * 4000;
-  const next = () => ctx.after(wait, () => { spawnBubble(ctx, R); wait = 9000 + R.f() * 7000; next(); });
-  next();
+/* ---------- Perks: zufällig, aber wer hinten liegt, bekommt die fieseren ---------- */
+function myTier() { const tot = partyTotals(); const n = tot.length; if (n < 2) return 1; const i = tot.findIndex(x => x.id === S.me.id); if (i === 0 && tot[0].pts > 0) return 0; if (i === n - 1) return 2; return 1; }
+const TIER_W = [[3, 2, 0.5], [2, 2, 1], [1, 2, 3]];
+function rollItem(gid, power) {
+  const tier = myTier();
+  const pool = ITEM_KEYS.filter(k => itemFits(k, gid) && (!power || ITEMS[k].p === power)).map(k => [k, TIER_W[tier][ITEMS[k].p - 1] * (ITEMS[k].g ? 2.5 : 1)]);
+  if (!pool.length) return power ? rollItem(gid) : 'tomato';
+  let r = Math.random() * pool.reduce((a, [, w]) => a + w, 0);
+  for (const [k, w] of pool) { r -= w; if (r <= 0) return k; } return pool[0][0];
 }
-function spawnBubble(ctx, R) {
-  const host = $('#live-stage'); if (!host || !ctx.alive) return;
-  const W = host.clientWidth, H = Math.max(220, Math.min(host.clientHeight, window.innerHeight - 230));
-  const fx = R.f(), fy = R.f(); let taken = false;
-  const b = h('button', { class: 'bubble', type: 'button', 'aria-label': 'Waffe einsammeln', style: `left:${Math.round(fx * Math.max(0, W - 70))}px;top:${Math.round(10 + fy * Math.max(0, H - 90))}px` }, '🎁');
-  const grab = (e) => { e.preventDefault(); e.stopPropagation(); if (taken) return; if (collectItem()) { taken = true; b.remove(); } };
-  b.addEventListener('pointerdown', grab); b.addEventListener('click', grab);
-  host.append(b); ctx.after(3800, () => b.remove());
+function grantItems(n, gid) { const got = []; for (let i = 0; i < n && P.inv.length < INV_MAX; i++) { const k = rollItem(gid); P.inv.push(k); got.push(k); } if (got.length) hudSoon(); return got; }
+function convertInv(gid) {
+  const swaps = [];
+  P.inv = P.inv.map(k => { if (itemFits(k, gid)) return k; const nk = rollItem(gid, ITEMS[k].p); swaps.push(`${ITEMS[k].e}→${ITEMS[nk].e}`); return nk; });
+  if (swaps.length) toast(`🔄 Passend zu ${GAME[gid].name} getauscht: ${swaps.join('  ')}`);
 }
-
-/* ---------- Waffen ---------- */
-function myTier() { const tot = partyTotals(); const n = tot.length; if (n < 2) return 1; const i = tot.findIndex(x => x.id === S.me.id); if (i === 0 && tot[0].pts > 0) return 0; if (i === n - 1 && n > 2) return 2; return 1; }
-function rollItem() {
-  const tier = myTier(); const golf = P.st && P.st.games[P.st.gi] === 'golf';
-  const pool = ITEM_KEYS.map(k => [k, (ITEMS[k].w[tier] || 0) * (golf && k === 'wind' ? 2 : 1)]); let r = Math.random() * pool.reduce((a, [, w]) => a + w, 0);
-  for (const [k, w] of pool) { r -= w; if (r <= 0) return k; } return 'tomato';
-}
-function collectItem() {
-  if (P.inv.length >= 2) { toast('Beide Plätze sind voll. Setz erst etwas ein!'); return false; }
-  const k = rollItem(); P.inv.push(k); toast(`🎁 ${ITEMS[k].e} ${ITEMS[k].n}: ${ITEMS[k].d}.`); hudRender(); return true;
-}
+function liveOpponents() { const st = P.st; const r = st ? (st.results[st.gi] || {}) : {}; return Object.keys(P.members).filter(id => id !== S.me.id && !r[id]); }
 function useItem(i) {
   const k = P.inv[i]; if (!k) return; const it = ITEMS[k];
   if (P.pick === i) { P.pick = -1; hudRender(); return; }
-  if (it.t === 'self') { P.inv.splice(i, 1); P.pick = -1; P.shieldUntil = Date.now() + 30000; toast('🛡️ Schild aktiv. Der nächste Angriff prallt ab.'); hudRender(); return; }
-  const opp = Object.keys(P.members).filter(id => id !== S.me.id);
-  if (!opp.length) { toast('Niemand da, den du ärgern könntest.'); return; }
+  if (P.st && P.st.phase !== 'play') { toast('Perks wirken nur während eines Spiels.'); return; }
+  if (it.t === 'self') {
+    let ok = false;
+    if (k === 'shield') { P.shieldUntil = Date.now() + 30000; ok = true; toast('🛡️ Schild aktiv. Der nächste Angriff prallt ab.'); }
+    else if (S.ctx && S.ctx.alive && S.ctx.effect) { ok = !!S.ctx.effect(k, true); if (ok) toast(`${it.e} ${it.n} eingesetzt!`); }
+    if (!ok) { toast(`${it.e} ${it.n} geht gerade nicht. Versuch es gleich nochmal.`); return; }
+    P.inv.splice(i, 1); P.pick = -1; hudRender(); return;
+  }
+  const opp = liveOpponents();
+  if (!opp.length) { toast(Object.keys(P.members).length > 1 ? 'Alle anderen sind schon fertig.' : 'Niemand da, den du ärgern könntest.'); return; }
   if (it.t === 'all') { P.inv.splice(i, 1); P.pick = -1; pbcast('atk', { to: '*', k }); feedLine(`${it.e} ${pname(S.me.id)} → alle`); hudRender(); return; }
   if (opp.length === 1) { fire(i, opp[0]); return; }
   P.pick = i; hudRender();
@@ -2217,8 +2759,9 @@ function applyEffect(k, from) {
   else if (k === 'fog') fxClass(w, 'fog', 4000);
   else if (k === 'shrink') fxClass(w, 'shrink', 5000);
   else if (k === 'ice') { P.frozenUntil = Date.now() + 2500; const host = $('#live-stage'); if (host) { const ov = h('div', { class: 'ice-ov' }, '🧊'); host.append(ov); setTimeout(() => ov.remove(), 2500); } else bump(w, 'shake'); }
-  else if (k === 'wind') { const handled = !!(S.ctx && S.ctx.alive && S.ctx.effect && S.ctx.effect('wind')); if (!handled) bump(w, 'shake'); fxWord('💨', `${from} pustet`); }
   else if (k === 'bolt') { fxClass(w, 'fog', 2500); bump($('#shell'), 'shake'); fxWord('⚡', `${from} lässt es krachen`); }
+  else if (k === 'keyswap' && S.ctx && S.ctx.alive && S.ctx.kp) { S.ctx.kp.scramble(7000); fxWord('🔢', 'Zahlendreher!'); }
+  else if (it.g) { const handled = !!(S.ctx && S.ctx.alive && S.ctx.effect && S.ctx.effect(k)); if (handled) fxWord(it.e, it.n); else bump(w, 'shake'); }
 }
 
 /* ---------- Party-Ansichten ---------- */
@@ -2229,9 +2772,9 @@ function hudRender() {
   const hud = $('#hud'); if (!hud || !P.st) return; const st = P.st; const gid = st.games[st.gi]; const r = st.results[st.gi] || {};
   if (P.pick >= 0 && !P.inv[P.pick]) P.pick = -1;
   const tot = partyTotals(); const ids = tot.map(x => x.id).filter(id => P.members[id]);
-  const inv = h('div', { class: 'inv' }, [0, 1].map(i => { const k = P.inv[i]; return h('button', { class: 'slot' + (k ? ' full' : '') + (P.pick === i ? ' sel' : ''), type: 'button', disabled: !k, title: k ? `${ITEMS[k].n}: ${ITEMS[k].d}` : 'Leerer Platz', 'aria-label': k ? `${ITEMS[k].n} einsetzen` : 'Leerer Platz', onclick: () => useItem(i) }, k ? ITEMS[k].e : ''); }));
+  const inv = h('div', { class: 'inv' }, Array.from({ length: INV_MAX }, (_, i) => i).map(i => { const k = P.inv[i]; return h('button', { class: 'slot' + (k ? ' full' : '') + (P.pick === i ? ' sel' : ''), type: 'button', disabled: !k, title: k ? `${ITEMS[k].n}: ${ITEMS[k].d}` : 'Leerer Platz', 'aria-label': k ? `${ITEMS[k].n} einsetzen` : 'Leerer Platz', onclick: () => useItem(i) }, k ? ITEMS[k].e : ''); }));
   const strip = h('div', { class: 'strip' }, ids.map(id => {
-    const done = r[id]; const target = P.pick >= 0 && id !== S.me.id;
+    const done = r[id]; const target = P.pick >= 0 && id !== S.me.id && !done;
     const pr = id === S.me.id ? P.progOut : (P.prog[id] && P.prog[id].gi === st.gi && P.prog[id].r === st.round ? P.prog[id].t : '');
     return h(target ? 'button' : 'div', { class: 'pchip' + (id === S.me.id ? ' me' : '') + (done ? ' done' : '') + (target ? ' target' : ''), type: target ? 'button' : null, onclick: target ? () => fire(P.pick, id) : null },
       h('span', { class: 'em' }, pemoji(id)), h('span', null, h('b', null, pname(id)), h('small', null, done ? `✓ ${done.p}` : (pr || 'spielt …'))));
@@ -2239,7 +2782,7 @@ function hudRender() {
   hud.replaceChildren(
     h('div', { class: 'hud-top' }, h('span', { class: 'hud-time', id: 'hud-time' }, ''), h('span', { class: 'hud-round' }, `${st.gi + 1}/${st.games.length} · ${GAME[gid].name}`), Date.now() < P.shieldUntil ? h('span', { title: 'Schild aktiv', style: 'font-size:22px' }, '🛡️') : null, inv),
     strip,
-    h('div', { class: 'feed' + (P.pick >= 0 ? ' pick' : ''), id: 'feed' }, P.pick >= 0 ? `${ITEMS[P.inv[P.pick]].e} Wen willst du treffen? Tipp auf einen Namen. (Nochmal auf die Waffe tippen bricht ab.)` : (P.feed || 'Sammle 🎁-Kisten ein und setz die Waffen oben rechts ein.')));
+    h('div', { class: 'feed' + (P.pick >= 0 ? ' pick' : ''), id: 'feed' }, P.pick >= 0 ? `${ITEMS[P.inv[P.pick]].e} Wen willst du treffen? Tipp auf einen Namen. (Nochmal auf die Waffe tippen bricht ab.)` : (P.feed || (P.inv.length ? 'Tipp oben rechts auf einen Perk, um ihn einzusetzen.' : 'Neue Perks gibt es für starke Aktionen und nach jeder Runde.'))));
   updClock();
 }
 function renderWaiting() {
@@ -2285,14 +2828,19 @@ function viewPartyLobby() {
       h('section', { class: 'card' }, h('div', { class: 'sec-head' }, h('h2', null, 'Dabei'), h('span', { class: 'fine' }, `${ids.length} Spieler`)), h('div', { class: 'people' }, ids.map(id => h('div', { class: 'member' }, h('span', { class: 'em' }, pemoji(id)), h('b', null, pname(id)), id === st.host ? h('span', { class: 'tag r' }, 'Gastgeber') : null, id === S.me.id ? h('span', { class: 'tag' }, 'du') : null))))),
     h('section', { class: 'card' }, h('div', { class: 'sec-head' }, h('h2', null, 'Spiele'), h('span', { class: 'fine' }, P.isHost ? 'Tippen zum Ändern, bis zu sechs' : `${st.games.length} Runden`)), lobbyGames(),
       h('p', { class: 'fine', style: 'margin-top:10px' }, `Gesamtdauer höchstens etwa ${Math.ceil(st.games.reduce((a, g) => a + LIVE_CAP[g] + 16, 0) / 60)} Minuten. Minigolf läuft live mit drei Bahnen, und ihr seht die Bälle der anderen.`)),
-    h('section', { class: 'card' }, h('div', { class: 'sec-head' }, h('h2', null, 'Waffenkammer')), h('p', { class: 'fine', style: 'margin-bottom:12px' }, 'Während des Spiels tauchen 🎁-Kisten auf: schnell antippen, beim Minigolf drüberrollen. Du hast zwei Plätze. Wer hinten liegt, bekommt die fieseren Sachen.'),
-      h('div', { class: 'items-legend' }, ITEM_KEYS.map(k => h('div', { class: 'il' }, h('span', null, ITEMS[k].e), h('span', null, h('b', null, ITEMS[k].n), ' ', ITEMS[k].d))))),
+    h('section', { class: 'card' }, h('div', { class: 'sec-head' }, h('h2', null, 'Waffenkammer')),
+      h('p', { class: 'fine', style: 'margin-bottom:12px' }, 'Du hast drei Plätze für Perks. Jeder bekommt zum Start einen. Nach jeder Runde gibt es einen zufälligen dazu, der Letzte bekommt zwei. Extra-Perks gibt es für starke Aktionen: drei richtige Antworten in Folge, ein Volltreffer beim Schätzen, ein Birdie oder die ?-Kisten auf der Minigolfbahn. Wer hinten liegt, zieht die fieseren Sachen.'),
+      [['Überall', k => !ITEMS[k].g], ['Quiz & Schätzen', k => ITEMS[k].g && ITEMS[k].g.some(g => g === 'quiz' || g === 'schaetz')], ['Rechnen & Merken', k => k === 'keyswap'], ['Minigolf', k => ITEMS[k].g && ITEMS[k].g.includes('golf')], ['Länderjagd', k => ITEMS[k].g && ITEMS[k].g.includes('laender')]].map(([title, f]) => {
+        const ks = ITEM_KEYS.filter(k => f(k) && (title !== 'Quiz & Schätzen' || k !== 'keyswap')); if (!ks.length) return null;
+        return [h('div', { class: 'il-head' }, title), h('div', { class: 'items-legend' }, ks.map(k => h('div', { class: 'il' }, h('span', null, ITEMS[k].e), h('span', null, h('b', null, ITEMS[k].n), ITEMS[k].t === 'self' ? h('span', { class: 'tag' }, 'für dich') : ITEMS[k].t === 'all' ? h('span', { class: 'tag d' }, 'alle') : null, ' ', ITEMS[k].d))))];
+      })),
     P.isHost ? h('button', { class: 'btn primary lg wide', type: 'button', onclick: partyStart }, ids.length > 1 ? `Los geht’s mit ${ids.length} Leuten` : 'Alleine starten (zum Testen)') : h('div', { class: 'empty' }, `Warte, bis ${pname(st.host)} startet …`));
 }
 function viewPartyCountdown() {
   const st = P.st; const g = GAME[st.games[st.gi]];
   return h('div', { class: 'wait-card' }, h('div', { class: 'eyebrow' }, `Runde ${st.gi + 1} von ${st.games.length}`), h('span', { class: 'tile-ic lg', style: catStyle(g) }, icon(g.id)), h('h1', { class: 'page-title' }, g.name),
-    h('p', { class: 'gs-rules', style: 'max-width:52ch' }, g.id === 'golf' ? 'Drei Bahnen. Rollt über die ?-Kisten, um Waffen zu bekommen. Die halbdurchsichtigen Bälle sind die der anderen.' : g.rules),
+    h('p', { class: 'gs-rules', style: 'max-width:52ch' }, LIVE_RULES[g.id] || g.rules),
+    P.inv.length ? h('p', { class: 'fine' }, 'Deine Perks: ', P.inv.map(k => `${ITEMS[k].e} ${ITEMS[k].n}`).join(' · ')) : null,
     h('div', { class: 'cd-num', id: 'cd-num' }, Math.max(1, Math.ceil((P.localEnd - Date.now()) / 1000))), h('p', { class: 'fine' }, `Zeitlimit ${mmss(LIVE_CAP[g.id])}`));
 }
 function totalsTable(tot, st) {
@@ -2307,6 +2855,7 @@ function viewPartyResults(final) {
   const parts = [h('div', { class: 'page-head' }, h('div', null, h('div', { class: 'eyebrow' }, final ? 'Siegerehrung' : `Runde ${st.gi + 1} von ${st.games.length}`), h('h1', { class: 'page-title' }, final ? st.name : g.name)), h('button', { class: 'btn ghost sm', type: 'button', onclick: () => partyLeave() }, 'Verlassen'))];
   if (final) parts.push(tot.length ? h('div', { class: 'podium', style: 'margin-inline:auto;width:100%' }, [1, 0, 2].map(k => { const x = tot[k]; if (!x) return h('div'); return h('div', { class: 'pod p' + (k + 1) }, h('span', { class: 'em' }, pemoji(x.id)), h('b', null, pname(x.id)), h('div', { class: 'pod-block' }, x.pts)); })) : null);
   else parts.push(h('section', { class: 'card' }, rr.length ? h('ol', { class: 'rank' }, rr.map(x => h('li', { class: 'rr' + (x.id === S.me.id ? ' me' : '') }, posEl(x.rank), h('span', { class: 'rr-who' }, `${pemoji(x.id)} ${pname(x.id)} `, h('small', null, x.d)), h('span', { class: 'rr-p digits' }, `${x.p} · +${x.pts}`)))) : h('p', { class: 'fine' }, 'Niemand hat rechtzeitig fertig gespielt.')));
+  const lg = P.lastGrant; if (!final && lg && lg.key === st.round + ':' + st.gi) parts.push(h('section', { class: 'grant' }, h('div', { class: 'eyebrow' }, lg.n > 1 ? 'Trostpreis für den letzten Platz' : 'Deine Belohnung für die Runde'), lg.items.length ? h('div', { class: 'grant-items' }, lg.items.map(k => h('div', { class: 'gi' }, h('span', { class: 'gi-e' }, ITEMS[k].e), h('span', null, h('b', null, ITEMS[k].n), h('small', null, ITEMS[k].d))))) : h('p', { class: 'fine' }, 'Deine drei Plätze sind voll. Setz in der nächsten Runde etwas ein!')));
   parts.push(h('h2', { class: 'sec-title' }, final ? 'Endstand' : 'Zwischenstand'), totalsTable(tot, st));
   if (final) parts.push(h('div', { class: 'row' }, P.isHost ? h('button', { class: 'btn primary lg', type: 'button', onclick: partyAgain }, 'Neue Runde mit allen') : h('span', { class: 'fine' }, `${pname(st.host)} kann eine neue Runde starten.`), h('button', { class: 'btn lg', type: 'button', onclick: () => partyLeave() }, 'Party verlassen')));
   else parts.push(h('div', { class: 'row' }, h('span', { class: 'fine' }, st.gi + 1 < st.games.length ? `Als Nächstes: ${GAME[st.games[st.gi + 1]].name} in ` : 'Siegerehrung in ', h('b', { id: 'nx-num', class: 'digits' }, Math.max(0, Math.ceil((P.localEnd - Date.now()) / 1000))), ' s'), P.isHost ? h('button', { class: 'btn sm', type: 'button', onclick: () => { P.hostEnd = Date.now(); } }, 'Weiter') : null));
