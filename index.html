@@ -604,7 +604,7 @@ tr.me td{background:color-mix(in oklab,var(--tomato) 9%,var(--surface))}
 .lj-km{font-size:13px}
 </style>
 <script src="config.js"></script>
-<script src="fragen.js?v=4"></script>
+<script src="fragen.js?v=5"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0"></script>
 </head>
 <body>
@@ -1009,7 +1009,7 @@ const GAMES = [
   { id: 'marke', name: 'Markenraten', cat: 'wissen', short: 'Welche Marke steckt hinter den Hinweisen?',
     rules: 'Sechs Marken. Nach und nach erscheinen bis zu vier Hinweise: Branche und Land, seit wann es sie gibt, ein Fakt und wie das Logo aussieht. Wer schon nach dem ersten Hinweis richtig tippt, bekommt die meisten Punkte. Falsch gibt null. Am Rechner gehen auch die Tasten 1 bis 4.', play: playMarke },
   { id: 'nadel', name: 'Nadelstich', cat: 'schaetzen', short: 'Setz die Nadel dahin, wo es steht oder passiert ist.',
-    rules: 'Sechs Bauwerke, Orte oder Ereignisse. Dreh den Globus, zoom heran (auch mit zwei Fingern), tipp auf die Stelle und setz die Nadel. Je näher du dran bist, desto mehr Punkte. Live seht ihr danach alle Nadeln auf einem Globus.', play: playNadel },
+    rules: 'Sechs Bauwerke, Orte, Städte oder Ereignisse aus fast 1.900 Möglichkeiten. Dreh den Globus, zoom heran (auch mit zwei Fingern), tipp auf die Stelle und setz die Nadel. Je näher du dran bist, desto mehr Punkte. Live seht ihr danach alle Nadeln auf einem Globus.', play: playNadel },
   { id: 'flappy', name: 'Flatterflug', cat: 'geschick', short: 'Flieg durch die Röhren, so weit du kommst.',
     rules: 'Tippen lässt deinen Vogel flattern. Flieg durch die Lücken zwischen den Röhren, es wird immer schneller. Jede geschaffte Röhre bringt 40 Punkte. In der Live-Party fliegen alle gleichzeitig durch denselben Parcours, und wer am längsten durchhält, gewinnt die Runde.', play: playFlappy },
   { id: 'sumo', name: 'Rempelring', cat: 'geschick', short: 'Schubs alle von der Plattform. Wer zuletzt steht, gewinnt.', noAsync: true,
@@ -1706,8 +1706,10 @@ const PLACES = [
   ['Erster Atombombentest „Trinity“', 'Ereignis', 33.677, -106.475], ['Verleihung des Friedensnobelpreises', 'Ereignis', 59.912, 10.735], ['Weltwirtschaftsforum Davos', 'Ereignis', 46.802, 9.836], ['Erster Eurovision Song Contest 1956 (Lugano)', 'Ereignis', 46.004, 8.951],
   ['Schlacht bei Marathon', 'Ereignis', 38.118, 23.978], ['Attentat auf John F. Kennedy (Dallas)', 'Ereignis', 32.779, -96.809], ['Angriff auf Pearl Harbor', 'Ereignis', 21.365, -157.950], ['Darwins Beobachtungen auf den Galápagos', 'Ereignis', -0.95, -90.97]
 ];
+/* weitere Orte aus fragen.js */
+(function () { const F = window.ZZ_FRAGEN || {}; if (!Array.isArray(F.orte)) return; const have = new Set(PLACES.map(p => p[0])); for (const p of F.orte) if (Array.isArray(p) && p.length === 4 && typeof p[0] === 'string' && p[0].trim() && Number.isFinite(+p[2]) && Number.isFinite(+p[3]) && Math.abs(+p[2]) <= 90 && Math.abs(+p[3]) <= 180 && !have.has(p[0])) { have.add(p[0]); PLACES.push([p[0].slice(0, 120), String(p[1] || 'Ort').slice(0, 20), +p[2], +p[3]]); } })();
 function geoKm(lat1, lon1, lat2, lon2) { const r = Math.PI / 180; const a = Math.sin((lat2 - lat1) * r / 2) ** 2 + Math.cos(lat1 * r) * Math.cos(lat2 * r) * Math.sin((lon2 - lon1) * r / 2) ** 2; return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(a))); }
-const KIND_E = { Bauwerk: '🏛️', Natur: '🏔️', Ort: '📍', Popkultur: '🎬', Sport: '🏟️', Ereignis: '📜' };
+const KIND_E = { Bauwerk: '🏛️', Natur: '🏔️', Ort: '📍', Popkultur: '🎬', Sport: '🏟️', Ereignis: '📜', Stadt: '🏙️', Hauptstadt: '⭐' };
 function playNadel(ctx) {
   const qs = ctx.qs || SYNC_GEN.nadel(ctx.R); const N = qs.length; const kms = [];
   const box = h('div', { class: 'nd' }); ctx.root.append(box);
@@ -1830,7 +1832,7 @@ const SYNC_GEN = {
     const opts = R.shuffle([b, ...same.concat(other).slice(0, 3)]).map(x => x[0]);
     return [b[0], ...opts, ...marketHints(b), opts.indexOf(b[0]) + 1];
   }),
-  nadel: (R) => R.shuffle(PLACES).slice(0, 6).map(p => [p[0], p[1], p[2], p[3]])
+  nadel: (R) => { const out = []; let nc = 0; for (const p of R.shuffle(PLACES)) { const city = p[1] === 'Stadt' || p[1] === 'Hauptstadt'; if (city && nc >= 2) continue; if (city) nc++; out.push([p[0], p[1], p[2], p[3]]); if (out.length === 6) break; } return out; }
 };
 
 
